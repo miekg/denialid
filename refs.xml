@@ -1,6 +1,7 @@
 <references title="Normative References">
     <?rfc include="bib/reference.RFC.1034" ?>
     <?rfc include="bib/reference.RFC.2308" ?>
+    <?rfc include="bib/reference.RFC.3655" ?>
     <?rfc include="bib/reference.RFC.3755" ?>
     <?rfc include="bib/reference.RFC.4033" ?>
     <?rfc include="bib/reference.RFC.4034" ?>
