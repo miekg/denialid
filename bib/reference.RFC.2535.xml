@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='RFC2535'>
+
+<front>
+<title abbrev='DNS Security Extensions'>Domain Name System Security Extensions</title>
+<author initials='D.' surname='Eastlake' fullname='Donald E. Eastlake 3rd'>
+<organization>IBM</organization>
+<address>
+<postal>
+<street>65 Shindegan Hill Road</street>
+<street>RR #1</street>
+<city>Carmel</city>
+<region>NY</region>
+<code>10512</code>
+<country>US</country></postal>
+<phone>+1 914 784 7913</phone>
+<facsimile>+1 914 784 3833</facsimile>
+<email>dee3@us.ibm.com</email></address></author>
+<date year='1999' month='March' />
+<abstract>
+<t>Extensions to the Domain Name System (DNS) are described that provide data integrity and authentication to security aware resolvers and applications through the use of cryptographic digital signatures. These digital signatures are included in secured zones as resource records.  Security can also be provided through non-security aware DNS servers in some cases.</t>
+<t>The extensions provide for the storage of authenticated public keys in the DNS.  This storage of keys can support general public key distribution services as well as DNS security.  The stored keys enable security aware resolvers to learn the authenticating key of zones in addition to those for which they are initially configured. Keys associated with DNS names can be retrieved to support other protocols.  Provision is made for a variety of key types and algorithms.</t>
+<t>In addition, the security extensions provide for the optional authentication of DNS protocol transactions and requests.</t>
+<t>This document incorporates feedback on RFC 2065 from early implementers and potential users.</t></abstract></front>
+
+<seriesInfo name='RFC' value='2535' />
+<format type='TXT' octets='110958' target='http://www.rfc-editor.org/rfc/rfc2535.txt' />
+</reference>

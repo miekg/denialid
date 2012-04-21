@@ -1,0 +1,14 @@
+                           ** example.org
+                       +-- ** .....................
+                  [1] /  . /\ .                    .
+                     /  .  |   .                    .
+                    |  .   |    .                    .
+                    v .    |     .                    . 
+                    **     |      **                  ++
+      h.example.org ** ----+----> ** 3.example.org    ++ 2.example.org
+                    .     /  [3]   . |                .
+                    .    /         . | [2]            . 
+                    .   /          . |                .
+                    .  /           . v                .
+    1.h.example.org **            **                  ++ 
+                    ** <--------- ** 3.3.example.org  ++ x.2.example.org

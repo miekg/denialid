@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE rfc SYSTEM 'rfc2629.dtd'>
+<?rfc toc="yes"?>         <!-- generate a table of contents -->
+<?rfc tocompact="no"?>
+<?rfc tocdepth="6"?>
+<?rfc symrefs="yes"?>     <!-- use anchors instead of numbers for references -->
+<?rfc sortrefs="yes" ?>   <!-- alphabetize the references -->
+<?rfc rfcedstyle="yes"?>
+<?rfc strict="yes"?>
+<?rfc autobreaks="yes"?>
+<?rfc compact="yes" ?>    <!-- conserve vertical whitespace -->
+<?rfc subcompact="no" ?>  <!-- but keep a blank line between list items -->
+<rfc ipr="trust200902" category="info" docName="draft-gieben-auth-denial-of-existence-dns-00">
+<front>
+
+<title abbrev="Authenticated Denial in DNS">Authenticated Denial of Existence in the DNS</title>
+
+        <author initials='R.' surname='Gieben' fullname='R. (Miek) Gieben'>
+            <organization>SIDN</organization>
+            <address>
+                <postal>
+                    <street>Meander 501</street>
+                    <street></street>
+                    <city>Arnhem</city> <region></region>
+                    <code>6825 MD</code>
+                    <country>NL</country>
+                </postal>
+
+                <phone></phone>
+                <email>miek.gieben@sidn.nl</email>
+                <uri>https://sidn.nl/</uri>
+            </address>
+        </author>
+
+        <author initials='W.' surname='Mekking' fullname='W. (Matthijs) Mekking'>
+            <organization>NLnet Labs</organization>
+
+            <address>
+                <postal>
+                    <street>Science Park 400</street>
+                    <street></street>
+                    <city>Amsterdam</city> <region></region>
+                    <code>1098 XH</code>
+                    <country>NL</country>
+                </postal>
+
+                <phone></phone>
+                <email>matthijs@nlnetlabs.nl</email>
+                <uri>http://www.nlnetlabs.nl/</uri>
+            </address>
+        </author>
+
+        <date month='January' year='2012' />
+
+        <area>Internet</area>
+        <workgroup>DNSEXT</workgroup>
+        <keyword>DNSSEC</keyword>
+        <abstract>
+        <?rfc include="abstract.xml"?>
+        </abstract>
+</front>
+
+<middle>
+<?rfc include="middle.xml"?>
+</middle>
+
+<back>
+ <?rfc include="refs.xml"?>
+</back>
+</rfc>
