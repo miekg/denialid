@@ -11,7 +11,7 @@ name exists, but does not have the specific RR type you were asking for.
 The first is referred to as an NXDOMAIN [](#RFC2308) (non-existent domain) and the 
 latter an NODATA [](#RFC2308) response.
 
-In this document we will explain how authenticated denial
+In this memo we will explain how authenticated denial
 of existence works.
 We begin by explaining the current technique in the DNS
 and work our way up to DNSSEC. We explain the first steps
@@ -22,10 +22,10 @@ way for NSEC3.
 To complete the picture we also need to explain DNS wildcards
 as it complicates matters.
 
-Note: In this document domain names in zone file examples will have a trailing dot, in the
+Note: In this memo domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
-of DNSSEC. This document currently does not explain NSEC3 opt-out and secure delegations.
+of DNSSEC. This memo currently does not explain NSEC3 opt-out and secure delegations.
 This may be added in a future revision. 
 
 The following RFCs are not required reading, but they might help in
@@ -298,7 +298,7 @@ These two issues eventually lead to NSEC3 which:
 * Makes it possible to skip names for the next owner name. This feature
   is called opt-out. It means not all names in your zone get an NSEC3 plus
   ditto signature, making it possible to "grow into" your DNSSEC deployment. Describing
-  opt-out is (currently) out of scope for this document. For those interested,
+  opt-out is (currently) out of scope for this memo. For those interested,
   opt-out is explained in RFC 4956 [](#RFC4956), which is curiously titled "(DNSSEC) Opt-In".
   Later this is incorporated into RFC 5155 [](#RFC5155).
 
@@ -316,7 +316,7 @@ inherited the two issues from NXT.
 Several years after that NSEC2 was introduced as a way to solve the two issues
 of NSEC. The NSEC2 draft contains the following paragraph:
 
-> This document proposes an alternate scheme which hides owner names
+> This memo proposes an alternate scheme which hides owner names
 > while permitting authenticated denial of existence of non-existent
 > names.  The scheme uses two new RR types: NSEC2 and EXIST.
 
@@ -395,8 +395,8 @@ RR types associated with them.
 Creates 2 names:
 
 1. `1.h.example.org` that has the type: TXT;
-2. `h.example.org` which has no types. This is the empty non-terminal.^[An empty
-non-terminal *will* get an NSEC3 records, but not an NSEC record.]
+2. `h.example.org` which has no types. This is the empty non-terminal. An empty
+   non-terminal *will* get an NSEC3 records, but not an NSEC record.
 
 ## Slaving an NSEC3 Zone
 A secondary server slaving a zone with NSEC3 records need to
@@ -453,7 +453,7 @@ sees the answer as-is. How will this answer look with DNSSEC?
     *.example.org.      NSEC example.org. TXT RRSIG NSEC
     *.example.org.      RRSIG(NSEC) ( ... )
 
-The RRSIG of the `z.example.org` TXT record[^2] indicates there is a wildcard configured. The RDATA of
+The RRSIG of the `z.example.org` TXT record indicates there is a wildcard configured. The RDATA of
 the signature lists a label count [](#RFC4034), Section 3.1.3., of two (not visible in the answer above),
 but the owner name of the signature has three three labels. 
 This mismatch indicates there is a wildcard configured for the
@@ -555,8 +555,8 @@ An NSEC3 *closest encloser proof* consists of:
 
 Take the following example. We take our zone, but now with the following
 two records and it is signed with NSEC3. 
-^[As said these records create two non-terminals: "h.example.org" and "3.example.org",
-but that is irrelevant for the theory here.]
+As said these records create two non-terminals: "h.example.org" and "3.example.org",
+but that is irrelevant for the theory here.
 
     1.h.example.org.    TXT "1.h record"
     3.3.example.org.    TXT "3.3 record"
@@ -702,7 +702,7 @@ in an NSEC3 record, and finally an NSEC3 must say something about the wildcard. 
 makes three records.
 
 # List of Hashed Owner Names
-The following owner names are used in this document. The
+The following owner names are used in this memo. The
 origin for these names is `example.org`.
 
 Original Name     Hashed Name
@@ -722,10 +722,10 @@ Table: Hashed owner names for the `example.org` zone.
 
 # Security Considerations
 
-... TODO ...
+This memo does not deal with security.
 
 # Acknowledgements
-This document would not be possible without the help of Ed Lewis 
+This memo would not be possible without the help of Ed Lewis 
 Roy Arends, Wouter Wijngaards, Olaf Kolkman, Carsten Strotmann,
 Jan-Piet Mens,
 Marco Davids, Esther Makaay and Antoin Verschuren.
