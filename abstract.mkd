@@ -4,11 +4,11 @@ It is also used to signal that a domain
 name exists, but does not have the specific RR type you were asking for.
 This document attempts to answer two simple questions.
 
-> When returning a negative DNSSEC response, a name server sometimes
-> includes up to two NSEC records. With NSEC3 the maximum amount is three.
-> 
-> * Why do you need up to two NSEC records?
-> * And why does NSEC3 sometimes require an extra record?
+ When returning a negative DNSSEC response, a name server sometimes
+includes up to two NSEC records. With NSEC3 the maximum amount is three.
+ 
+* Why do you need up to two NSEC records?
+* And why does NSEC3 sometimes require an extra record?
 
 The answer to the questions hinges on the concept of wildcards and the *closest encloser*.
 With NSEC, the name that is the *closest encloser* is implicitly given
