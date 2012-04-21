@@ -1,8 +1,0 @@
-                           ** example.org
-                       +-- ** <--+
-                      /  .    .   \
-                     /  .      .   \
-                    |  .        .  |
-                    v .          . |
-                    **            **
-      a.example.org ** ---------> ** d.example.org
