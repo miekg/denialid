@@ -199,8 +199,8 @@ see [](#fig:the-nsec-r).
 As we have defined the intervals and put those in resource
 records, we now have something that can be signed.
 
-
-                           ** example.org
+                        example.org
+                           **
                        +-- ** <--+
                       /  .    .   \
                      /  .      .   \
@@ -590,8 +590,8 @@ one thing.
 Does the hash of `x.2.example.org` fall in any of the intervals of 
 the NSEC3 records it got?
 
-
-                           ** example.org
+                        example.org
+                           ** 
                        +-- ** .....................
                   [1] /  . /\ .                    .
                      /  .  |   .                    .
