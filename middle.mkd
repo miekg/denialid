@@ -450,7 +450,7 @@ sees the answer as-is. How will this answer look with DNSSEC?
     z.example.org.      RRSIG(TXT) ( ... )
 
     ;; AUTHORITY SECTION:
-    *.example.org.      NSEC example.org. TXT RRSIG NSEC
+    *.example.org.      NSEC a.example.org. TXT RRSIG NSEC
     *.example.org.      RRSIG(NSEC) ( ... )
 
 The RRSIG of the `z.example.org` TXT record indicates there is a wildcard configured. The RDATA of
