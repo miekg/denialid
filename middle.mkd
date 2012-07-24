@@ -25,8 +25,7 @@ as it complicates matters.
 Note: In this memo domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
-of DNSSEC. This memo currently does not explain NSEC3 opt-out and secure delegations.
-This may be added in a future revision. 
+of DNSSEC. This memo does not explain NSEC3 opt-out and secure delegations.
 
 The following RFCs are not required reading, but they might help in
 understanding the problem space.
@@ -37,7 +36,7 @@ understanding the problem space.
 And these provide some general DNSSEC information.
 
 * RFC 4033,RFC 4034, RFC 4035 [](#RFC4033), [](#RFC4034),[](#RFC4035) - DNSSEC Spec;
-* RFC 4956 ()[#RFC4956) - DNS Security (DNSSEC) Opt-In. This RFC has the status
+* RFC 4956 [][(#RFC4956) - DNS Security (DNSSEC) Opt-In. This RFC has the status
     experimental, but is a good read.
 
 And these three drafts give some background information on the NSEC3
