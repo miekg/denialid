@@ -11,7 +11,7 @@ name exists, but does not have the specific RR type you were asking for.
 The first is referred to as an NXDOMAIN [](#RFC2308) (non-existent domain) and the 
 latter an NODATA [](#RFC2308) response.
 
-In this memo we will explain how authenticated denial
+In this document we will explain how authenticated denial
 of existence works.
 We begin by explaining the current technique in the DNS
 and work our way up to DNSSEC. We explain the first steps
@@ -22,10 +22,10 @@ way for NSEC3.
 To complete the picture we also need to explain DNS wildcards
 as it complicates matters.
 
-Note: In this memo domain names in zone file examples will have a trailing dot, in the
+Note: In this document domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
-of DNSSEC. This memo does not explain NSEC3 opt-out and secure delegations.
+of DNSSEC. This document does not explain NSEC3 opt-out and secure delegations.
 
 The following RFCs are not required reading, but they might help in
 understanding the problem space.
