@@ -297,7 +297,7 @@ These two issues eventually lead to NSEC3 which:
 * Makes it possible to skip names for the next owner name. This feature
   is called opt-out. It means not all names in your zone get an NSEC3 plus
   ditto signature, making it possible to "grow into" your DNSSEC deployment. Describing
-  opt-out is (currently) out of scope for this memo. For those interested,
+  opt-out is (currently) out of scope for this document. For those interested,
   opt-out is explained in RFC 4956 [](#RFC4956), which is curiously titled "(DNSSEC) Opt-In".
   Later this is incorporated into RFC 5155 [](#RFC5155).
 
@@ -315,7 +315,7 @@ inherited the two issues from NXT.
 Several years after that NSEC2 was introduced as a way to solve the two issues
 of NSEC. The NSEC2 draft contains the following paragraph:
 
-> This memo proposes an alternate scheme which hides owner names
+> This document proposes an alternate scheme which hides owner names
 > while permitting authenticated denial of existence of non-existent
 > names.  The scheme uses two new RR types: NSEC2 and EXIST.
 
@@ -701,7 +701,7 @@ in an NSEC3 record, and finally an NSEC3 must say something about the wildcard. 
 makes three records.
 
 # List of Hashed Owner Names
-The following owner names are used in this memo. The
+The following owner names are used in this document. The
 origin for these names is `example.org`.
 
 Original Name     Hashed Name
@@ -721,21 +721,13 @@ Table: Hashed owner names for the `example.org` zone.
 
 # Security Considerations
 
-This memo does not deal with security.
+This document does not deal with security.
 
 # Acknowledgements
-This memo would not be possible without the help of Ed Lewis 
+This document would not be possible without the help of Ed Lewis 
 Roy Arends, Wouter Wijngaards, Olaf Kolkman, Carsten Strotmann,
 Jan-Piet Mens,
 Marco Davids, Esther Makaay and Antoin Verschuren.
 Also valuable, was the source code of Unbound
 (`validator/val_nsec3.c`).
-
 Extensive feedback was received from Karst Koymans.
-
-## Changes in version two
-
-* Small corrections;
-* Mention the NO resource record;
-* The NSEC3 example now returns three NSEC3 records;
-* Empty non-terminals are explained.

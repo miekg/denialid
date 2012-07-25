@@ -10,7 +10,7 @@
 <?rfc autobreaks="yes"?>
 <?rfc compact="yes" ?>    <!-- conserve vertical whitespace -->
 <?rfc subcompact="no" ?>  <!-- but keep a blank line between list items -->
-<rfc ipr="trust200902" category="info" docName="draft-gieben-auth-denial-of-existence-dns-00">
+<rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-00">
 <front>
 
 <title abbrev="Authenticated Denial in DNS">Authenticated Denial of Existence in the DNS</title>
@@ -53,8 +53,10 @@
         <date month='January' year='2012' />
 
         <area>Internet</area>
-        <workgroup>DNSEXT</workgroup>
         <keyword>DNSSEC</keyword>
+        <keyword>Denial of Existance</keyword>
+        <keyword>NSEC</keyword>
+        <keyword>NSEC3</keyword>
         <abstract>
         <?rfc include="abstract.xml"?>
         </abstract>
