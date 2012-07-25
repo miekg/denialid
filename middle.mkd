@@ -454,7 +454,7 @@ sees the answer as-is. How will this answer look with DNSSEC?
 
 The RRSIG of the `z.example.org` TXT record indicates there is a wildcard configured. The RDATA of
 the signature lists a label count [](#RFC4034), Section 3.1.3., of two (not visible in the answer above),
-but the owner name of the signature has three three labels. 
+but the owner name of the signature has three labels. 
 This mismatch indicates there is a wildcard configured for the
 name `*.example.org`. 
 The AUTHORITY section holds an NSEC.
