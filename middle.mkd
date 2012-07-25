@@ -97,7 +97,7 @@ exist.
 
 ## NODATA
 It is important to realize, that NXDOMAIN is not the only type
-of *does-not-exist*. A name may exist, but the type you are asking
+of does-not-exist. A name may exist, but the type you are asking
 for may not. This occurrence of non-existence is called an NODATA [](#RFC2308) response.
 Let us ask our name server for `a.example.org AAAA`, and look at the
 answer:
@@ -108,7 +108,7 @@ answer:
     example.org.        SOA ( ... )
 
 The status is NOERROR meaning that the `a.example.org` name exists.
-But the reply does *not* contain an ANSWER section. Instead it has
+But the reply does not contain an ANSWER section. Instead it has
 an AUTHORITY section which holds the SOA record of `example.org`. The resolver
 has to put these pieces of information together and conclude that
 `a.example.org` exists, but it does not have an `AAAA` record.
@@ -140,11 +140,11 @@ The first requirement implies that all denial of existence answers need to be
 pre-computed, but it is impossible to precompute (all conceivable) non-existence answers.
 In the example above, you need
 a way to tell somebody who is asking for `b.example.org` that it
-does not exists *without* using the name `b.example.org` in the
+does not exists without using the name `b.example.org` in the
 answer. 
 This has been solved by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
-defines the holes (non-existing names) in the zone. This record *can* 
+defines the holes (non-existing names) in the zone. This record can 
 be signed beforehand and given to the resolver.
 
 > Given all these troubles why didn't the designers of
@@ -171,7 +171,7 @@ The first attempt to specify authenticated denial of existence was NXT
 > owner name in a certain name interval do not exist in a zone and to
 > indicate what RR types are present for an existing name.
 
-By specifying what you *do* have, you implicitly tell what you *don't* have. NXT
+By specifying what you do have, you implicitly tell what you don't have. NXT
 is superseded by NSEC. In the next section we explain how NSEC (and thus NXT) works.
 
 ## NSEC ##
@@ -180,7 +180,7 @@ KEY became DNSKEY and NXT was simply renamed to NSEC and a few, minor
 issues were fixed in the process.
 
 Just as NXT, NSEC is used to describe an interval
-between names: it indirectly tells a resolver which names *do not* exist in
+between names: it indirectly tells a resolver which names do not exist in
 a zone.
 
 For this to work, we need our `example.org` zone to be sorted in canonical ordering
@@ -531,23 +531,23 @@ Closest encloser:
     be an empty non-terminal)
     in the zone that is an ancestor of
     the name used in the query. Suppose the query name is `x.2.example.org`
-    then `example.org` is the *closest encloser* in our example;
+    then `example.org` is the `closest encloser` in our example;
 
 Next closer name:
 
 :   Introduced in the NSEC3 RFC, this is the closest encloser with one more label added to the left.
     So if `example.org` is the closest encloser for the query name `x.2.example.org`, `2.example.org` is 
-    the *next closer name*.
+    the `next closer name`.
 
-An NSEC3 *closest encloser proof* consists of:
+An NSEC3 `closest encloser proof` consists of:
 
-1. An NSEC3 RR that **matches** the *closest encloser*. This means the
-   un-hashed owner name of the record *is* the closest encloser. This bit of
+1. An NSEC3 RR that **matches** the `closest encloser`. This means the
+   un-hashed owner name of the record is the closest encloser. This bit of
    information tells a resolver: "The name you are asking for does 
    not exist, the closest I have is this". 
 
-2. An NSEC3 RR that **covers** the *next closer name*. This means it
-   defines an interval in which the *next closer name* falls. This
+2. An NSEC3 RR that **covers** the `next closer name`. This means it
+   defines an interval in which the `next closer name` falls. This
    tells the resolver: "The name in your question falls in
    this interval, and therefor the name in your question does not exist. In fact,
    the closest encloser is indeed the closest I have".
@@ -621,20 +621,20 @@ they all seem useless.
 A question that you might have at this point is why doesn't the server send an NSEC3
 that covers the hash of `x.2.example.org`, so the resolver can validate in one step? 
 While this indeed denies the existence of `x.2.example.org` it is only half the
-answer. As explained, a denial of existence answer *needs* to say something about
+answer. As explained, a denial of existence answer needs to say something about
 whether or not a wildcard should have been expanded. And to communicate
-*which* wildcard that could have been, you need to tell the resolver what the closest encloser
+which wildcard that could have been, you need to tell the resolver what the closest encloser
 is. 
 
 So this is where the closest encloser proof comes into play. And for the proof
-to work, the resolver needs to know what the *closest encloser* is. There must
+to work, the resolver needs to know what the `closest encloser` is. There must
 be an existing ancestor in the zone: a name must exist that is shorter than the
 query name. The resolvers keeps hashing, increasingly shorter names from
-the query name until an owner name of an NSEC3 *matches*. This owner name is
-the *closest encloser*.
+the query name until an owner name of an NSEC3 matches. This owner name is
+the `closest encloser`.
 
 When the resolver has found the closest encloser, the next step is
-to construct the *next closer name*. This is the closest encloser
+to construct the `next closer name`. This is the closest encloser
 with the last chopped label from query name prepended to it:
 "\<last chopped label\>.\<closest encloser\>". The hash of this name should 
 be covered by the interval set in any of the other NSEC3 records.
@@ -670,7 +670,7 @@ tell the resolver what the closest encloser is.
 From that knowledge the resolver constructs the next closer, which
 in this case is: `2.example.org`; `2` is the last label chopped, when `example.org` is the closest
 encloser.
-The hash of *this* name should be
+The hash of this name should be
 covered in any of the other NSEC3s. And it is, `7T70DRG4EKC28V93Q7GNBLEOPA7VLP6Q` falls in the interval
 set by: `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ` and `8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ` (this is our second NSEC3).
 
@@ -680,7 +680,7 @@ So what does the resolver learn from this?
 * `2.example.org` does not exist.
 
 And if `2.example.org` does not exist, `x.2.example.org` also does not exist.
-But *only* if there was *no* wildcard configured. So this is the last step: check if
+But only if there was no wildcard configured. So this is the last step: check if
 there is a wildcard configured at the closest encloser. 
 
 The resolver
@@ -695,7 +695,7 @@ When we have validated the signatures, we reached our goal: authenticated denial
 of existence.
 
 Coming back to the original question: why do we need (up to) three NSEC3
-records? The resolver needs to be explicitly told what the *closest encloser* is
+records? The resolver needs to be explicitly told what the `closest encloser` is
 and this takes up a full NSEC3 record. Then the next closer name needs to be covered
 in an NSEC3 record, and finally an NSEC3 must say something about the wildcard. That
 makes three records.
