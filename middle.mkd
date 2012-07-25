@@ -9,7 +9,7 @@ It is also used to signal that a domain
 name exists, but does not have the specific RR type you were asking for.
 
 The first is referred to as an NXDOMAIN [](#RFC2308) (non-existent domain) and the 
-latter an NODATA [](#RFC2308) response.
+latter a NODATA [](#RFC2308) response.
 
 In this document we will explain how authenticated denial
 of existence works.
@@ -98,7 +98,7 @@ exist.
 ## NODATA
 It is important to realize, that NXDOMAIN is not the only type
 of does-not-exist. A name may exist, but the type you are asking
-for may not. This occurrence of non-existence is called an NODATA [](#RFC2308) response.
+for may not. This occurrence of non-existence is called a NODATA [](#RFC2308) response.
 Let us ask our name server for `a.example.org AAAA`, and look at the
 answer:
 
