@@ -184,7 +184,7 @@ between names: it indirectly tells a resolver which names do not exist in
 a zone.
 
 For this to work, we need our `example.org` zone to be sorted in canonical ordering
-(see RFC 4034, Section 6.1), and then create the NSECs.
+([](#RFC4034), Section 6.1), and then create the NSECs.
 We add three NSEC records, one for each name, and each one "covers" a certain
 interval. The last NSEC record points back to the first as required by the RFC. Also
 see [](#fig:the-nsec-r).
