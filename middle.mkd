@@ -720,8 +720,10 @@ Original Name     Hashed Name
 Table: Hashed owner names for the `example.org` zone.
 
 # Security Considerations
+This document raises no security issues. 
 
-This document does not deal with security.
+# IANA Considerations
+This document has no actions for IANA.
 
 # Acknowledgements
 This document would not be possible without the help of Ed Lewis,
