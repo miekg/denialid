@@ -42,9 +42,9 @@ And these provide some general DNSSEC information.
 And these three drafts give some background information on the NSEC3
 development.
 
-* tools.ietf.org/html/draft-ietf-dnsext-not-existing-rr-01;
-* tools.ietf.org/html/draft-laurie-dnsext-nsec2v2-00;
-* tools.ietf.org/html/draft-arends-dnsnr-00.
+* The NO RR [](#I-D.ietf-dnsext-not-existing-rr);
+* The NSEC2 RR [](#I-D.laurie-dnsext-nsec2v2);
+* The DNSNR RR [](#I-D.arends-dnsnr).
 
 # Denial of Existence
 We start with the basics and take a look at

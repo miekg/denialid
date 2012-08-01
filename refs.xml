@@ -13,4 +13,7 @@
     <?rfc include="bib/reference.RFC.3655" ?>
     <?rfc include="bib/reference.RFC.3755" ?>
     <?rfc include="bib/reference.RFC.4956" ?>
+    <?rfc include="bib/reference.I-D.arends-dnsnr.xml" ?>
+    <?rfc include="bib/reference.I-D.laurie-dnsext-nsec2v2.xml" ?>
+    <?rfc include="bib/reference.I-D.ietf-dnsext-not-exsiting-rr.xml" ?>
 </references>

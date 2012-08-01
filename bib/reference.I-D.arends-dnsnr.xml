@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='I-D.arends-dnsnr'>
+<front>
+<title>DNSSEC Non-Repudiation Resource Record</title>
+
+<author initials='R' surname='Arends' fullname='Roy Arends'>
+    <organization />
+</author>
+
+<date month='July' day='13' year='2004' />
+
+<abstract><t>This document describes the DNSNR Resource Record (RR) for the Non-Repudiation (NR) of Existence service in the context of the DNS Security Extensions (DNSSEC). The DNSNR is an alternative to NSEC or "Authenticated Denial of Existence" Resource Records. A signed DNSNR RR protects security-aware DNS components against false denial of existence of RRsets by providing the RR types that exist for its ownername, which optionally includes a non-authoritative delegation point NS RR type. Labels in the ownername and the RDATA may be a hash-value as a defense against zone traversal.</t></abstract>
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-arends-dnsnr-00' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-arends-dnsnr-00.txt' />
+</reference>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='I-D.laurie-dnsext-nsec2v2'>
+<front>
+<title>DNSSEC NSEC2 Owner and RDATA Format</title>
+
+<author initials='B' surname='Laurie' fullname='Ben Laurie'>
+    <organization />
+</author>
+
+<date month='December' day='9' year='2004' />
+
+<abstract><t>The DNS Security (DNSSEC) NSEC resource record (RR) is intended to be used to provide authenticated denial of existence of DNS owner names and types; however, it also permits any user to obtain a listing of all DNS owner names in a zone. This can accomplished via successive DNS queries for all NSEC RRs in that zone.</t></abstract>
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-laurie-dnsext-nsec2v2-00' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-laurie-dnsext-nsec2v2-00.txt' />
+</reference>
