@@ -42,9 +42,9 @@ And these provide some general DNSSEC information.
 And these three drafts give some background information on the NSEC3
 development.
 
-* tools.ietf.org/html/draft-ietf-dnsext-not-existing-rr-01;
-* tools.ietf.org/html/draft-laurie-dnsext-nsec2v2-00;
-* tools.ietf.org/html/draft-arends-dnsnr-00.
+* The NO RR [](#I-D.ietf-dnsext-not-existing-rr);
+* The NSEC2 RR [](#I-D.laurie-dnsext-nsec2v2);
+* The DNSNR RR [](#I-D.arends-dnsnr).
 
 # Denial of Existence
 We start with the basics and take a look at
@@ -56,9 +56,9 @@ NS records are left out and the SOA and RRSIG records are shortened. Resulting
 in the following unsigned zone file:
 
     example.org.        SOA ( ... )
-    a.example.org.      A 127.0.0.1
+    a.example.org.      A 192.0.2.1
                         TXT "a record"
-    d.example.org.      A 127.0.0.1
+    d.example.org.      A 192.0.2.1
                         TXT "d record"
 
 ## NXDOMAIN
@@ -218,13 +218,13 @@ This signed zone is loaded into the name server. It looks like this:
                         RRSIG(SOA) ( ... )
                         RRSIG(DNSKEY) ( ... )
                         RRSIG(NSEC) ( ... )
-    a.example.org.      A 127.0.0.1
+    a.example.org.      A 192.0.2.1
                         TXT "a record"
                         NSEC d.example.org. A TXT NSEC RRSIG
                         RRSIG(A) ( ... )
                         RRSIG(TXT) ( ... )
                         RRSIG(NSEC) ( ... )
-    d.example.org.      A 127.0.0.1
+    d.example.org.      A 192.0.2.1
                         TXT "d record"
                         NSEC example.org. A TXT NSEC RRSIG
                         RRSIG(A) ( ... )
@@ -426,9 +426,9 @@ For completeness our (unsigned) zone now looks like this:
 
     example.org.        SOA ( ... )
     *.example.org.      TXT "wildcard record"
-    a.example.org.      A 127.0.0.1
+    a.example.org.      A 192.0.2.1
                         TXT "a record"
-    d.example.org.      A 127.0.0.1
+    d.example.org.      A 192.0.2.1
                         TXT "d record"
 
 <!-- * keep vim's syntax happy --> If a resolver asks for `z.example.org TXT`, 
@@ -720,8 +720,10 @@ Original Name     Hashed Name
 Table: Hashed owner names for the `example.org` zone.
 
 # Security Considerations
+This document raises no security issues. 
 
-This document does not deal with security.
+# IANA Considerations
+This document has no actions for IANA.
 
 # Acknowledgements
 This document would not be possible without the help of Ed Lewis,

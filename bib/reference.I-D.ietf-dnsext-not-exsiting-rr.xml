@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='I-D.ietf-dnsext-not-existing-rr'>
+<front>
+<title>Authenticating denial of existence in DNS with minimum disclosure</title>
+
+<author initials='S' surname='Josefsson' fullname='Simon Josefsson'>
+    <organization />
+</author>
+
+<date month='November' day='29' year='2000' />
+
+<abstract><t>
+This draft present an alternative to NXT records, used to achieve authenticated denial of existence of a domain name, class and type. Problems with NXT records, as specified in RFC 2535, are identified. One solution, the NO record, is presented. The NO record differ from the NXT record by using a cryptographic hash value instead of the domain name. This prevent an adversery from collecting information by 'chaining' through a zone. It also remove delegation point concerns in NXT records. The document also describe hash truncation and record merging that reduces storage/network load.
+</t></abstract>
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-ietf-dnsext-not-existing-rr-01' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-ietf-dnsext-not-existing-rr-01.txt' />
+</reference>
