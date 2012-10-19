@@ -136,11 +136,21 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
 3. DNS wildcards complicate matters significantly. More
     about this in later sections.
 
+So if the packet header is not signed (as per the second requirement),
+why can't we just work around this by including in each NXDOMAIN response
+a *generic* signed record which denies the existence of whichever record was
+requested? It turns out that such a naive attempt at authenticated
+denial of existence is susceptible to replay attacks: When you're querying
+a nameserver for a record which actually exists, a man in the midle may
+replay that generic signed NXDOMAIN response and it would be impossible
+to tell whether that response was genuine or forged by the man in the middle.
+Consequently, the NXDOMAIN response has to be specific to the record requested.
+
 The first requirement implies that all denial of existence answers need to be 
 pre-computed, but it is impossible to precompute (all conceivable) non-existence answers.
 In the example above, you need
 a way to tell somebody who is asking for `b.example.org` that it
-does not exists without using the name `b.example.org` in the
+does not exist without using the name `b.example.org` in the
 answer. 
 This has been solved by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
@@ -176,7 +186,7 @@ is superseded by NSEC. In the next section we explain how NSEC (and thus NXT) wo
 
 ## NSEC ##
 In RFC 3755 [](#RFC3755) all the DNSSEC types were given new names, SIG was renamed RRSIG,
-KEY became DNSKEY and NXT was simply renamed to NSEC and a few, minor 
+KEY became DNSKEY and NXT was simply renamed to NSEC and a few minor 
 issues were fixed in the process.
 
 Just as NXT, NSEC is used to describe an interval
@@ -246,6 +256,10 @@ should come after `a`, but the next owner name is `d.example.org`, so
 Only by making that calculation, can a resolver conclude that the name
 `b` does not exist. If the signature of the NSEC record is valid, `b`
 is proven not to exist. We have: *authenticated denial of existence*.
+
+Note that a man in the middle may still replay this NXDOMAIN response
+when you're querying for, say, c.example.org. But it wouldn't do any
+harm since it's provably the proper response to the query.
 
 ## NODATA Responses
 NSEC records are also used in NODATA responses. In that case we need to look more closely 
@@ -353,7 +367,7 @@ for `example.org` we have hashed the names twice and use the salt `DEAD`.
 Lets look at typical NSEC3 record:
 
     15BG9L6359F5CH23E34DDUA6N1RIHL9H.example.org. (
-       NSEC3 1 0 2 DEAD 04SKNAPCA5AL7QOS3KM2L9TL3P5OKQ4C
+       NSEC3 1 0 2 DEAD A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84
             SOA RRSIG DNSKEY NSEC3PARAM )
 
 On the first line we see the hashed owner name: `15BG9L6359F5CH23E34DDUA6N1RIHL9H.example.org`, this
@@ -361,8 +375,8 @@ is the hashed name of `example.org`. Note that even though we hashed `example.or
 zone's name is added to make it look like a domain name again. 
 So un-hashed it sort of looks like: `SHA1(example.org).example.org`.
 
-The next owner name `a.example.org` (line 2) is hashed to: `04SKNAPCA5AL7QOS3KM2L9TL3P5OKQ4C`.
-Note that `.example.org` is not added to the next owner name, as this
+The next hashed owner name `A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84` (line 2) is the hashed version of `d.example.org`.
+Note that `.example.org` is not added to the next hashed owner name, as this
 name always falls in the current zone.
 
 The "1 0 2 DEAD" section of the NSEC3 states: 
@@ -378,6 +392,34 @@ lists the types present at the original owner name. Note that the type NSEC3
 is absent from the list in the example above. This is due to the fact that the
 original owner name (`example.org`) does not have the NSEC3 type. It only exists
 for the hashed name.
+
+You may be wondering why the next hashed owner of `example.org` is
+`d.example.org`, unlike NSEC where the next owner name was `a.example.org`.
+This is because NSEC3 sorts the names in the zone not by the original owner
+name but by the hashed owner name. So in our tiny example zone, the sorted
+list looks like this: 04SKNAPCA5AL7QOS3KM2L9TL3P5OKQ4C (a.example.org),
+15BG9L6359F5CH23E34DDUA6N1RIHL9H (example.org),
+A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84 (d.example.org).
+
+If you've understood the fundamental concept of NSEC -- signing the gaps
+between existing names -- then NSEC3 may seem counter-intuitive:
+When hashing two consecutive owner names, there may always be
+other owner names in the zone whose hashed version falls between the two
+resulting hashes. Or, generally speaking, the following is clearly not
+true: SHA1(x) < SHA1(y) for all x < y. In fact, if we hash `a.example.org`
+and `d.example.org`, which are consecutive in unhashed form, the hash of
+`example.org` falls between them. So how can it work?
+
+As it turns out, it doesn't matter that the order of the owner names
+is mixed up by the hashing. Remember that all we want to achieve is
+thwarting replay attacks. Let's assume that you're querying for a name
+that actually exists and a man in the middle sends you an NSEC3 record
+as a response. For the attack to be successful, the hashed version of
+the name you where asking for has to fall between the hashed owner name
+and the next hashed owner of the NSEC3 record. By definition, that
+can't be true and the attack will therefore fail. So whereas NSEC signs
+the gaps between existing names, NSEC3 signs the gaps between the hashed
+versions of existing names.
 
 Names like `1.h.example.org` hash to one label in NSEC3,
 `1.h.example.org` becomes: `117GERCPRCJGG8J04EV1NDRK8D1JT14K.example.org` when
@@ -397,12 +439,13 @@ Creates 2 names:
 2. `h.example.org` which has no types. This is the empty non-terminal. An empty
    non-terminal will get an NSEC3 records, but not an NSEC record.
 
-## Slaving an NSEC3 Zone
-A secondary server slaving a zone with NSEC3 records needs to
-find out the specifics (hash iterations and salt) to be able to
-hash incoming query names.
+## Loading an NSEC3 Zone into an Authoritative Server
+Whenever an authoritative server receives a query for a non-existing record,
+it has to hash the incoming query name to determine into which interval
+between two existing hashes it falls. To do that it needs to know the
+zone's specific NSEC3 parameters (hash iterations and salt).
 
-To do this, it could scan the zone during the AXFR for NSEC3 records and glance
+One way to learn them is to scan the zone during loading for NSEC3 records and glean
 the NSEC3 parameters from them.  However, it would need to make sure that there
 is at least one complete set of NSEC3 records for the zone using the same
 parameters. Therefore, it would need to inspect all NSEC3 records.
@@ -410,9 +453,9 @@ parameters. Therefore, it would need to inspect all NSEC3 records.
 A more graceful solution was designed. 
 This solution was to create a new record, NSEC3PARAM, which must be placed at
 the apex of the zone.  Its sole role is to provide a single, fixed place
-where a secondary name server can directly see the NSEC3 parameters used.
+where an authoritative name server can directly see the NSEC3 parameters used.
 If NSEC3 were designed in the early days of
-DNS (+/- 1985) this information was probably put in the SOA record.
+DNS (+/- 1985) this information would probably have been put in the SOA record.
 
 ## Wildcards in the DNS ##
 In the above sections we haven't revealed the entire story. There is a complication: wildcards.
@@ -474,9 +517,9 @@ this answer was synthesized from a wildcard.
 
 In the reply above we see that `z.example.org` was generated via wildcard
 expansion. The DNSSEC standard mandates that an NSEC (or NSEC3) is included in such responses.
-If it didn't, an attacker could poison the cache with false data.
+If it wasn't, an attacker could mount a replay attack and poison the cache with false data:
 
- Suppose that the resolver would have asked for
+ Suppose that the resolver has asked for
 `a.example.org TXT`, an attacker could modify the packet in such way that it looks
 like the response was generated through wildcard expansion, even though
 there exists a record for `a.example.org TXT`: `a.example.org.  TXT "a record"`
@@ -493,7 +536,7 @@ Which would be a perfectly valid answer if we would not require the
 inclusion of an NSEC or NSEC3 record in the wildcard answer response. The resolver
 believes that `a.example.org TXT` is a wildcard record, and the real record
 is obscured. This is bad and defeats all the security DNSSEC
-can deliver. Because of this, the NSEC or NSEC3 should be present.
+can deliver. Because of this, the NSEC or NSEC3 must be present.
 
 Thus a resolver can detect such a spoofing attempt:
 
@@ -519,7 +562,7 @@ So we have an NSEC3 that denies the existence of the requested name and
 an NSEC3 that denies wildcard synthesis. What do we miss?
 
 The short answer is that due to the hashing in NSEC3 you loose the depth
-of your zone: everything is hashed into a flat plain. To make up for this
+of your zone: Everything is hashed into a flat plane. To make up for this
 loss of information you need an extra record.
 The more detailed explanation is quite a bit longer...
 
@@ -549,7 +592,7 @@ An NSEC3 `closest encloser proof` consists of:
 2. An NSEC3 RR that **covers** the `next closer name`. This means it
    defines an interval in which the `next closer name` falls. This
    tells the resolver: "The name in your question falls in
-   this interval, and therefor the name in your question does not exist. In fact,
+   this interval, and therefore the name in your question does not exist. In fact,
    the closest encloser is indeed the closest I have".
 
 Take the following example. We take our zone, but now with the following
@@ -623,13 +666,13 @@ that covers the hash of `x.2.example.org`, so the resolver can validate in one s
 While this indeed denies the existence of `x.2.example.org` it is only half the
 answer. As explained, a denial of existence answer needs to say something about
 whether or not a wildcard should have been expanded. And to communicate
-which wildcard that could have been, you need to tell the resolver what the closest encloser
+which wildcard could have been, you need to tell the resolver what the closest encloser
 is. 
 
 So this is where the closest encloser proof comes into play. And for the proof
 to work, the resolver needs to know what the `closest encloser` is. There must
 be an existing ancestor in the zone: a name must exist that is shorter than the
-query name. The resolvers keeps hashing, increasingly shorter names from
+query name. The resolvers keeps hashing increasingly shorter names from
 the query name until an owner name of an NSEC3 matches. This owner name is
 the `closest encloser`.
 
@@ -641,7 +684,7 @@ be covered by the interval set in any of the other NSEC3 records.
 
 Then the resolver needs to check the presence of a wildcard.
 It creates the wildcard name by prepending the wildcard
-label to the closest encloser: "*.\<closest encloser\>", and use the
+label to the closest encloser: "*.\<closest encloser\>", and uses the
 hash of that.
 
 Going back to our example the resolver must first detect the NSEC3 that
@@ -680,7 +723,7 @@ So what does the resolver learn from this?
 * `2.example.org` does not exist.
 
 And if `2.example.org` does not exist, `x.2.example.org` also does not exist.
-But only if there was no wildcard configured. So this is the last step: check if
+But only if there was no wildcard configured. So this is the last step: Check if
 there is a wildcard configured at the closest encloser. 
 
 The resolver
@@ -706,18 +749,19 @@ origin for these names is `example.org`.
 
 Original Name     Hashed Name
 -------------     -----------
-`@`               `15BG9L6359F5CH23E34DDUA6N1RIHL9H`
-`*`               `22670TRPLHSR72PQQMEDLTG1KDQEOLB7`
+`a`               `04SKNAPCA5AL7QOS3KM2L9TL3P5OKQ4C`
 `1.h`             `117GERCPRCJGG8J04EV1NDRK8D1JT14K`
+`@`               `15BG9L6359F5CH23E34DDUA6N1RIHL9H`
+`h`               `1AVVQN74SG75UKFVF25DGCETHGQ638EK`
+`*`               `22670TRPLHSR72PQQMEDLTG1KDQEOLB7`
+`3`               `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ`
 `2`               `7T70DRG4EKC28V93Q7GNBLEOPA7VLP6Q`
 `3.3`             `8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ`
-`3`               `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ`
-`a`               `04SKNAPCA5AL7QOS3KM2L9TL3P5OKQ4C`
+`d`               `A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84`
 `b`               `IUU8L5LMT76JELTP0BIR3TMG4U3UU8E7`
-`h`               `1AVVQN74SG75UKFVF25DGCETHGQ638EK`
 `x.2`             `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`
 
-Table: Hashed owner names for the `example.org` zone.
+Table: Hashed owner names for the `example.org` zone in hash order.
 
 # Security Considerations
 This document raises no security issues. 
