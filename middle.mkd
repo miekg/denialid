@@ -141,7 +141,7 @@ why can't we just work around this by including in each NXDOMAIN response
 a *generic* signed record which denies the existence of whichever record was
 requested? It turns out that such a naive attempt at authenticated
 denial of existence is susceptible to replay attacks: When you're querying
-a nameserver for a record which actually exists, a man in the midle may
+a nameserver for a record which actually exists, a man in the middle may
 replay that generic signed NXDOMAIN response and it would be impossible
 to tell whether that response was genuine or forged by the man in the middle.
 Consequently, the NXDOMAIN response has to be specific to the record requested.
