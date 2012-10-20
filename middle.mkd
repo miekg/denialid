@@ -373,7 +373,7 @@ Lets look at typical NSEC3 record:
 On the first line we see the hashed owner name: `15BG9L6359F5CH23E34DDUA6N1RIHL9H.example.org`, this
 is the hashed name of `example.org`. Note that even though we hashed `example.org`, the 
 zone's name is added to make it look like a domain name again. 
-So un-hashed it sort of looks like: `SHA1(example.org).example.org`.
+So unhashed it sort of looks like: `SHA1(example.org).example.org`.
 
 The next hashed owner name `A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84` (line 2) is the hashed version of `d.example.org`.
 Note that `.example.org` is not added to the next hashed owner name, as this
@@ -429,7 +429,7 @@ introduces a flat space of names, as opposed to NSEC.
 
 In fact the domain name used above: `1.h.example.org` creates an empty non-terminal. 
 Empty non-terminals are domain names that exist but have no
-RR types associated with them but has one or more subdomains that do ([](#RFC5155), Section 1.3). 
+RR types associated with them but has one or more sub domains that do ([](#RFC5155), Section 1.3). 
 
         1.h.example.org.    TXT "1.h record"
 
@@ -547,7 +547,7 @@ Thus a resolver can detect such a spoofing attempt:
 Another way of putting this is that DNSSEC is there to ensure
 the name server has followed the steps as outlined in [](#RFC1034), Section 4.3.2
 for looking up names in the zone. 
-It explicitly lists wildcard lookup as one of these steps (3c), so with DNSSEC this must be
+It explicitly lists wildcard look up as one of these steps (3c), so with DNSSEC this must be
 communicated to the resolver: hence the NSEC(3) record.
 
 With NSEC the maximum number of NSEC records a resolver can get back is
@@ -585,7 +585,7 @@ Next closer name:
 An NSEC3 `closest encloser proof` consists of:
 
 1. An NSEC3 RR that **matches** the `closest encloser`. This means the
-   un-hashed owner name of the record is the closest encloser. This bit of
+   unhashed owner name of the record is the closest encloser. This bit of
    information tells a resolver: "The name you are asking for does 
    not exist, the closest I have is this". 
 
@@ -707,7 +707,7 @@ given. So it has the following hashes to work with:
 
 Of these hashes only one matches the owner name of one of the NSEC3
 records: `15BG9L6359F5CH23E34DDUA6N1RIHL9H`. This must be the closest
-encloser (un-hashed: `example.org`). That's the main purpose of that NSEC3 record:
+encloser (unhashed: `example.org`). That's the main purpose of that NSEC3 record:
 tell the resolver what the closest encloser is.
 
 From that knowledge the resolver constructs the next closer, which
@@ -769,7 +769,7 @@ This document raises no security issues.
 # IANA Considerations
 This document has no actions for IANA.
 
-# Acknowledgements
+# Acknowledgments
 This document would not be possible without the help of Ed Lewis,
 Roy Arends, Wouter Wijngaards, Olaf Kolkman, Carsten Strotmann,
 Jan-Piet Mens, Peter van Dijk,
