@@ -638,20 +638,20 @@ the NSEC3 records it got?
                         example.org
                            ** 
                        +-- ** .....................
-                  [1] /  . /\ .                    .
+                  (1) /  . /\ .                    .
                      /  .  |   .                    .
                     |  .   |    .                    .
                     v .    |     .                    . 
                     **     |      **                  ++
       h.example.org ** ----+----> ** 3.example.org    ++ 2.example.org
-                    .     /  [3]   . |                .
-                    .    /         . | [2]            . 
+                    .     /  (3)   . |                .
+                    .    /         . | (2)            . 
                     .   /          . |                .
                     .  /           . v                .
     1.h.example.org **            **                  ++ 
                     ** <--------- ** 3.3.example.org  ++ x.2.example.org
     Figure: x.2.example.org does not exist. The arrows represent the NSEC3 records, the ones
-    numbered [1], [2] and [3] are the NSEC3s returned in our answer.
+    numbered (1), (2) and (3) are the NSEC3s returned in our answer.
 
 The hash of `x.2.example.org` is `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`.
 Checking this hash on the first NSEC3 yields that it does not fall
