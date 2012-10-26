@@ -572,9 +572,9 @@ Closest encloser:
 
 :   Introduced in [](#RFC4592):
 
-    "The closest encloser is the node in the zone's tree of existing
-     domain names that has the most labels matching the query name
-     (consecutively, counting from the root label downward)."
+>   The closest encloser is the node in the zone's tree of existing
+>   domain names that has the most labels matching the query name
+>   (consecutively, counting from the root label downward).
     
     Suppose the query name is `x.2.example.org`
     then `example.org` is the `closest encloser` in our example;
