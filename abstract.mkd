@@ -7,7 +7,7 @@ This document attempts to answer two simple questions.
 When returning a negative DNSSEC response, a name server sometimes
 includes up to two NSEC records. With NSEC3 the maximum amount is three.
  
-* Why do you need up to two NSEC records?
+* Why are, up to two, NSEC records needed?
 * And why does NSEC3 sometimes require an extra record?
 
 The answer to the questions hinges on the concept of wildcards and the `closest encloser`.
