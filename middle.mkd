@@ -177,9 +177,9 @@ NSEC3 (next secure, version 3) in RFC 5155.
 The first attempt to specify authenticated denial of existence was NXT 
 (RFC 2535 [](#RFC2535)).  Section 5.1 of that RFC introduces the record:
 
-> The NXT resource record is used to securely indicate that RRs with an
+> "The NXT resource record is used to securely indicate that RRs with an
 > owner name in a certain name interval do not exist in a zone and to
-> indicate what RR types are present for an existing name.
+> indicate what RR types are present for an existing name."
 
 By specifying what you do have, you implicitly tell what you don't have. NXT
 is superseded by NSEC. In the next section we explain how NSEC (and thus NXT) works.
@@ -570,13 +570,11 @@ To understand NSEC3 we will need two definitions:
 
 Closest encloser:
 
-:   Introduced in [](#RFC4592):
-
->   The closest encloser is the node in the zone's tree of existing
->   domain names that has the most labels matching the query name
->   (consecutively, counting from the root label downward).
-    
-    Suppose the query name is `x.2.example.org`
+:   Introduced in [](#RFC4592),
+    "The closest encloser is the node in the zone's tree of existing
+    domain names that has the most labels matching the query name
+    (consecutively, counting from the root label downward)."
+    If the query name is `x.2.example.org`
     then `example.org` is the `closest encloser` in our example;
 
 Next closer name:
