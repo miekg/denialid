@@ -493,7 +493,7 @@ sees the answer as-is. How will this answer look with DNSSEC?
     z.example.org.      RRSIG(TXT) ( ... )
 
     ;; AUTHORITY SECTION:
-    d.example.org.      NSEC example.org. TXT RRSIG NSEC
+    d.example.org.      NSEC example.org. A TXT RRSIG NSEC
     d.example.org.      RRSIG(NSEC) ( ... )
 
 The RRSIG of the `z.example.org` TXT record indicates there is a wildcard configured. The RDATA of
@@ -512,9 +512,8 @@ indeed allowed.
 > the owner name is switched to `z.example.org`. So even
 > with wildcards, no signatures are created on the fly.
 
-One thing you may notice is that this reply has an NSEC record in it *even* though
-it is not an NXDOMAIN nor NODATA reply.  In this case it is there to tell the resolver
-this answer was synthesized from a wildcard. 
+One thing you may notice is that this reply has an NSEC record in it *even though*
+it is not an NXDOMAIN nor NODATA reply.
 
 In the reply above we see that `z.example.org` was generated via wildcard
 expansion. The DNSSEC standard mandates that an NSEC (or NSEC3) is included in such responses.
