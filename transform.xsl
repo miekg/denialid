@@ -2,12 +2,12 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <!-- 
-    Version: 0.8.9
+    Version: 0.8.10
     (c) Miek Gieben
     Licensed under the GPL version 2.
 
     Convert DocBook XML as created by Pandoc to XML suitable for RFCs and thus
-    parseble with xml2rfc. 
+    parseable with xml2rfc. 
 -->
 
 <xsl:output method="xml" omit-xml-declaration="yes"/>
@@ -251,7 +251,7 @@
             <xsl:value-of select="normalize-space(translate(./term, '&#x20;&#x9;&#xD;&#xA;', ' '))"/>
         </xsl:attribute>
         <!-- OPTION: enable this to get a newline after the hangText -->
-        <!-- <xsl:element name="vspace"/> -->
+        <xsl:element name="vspace"/>
         <xsl:apply-templates select="./listitem"/>
     </t>
 </xsl:template>
