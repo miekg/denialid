@@ -81,7 +81,7 @@ and this is the data", resulting in this reply:
 The `status: NOERROR` signals that everything is OK, `id` is an integer
 used to match questions and answers. In the ANSWER section we find
 our answer. The AUTHORITY section holds the names of the name servers
-that have information concerning the `example.org` domain. Note that including
+that have information concerning the `example.org` zone. Note that including
 this information is optional.
 
 If a resolver now asks for `b.example.org TXT` it gets an answer that
