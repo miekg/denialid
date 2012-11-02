@@ -134,7 +134,7 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
     the AD bit (AD stands for Authentic Data, see RFC 3655 [](#RFC3655)), 
     which may give some food for thought;
 
-3. DNS wildcards complicate matters significantly. More
+3. DNS wildcards and CNAME records complicate matters significantly. More
     about this in later sections ([](#wildcards-in-the-dns)).
 
 The first requirement implies that all denial of existence answers need to be 
@@ -187,7 +187,7 @@ is superseded by NSEC. In the next section we explain how NSEC (and thus NXT) wo
 
 ## NSEC ##
 In RFC 3755 [](#RFC3755) all the DNSSEC types were given new names, SIG was renamed RRSIG,
-KEY became DNSKEY and NXT was simply renamed to NSEC and a few minor 
+KEY became DNSKEY and NXT was renamed to NSEC and a few minor 
 issues were fixed in the process.
 
 Just as NXT, NSEC is used to describe an interval
