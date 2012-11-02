@@ -458,7 +458,7 @@ This solution was to create a new record, NSEC3PARAM, which must be placed at
 the apex of the zone.  Its sole role is to provide a single, fixed place
 where an authoritative name server can directly see the NSEC3 parameters used.
 If NSEC3 were designed in the early days of
-DNS (+/- 1985) this information would probably have been put in the SOA record.
+DNS (+/- 1984) this information would probably have been put in the SOA record.
 
 ## Wildcards in the DNS ##
 In the above sections we have not revealed the entire story. There is a complication: wildcards.
