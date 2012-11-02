@@ -25,7 +25,7 @@ as these complicate matters.
 Note: In this document domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
-of DNSSEC. This document does not explain NSEC3 opt-out and secure delegations.
+of DNSSEC. NSEC3 opt-out and secure delegations are out of scope for this document.
 
 The following RFCs are not required reading, but they help in
 understanding the problem space.
