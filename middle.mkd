@@ -27,7 +27,7 @@ running text they will not.
 This text is written for people who have a fair understanding
 of DNSSEC. This document does not explain NSEC3 opt-out and secure delegations.
 
-The following RFCs are not required reading, but they might help in
+The following RFCs are not required reading, but they help in
 understanding the problem space.
 
 * RFC 5155 [](#RFC5155) - Hashed Authenticated Denial of Existence;
@@ -767,7 +767,7 @@ certain design choices have been made. Implementations that do not correctly
 handle this aspect of DNSSEC create a severe hole in the security DNSSEC can add.
 This document aims to "fill this documentation gap" and provide would-be
 implementors and other interested parties with enough background knowledge to
-better understand authenticated denial of existence.
+better understand authenticated denial of existence. 
 
 # IANA Considerations
 This document has no actions for IANA.
