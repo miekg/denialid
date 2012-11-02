@@ -331,9 +331,9 @@ inherited the two issues from NXT.
 Several years after that NSEC2 was introduced as a way to solve the two issues
 of NSEC. The NSEC2 draft contains the following paragraph:
 
-> This document proposes an alternate scheme which hides owner names
+> "This document proposes an alternate scheme which hides owner names
 > while permitting authenticated denial of existence of non-existent
-> names.  The scheme uses two new RR types: NSEC2 and EXIST.
+> names.  The scheme uses two new RR types: NSEC2 and EXIST."
 
 When an authenticated denial of existence scheme starts to talk
 about EXIST records it is worth paying extra attention.
