@@ -294,7 +294,8 @@ Now the resolver should check the AUTHORITY section and conclude that:
 The techniques used by NSEC are the basics of authenticated denial of
 existence in DNSSEC.
 
-But there were two issues with NSEC (and NXT).
+### Drawback of NSEC
+There were two issues with NSEC (and NXT).
 The first is that it allows for zone walking. NSEC
 records point from one name to another, in our example: `example.org`, points
 to `a.example.org` which points to `d.example.org` which points back to
@@ -304,8 +305,8 @@ zone transfers (AXFR) on the server are denied.
 The second issue is that when a large, delegation heavy,
 zone deploys DNSSEC, every name in the zone gets an NSEC plus
 RRSIG. This leads to a huge increase in the zone
-size (when signed). This would in turn mean that operators of large zones (or with a lot
-of zones) who are deploying DNSSEC, face up front costs. This could hinder DNSSEC adoption.
+size (when signed). This would in turn mean that operators of such zones
+who are deploying DNSSEC, face up front costs. This could hinder DNSSEC adoption.
 
 These two issues eventually lead to NSEC3 which:
 
@@ -336,7 +337,7 @@ of NSEC. The NSEC2 draft contains the following paragraph:
 > names.  The scheme uses two new RR types: NSEC2 and EXIST."
 
 When an authenticated denial of existence scheme starts to talk
-about EXIST records it is worth paying extra attention.
+about EXIST records, it is worth paying extra attention.
 
 NSEC2 solved the zone walking issue, by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
