@@ -9,7 +9,7 @@ It is also used to signal that a domain
 name exists, but does not have the specific RR type you were asking for.
 
 The first is referred to as an NXDOMAIN [](#RFC2308) (non-existent domain) and the 
-latter a NODATA [](#RFC2308) response.
+latter a NODATA [](#RFC2308) response. Both are also known as negative responses.
 
 In this document we will explain how authenticated denial
 of existence works.
