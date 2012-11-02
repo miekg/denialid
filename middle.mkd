@@ -290,7 +290,7 @@ Now the resolver should check the AUTHORITY section and conclude that:
 The techniques used by NSEC are the basics of authenticated denial of
 existence in DNSSEC.
 
-### Drawbacks of NSEC
+## Drawbacks of NSEC
 There were two issues with NSEC (and NXT).
 The first is that it allows for zone walking. NSEC
 records point from one name to another, in our example: `example.org`, points
