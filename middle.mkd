@@ -765,7 +765,12 @@ Original Name     Hashed Name
 Table: Hashed owner names for the `example.org` zone in hash order.
 
 # Security Considerations
-This document raises no security issues. 
+The RFCs describing authenticated denial of existence are concise about why
+certain design choices have been made. Implementations that do not correctly
+handle this aspect of DNSSEC create a severe hole in the security DNSSEC can add.
+This document aims to "fill this documentation gap" and provide would-be
+implementors and other interested parties with enough background knowledge to
+better understand authenticated denial of existence.
 
 # IANA Considerations
 This document has no actions for IANA.
