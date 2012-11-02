@@ -241,6 +241,7 @@ This signed zone is loaded into the name server. It looks like this:
                         RRSIG(A) ( ... )
                         RRSIG(TXT) ( ... )
                         RRSIG(NSEC) ( ... )
+    Figure: The signed example.org zone.
 
 If a DNSSEC aware resolver asks for `b.example.org`, it gets
 back a `status: NXDOMAIN` packet, which by itself is meaningless
@@ -267,7 +268,7 @@ NSEC records are also used in NODATA responses. In that case we need to look mor
 at the type bit map. The
 type bit map in an NSEC record tells which types are defined for
 a name. If we look at the NSEC record of `a.example.org` (see the reply
-below for an example of the record) we
+below or [](#fig:the-signed) for an example of the record) we
 see the following types in the bit map: A, TXT, NSEC and RRSIG. So
 for the name `a` this indicates we must have an A, TXT, NSEC and RRSIG record in the
 zone. 
