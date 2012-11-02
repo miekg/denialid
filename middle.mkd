@@ -575,12 +575,12 @@ was appropriate: `w.a.` falls in the gap `*.a` to `*.b`. Similar, the NSEC recor
 We can have one or more NSEC3 records that deny the existence of the requested name
 and one NSEC3 record that deny wildcard synthesis. What do we miss?
 
-The short answer is that due to the hashing in NSEC3 you loose the depth
+The short answer is that, due to the hashing in NSEC3 you loose the depth
 of your zone: Everything is hashed into a flat plane. To make up for this
 loss of information you need an extra record.
 The more detailed explanation is quite a bit longer...
 
-To understand NSEC3 we will need two definitions:
+To understand NSEC3, we will need two definitions:
 
 Closest encloser:
 
@@ -606,9 +606,23 @@ An NSEC3 `closest encloser proof` consists of:
 
 2. An NSEC3 RR that **covers** the `next closer name`. This means it
    defines an interval in which the `next closer name` falls. This
-   tells the resolver: "The name in your question falls in
+   tells the resolver: "The next closer name falls in
    this interval, and therefore the name in your question does not exist. In fact,
    the closest encloser is indeed the closest I have".
+
+These two records already deny the existence of the requested name, so we do not
+need an NSEC3 record that covers the actual queried name: By denying the existence
+of the next closer name, you also deny the existence of the queried name.
+
+For a given query name, there can only be one place where wildcard expansion is possible.
+This is the source of synthesis, and is defined as:
+
+    <asterisk label>.<closest encloser>
+
+In other words, to deny wildcard synthesis, the
+resolver needs to know the hash of the source of synthesis.
+Since it does not know on forehand the closest encloser of the query name, it
+must be provided in the answer.
 
 Take the following example. We take our zone, but now with the following
 two records and it is signed with NSEC3. 
@@ -642,52 +656,9 @@ with the following NSEC3 records:
     1AVVQN74SG75UKFVF25DGCETHGQ638EK.example.org. (
         NSEC3 1 0 2 DEAD 75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ )
 
-If we would follow the NSEC approach, the resolver is only interested in
-one thing.
-Does the hash of `x.2.example.org` fall in any of the intervals of 
-the NSEC3 records it got?
 
-                        example.org
-                           ** 
-                       +-- ** .....................
-                  (1) /  . /\ .                    .
-                     /  .  |   .                    .
-                    |  .   |    .                    .
-                    v .    |     .                    . 
-                    **     |      **                  ++
-      h.example.org ** ----+----> ** 3.example.org    ++ 2.example.org
-                    .     /  (3)   . |                .
-                    .    /         . | (2)            . 
-                    .   /          . |                .
-                    .  /           . v                .
-    1.h.example.org **            **                  ++ 
-                    ** <--------- ** 3.3.example.org  ++ x.2.example.org
-    Figure: x.2.example.org does not exist. The arrows represent the NSEC3 records, the ones
-    numbered (1), (2) and (3) are the NSEC3s returned in our answer.
-
-The hash of `x.2.example.org` is `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`.
-Checking this hash on the first NSEC3 yields that it does not fall
-in between the interval: `15BG9L6359F5CH23E34DDUA6N1RIHL9H`
-and `1AVVQN74SG75UKFVF25DGCETHGQ638EK`.
-For the second NSEC3 the answer is also negative: the hash sorts outside
-the interval described by `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ` and
-`8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ`.
-And the last NSEC3 also isn't of any help.
-What is a resolver to do? It has been given the maximum amount of NSEC3s and 
-they all seem useless.
-
-A question that you might have at this point is why does the server not send an NSEC3
-that covers the hash of `x.2.example.org`, so the resolver can validate in one step? 
-While this indeed denies the existence of `x.2.example.org` it is only half the
-answer. As explained, a denial of existence answer needs to say something about
-whether or not a wildcard should have been expanded. And to communicate
-which wildcard could have been, you need to tell the resolver what the closest encloser
-is. 
-
-So this is where the closest encloser proof comes into play. And for the proof
-to work, the resolver needs to know what the `closest encloser` is. There must
-be an existing ancestor in the zone: a name must exist that is shorter than the
-query name. The resolver keeps hashing increasingly shorter names from
+The resolver has three candidates to figure out what is the closest encloser.
+It keeps hashing increasingly shorter names from
 the query name until an owner name of an NSEC3 matches. This owner name is
 the `closest encloser`.
 
@@ -695,14 +666,14 @@ When the resolver has found the closest encloser, the next step is
 to construct the `next closer name`. This is the closest encloser
 with the last chopped label from query name prepended to it:
 "\<last chopped label\>.\<closest encloser\>". The hash of this name should 
-be covered by the interval set in any of the other NSEC3 records.
+be covered by the interval set in any of the NSEC3 records.
 
 Then the resolver needs to check the presence of a wildcard.
 It creates the wildcard name by prepending the wildcard
 label to the closest encloser: "*.\<closest encloser\>", and uses the
 hash of that.
 
-Going back to our example the resolver must first detect the NSEC3 that
+Going back to our example, the resolver must first detect the NSEC3 that
 matches the closest encloser. It does this by chopping up the query name,
 hashing each instance (with the same number of iterations and hash
 as the zone it is querying) and comparing that to the answers
@@ -737,26 +708,53 @@ So what does the resolver learn from this?
 * `example.org` exists;
 * `2.example.org` does not exist.
 
-And if `2.example.org` does not exist, `x.2.example.org` also does not exist.
-But only if there was no wildcard configured. So this is the last step: Check if
-there is a wildcard configured at the closest encloser. 
+And if `2.example.org` does not exist, There is also no direct match for `x.2.example.org`.
+The last step is to deny the existence of the source of synthesis, to prove that no wildcard
+expansion was possible.
 
 The resolver
-hashes `*.example.org` to `22670TRPLHSR72PQQMEDLTG1KDQEOLB7`. Only the last
-NSEC3 covers this hash. The hash falls in
+hashes `*.example.org` to `22670TRPLHSR72PQQMEDLTG1KDQEOLB7` and is covered by the last
+NSEC3. The hash falls in
 the interval set by `1AVVQN74SG75UKFVF25DGCETHGQ638EK` and
-`75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ` (this is our third NSEC3).
-This means there is no wildcard
-at the closest encloser and `x.2.example.org` definitely does not exist.
+`75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ`.
+This means there is no wildcard record directly below
+the closest encloser and `x.2.example.org` definitely does not exist.
 
-When we have validated the signatures, we reached our goal: authenticated denial
+One extra NSEC3 record plus additional signature may seem a lot just to deny the
+existence of the wildcard record. But we cannot leave it out. If the standard would
+not mandate the closest encloser NSEC3 record, but instead required two NSEC3 records: one
+to deny the query name and one to deny the wildcard record. An attacker could fool the resolver
+that source of synthesis does not exist, while it in fact does.
+
+Suppose the wildcard record does exist and our unsigned zone looks like this:
+
+   example.org.        SOA ( ... )
+   *.example.org.      TXT "wildcard record"
+   1.h.example.org.    TXT "1.h record"
+   3.3.example.org.    TXT "3.3 record"
+
+The query `x.2.example.org TXT` would no have to be expanded to:
+
+   x.2.example.org.   TXT "wildcard record"
+
+An attacker can deny the wildcard expansion by creating a hash for a fake wildcard name `*.2.example.org`:
+`FBQ73BFKJLRKDOQS27K5QF81AQQD7HHO`. This hash is covered by the NSEC3 record of `3.3.`:
+`8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ` to `15BG9L6359F5CH23E34DDUA6N1RIHL9H`. This record coincedentally also
+covers the query name 'x.2.example.org` (which hashes to `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`). 
+An attacker just adds the following NSEC3 record in the AUTHORITY section:
+
+    8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ.example.org. (
+     NSEC3 1 0 2 DEAD 15BG9L6359F5CH23E34DDUA6N1RIHL9H TXT
+            RRSIG )
+
+to deny both `x.2.example.org` and some wildcard expansion. The attacker has succesfully fooled the
+resolver that `x.2.example.org` does not exist, while in fact it could have been synthesized via wildcard expansion.
+With the NSEC3 matching the closest encloser `example.org`, the resolver can be sure that the wildcard expansion
+should occur at `*.example.org` and nowhere else.
+
+When we have validated all the signatures, we reached our goal: authenticated denial
 of existence.
 
-Coming back to the original question: why do we need (up to) three NSEC3
-records? The resolver needs to be explicitly told what the `closest encloser` is
-and this takes up a full NSEC3 record. Then the next closer name needs to be covered
-in an NSEC3 record, and finally an NSEC3 must say something about the wildcard. That
-makes three records.
 
 # List of Hashed Owner Names
 The following owner names are used in this document. The
@@ -775,8 +773,9 @@ Original Name     Hashed Name
 `d`               `A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84`
 `b`               `IUU8L5LMT76JELTP0BIR3TMG4U3UU8E7`
 `x.2`             `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`
+`*.2`             `FBQ73BFKJLRKDOQS27K5QF81AQQD7HHO`
 
-Table: Hashed owner names for the `example.org` zone in hash order.
+Table: Hashed owner names for `example.org` in hash order.
 
 # Security Considerations
 This document raises no security issues. 
