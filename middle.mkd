@@ -6,12 +6,12 @@ One such area is "authenticated denial of existence".
 Authenticated denial of existence allows a DNSSEC enabled resolver to
 validate that a certain domain name does not exist.
 It is also used to signal that a domain
-name exists, but does not have the specific RR type you were asking for.
+name exists, but does not have the specific RRtype you were asking for.
 
 The first is referred to as an NXDOMAIN [](#RFC2308) (non-existent domain) and the 
-latter a NODATA [](#RFC2308) response.
+latter a NODATA [](#RFC2308) response, and are referred to as negative responses.
 
-In this document we will explain how authenticated denial
+In this document, we will explain how authenticated denial
 of existence works.
 We begin by explaining the current technique in the DNS
 and work our way up to DNSSEC. We explain the first steps
@@ -19,13 +19,14 @@ taken in DNSSEC and describe how NXT, NSEC and NSEC3 work. NO, NSEC2 and
 DNSNR also briefly make their appearance, as they have paved the
 way for NSEC3.
 
-To complete the picture we also need to explain DNS wildcards
-as these complicate matters.
+To complete the picture, we also need to explain DNS wildcards
+as these complicate matters, especially combined with CNAME records.
 
-Note: In this document domain names in zone file examples will have a trailing dot, in the
+Note: In this document, domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
-of DNSSEC. This document does not explain NSEC3 opt-out and secure delegations.
+of DNSSEC. This document does not explain NSEC3 opt-out and secure delegations,
+although this may be incorporated in a future version of this document.
 
 The following RFCs are not required reading, but they might help in
 understanding the problem space.
@@ -51,9 +52,9 @@ We start with the basics and take a look at
 NXDOMAIN handling in the DNS. To make it more visible
 we are going to use a small DNS zone, with
 3 names (`example.org`, `a.example.org` and `d.example.org`) and 3 types (SOA,
-A and TXT). For brevity the class is not shown (defaults to IN), the
-NS records are left out and the SOA and RRSIG records are shortened, resulting
-in the following unsigned zone file:
+A and TXT). For brevity, the class is not shown (defaults to IN), the
+NS records are left out and the SOA record is shortened, resulting
+in the following zone file:
 
     example.org.        SOA ( ... )
     a.example.org.      A 192.0.2.1
@@ -79,7 +80,7 @@ and this is the data", resulting in this reply:
 
 
 The `status: NOERROR` signals that everything is OK, `id` is an integer
-used to match questions and answers. In the ANSWER section we find
+used to match questions and answers. In the ANSWER section, we find
 our answer. The AUTHORITY section holds the names of the name servers
 that have information concerning the `example.org` domain. Note that including
 this information is optional.
@@ -92,9 +93,10 @@ this name does not exist:
     ;; AUTHORITY SECTION:
     example.org.        SOA ( ... )
 
-In this case we do not get an ANSWER section and the status
+In this case, we do not get an ANSWER section and the status
 is set to NXDOMAIN. From this the resolver concludes that `b.example.org` does not
-exist.
+exist. The AUTHORITY section holds the SOA record of `example.org` that the
+resolver can use to cache the negative response.
 
 ## NODATA
 It is important to realize that NXDOMAIN is not the only type
@@ -108,11 +110,11 @@ answer:
     ;; AUTHORITY SECTION:
     example.org.        SOA ( ... )
 
-The status is NOERROR meaning that the `a.example.org` name exists.
-But the reply does not contain an ANSWER section. Instead it has
-an AUTHORITY section which holds the SOA record of `example.org`. The resolver
-has to put these pieces of information together and conclude that
-`a.example.org` exists, but it does not have an `AAAA` record.
+The status is NOERROR meaning that the `a.example.org` name exists,
+but the reply does not contain an ANSWER section. This differentiates a
+NODATA response from an NXDOMAIN response, the rest of the packet is
+awfully similar. The resolver has to put these pieces of information together
+and conclude that `a.example.org` exists, but it does not have an `AAAA` record.
 
 # Secure Denial of Existence
 The above has to be translated to the security aware world
@@ -132,27 +134,20 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
     This means that a `status: NXDOMAIN` 
     can not be trusted. In fact the entire header may be forged, including
     the AD bit (AD stands for Authenticated Data, see RFC 3655 [](#RFC3655)), 
-    which may give some food for thought;
+    which may give some more food for thought;
 
-3. DNS wildcards complicate matters significantly. More
+3. DNS wildcards and CNAME records complicate matters significantly. More
     about this in later sections.
 
-So if the packet header is not signed (as per the second requirement),
-why can't we just work around this by including in each NXDOMAIN response
-a *generic* signed record which denies the existence of whichever record was
-requested? It turns out that such a naive attempt at authenticated
-denial of existence is susceptible to replay attacks: When you're querying
-a nameserver for a record which actually exists, a man in the middle may
-replay that generic signed NXDOMAIN response and it would be impossible
-to tell whether that response was genuine or forged by the man in the middle.
-Consequently, the NXDOMAIN response has to be specific to the record requested.
-
 The first requirement implies that all denial of existence answers need to be 
-pre-computed, but it is impossible to precompute (all conceivable) non-existence answers.
-In the example above, you need
-a way to tell somebody who is asking for `b.example.org` that it
-does not exist without using the name `b.example.org` in the
-answer. 
+pre-computed, but it is impossible to precompute (all conceivable) non-existence
+answers.
+A generic denial record which can be used in all denial of existence proofs is
+not an option: such a record is susceptible to replat attacks. When you are querying
+a nameserver for a record that actually exists, a man in the middle may
+replay that generic denial record and it would be impossible
+to tell whether the response was genuine or spoofed.
+
 This has been solved by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
 defines the holes (non-existing names) in the zone. This record can 
@@ -180,14 +175,14 @@ The first attempt to specify authenticated denial of existence was NXT
 
 > "The NXT resource record is used to securely indicate that RRs with an
 > owner name in a certain name interval do not exist in a zone and to
-> indicate what RR types are present for an existing name."
+> indicate what RRtypes are present for an existing name."
 
 By specifying what you do have, you implicitly tell what you don't have. NXT
 is superseded by NSEC. In the next section we explain how NSEC (and thus NXT) works.
 
 ## NSEC ##
 In RFC 3755 [](#RFC3755) all the DNSSEC types were given new names, SIG was renamed RRSIG,
-KEY became DNSKEY and NXT was simply renamed to NSEC and a few minor 
+KEY became DNSKEY and NXT was renamed to NSEC and a few minor 
 issues were fixed in the process.
 
 Just as NXT, NSEC is used to describe an interval
@@ -242,11 +237,16 @@ This signed zone is loaded into the name server. It looks like this:
                         RRSIG(TXT) ( ... )
                         RRSIG(NSEC) ( ... )
 
+Again for brevity, the class is not shown (defaults to IN), the
+NS records are left out and the SOA, DNSKEY and RRSIG records are shortened.
+
+### NXDOMAIN Responses
+
 If a DNSSEC aware resolver asks for `b.example.org`, it gets
 back a `status: NXDOMAIN` packet, which by itself is meaningless
 as the header can be forged. To be able to securely detect that `b` does not exist,
-there must also be an NSEC record which *covers* the name space
-where `b` lives:
+there must also be a signed NSEC record which covers the name space
+where `b` lives. The record:
 
     a.example.org.      NSEC d.example.org.
     
@@ -254,28 +254,27 @@ does just do that: `b`
 should come after `a`, but the next owner name is `d.example.org`, so
 `b` does not exist.
 
-Only by making that calculation, can a resolver conclude that the name
+Only by making that calculation, a resolver is able to conclude that the name
 `b` does not exist. If the signature of the NSEC record is valid, `b`
-is proven not to exist. We have *authenticated denial of existence*.
+is proven not to exist. We have authenticated denial of existence.
 
 Note that a man in the middle may still replay this NXDOMAIN response
 when you're querying for, say, c.example.org. But it wouldn't do any
 harm since it's provably the proper response to the query.
 
-## NODATA Responses
-NSEC records are also used in NODATA responses. In that case we need to look more closely 
-at the type bit map. The
-type bit map in an NSEC record tells which types are defined for
-a name. If we look at the NSEC record of `a.example.org` (see the reply
-below for an example of the record) we
-see the following types in the bit map: A, TXT, NSEC and RRSIG. So
+### NODATA Responses
+NSEC records are also used in NODATA responses. In that case we need to look more
+closely at the type bitmap. The
+type bitmap in an NSEC record tells which types are defined for
+a name. If we look at the NSEC record of `a.example.org`, we
+see the following types in the bitmap: A, TXT, NSEC and RRSIG. So
 for the name `a` this indicates we must have an A, TXT, NSEC and RRSIG record in the
 zone. 
 
-With the type bit map of the NSEC record a resolver can establish
-that a name is there, but the type is not. A resolver
-asks for `a.example.org AAAA`. This is the reply that comes
-back:
+With the type bitmap of the NSEC record, a resolver can establish
+that a name is there, but the type is not. For example, if a resolver
+asks for `a.example.org AAAA`, the reply that comes
+back is:
 
     ;; status: NOERROR, id: 44638
 
@@ -285,15 +284,17 @@ back:
     a.example.org.      NSEC d.example.org. A TXT NSEC RRSIG
     a.example.org.      RRSIG(NSEC) ( ... )
 
-Now the resolver should check the AUTHORITY section and conclude that: 
+The resolver should check the AUTHORITY section and conclude that: 
 
 1. `a.example.org` exists (because of the NSEC with that owner name) and;
-2. that the type (AAAA) does not as it is *not* listed in the type bit map.
+2. the type (AAAA) does not as it is not listed in the type bitmap.
 
 The technique used by NSEC form the basics of authenticated denial of
 existence in DNSSEC.
 
-But there were two issues with NSEC (and NXT).
+### Drawbacks
+
+There were two issues with NSEC (and NXT).
 The first is that it allows for zone walking. NSEC
 records point from one name to another, in our example: `example.org`, points
 to `a.example.org` which points to `d.example.org` which points back to
@@ -303,8 +304,8 @@ zone transfers (AXFR) on the server are denied.
 The second issue is that when a large, delegation heavy,
 zone deploys DNSSEC, every name in the zone gets an NSEC plus
 RRSIG. This leads to a huge increase in the zone
-size (when signed). This would in turn mean that operators of large zones (or with a lot
-of zones) who are deploying DNSSEC, face up front costs. This could hinder DNSSEC adoption.
+size (when signed). This would in turn mean that operators of such zones
+who are deploying DNSSEC, face up front costs. This could hinder DNSSEC adoption.
 
 These two issues eventually lead to NSEC3 which:
 
@@ -321,9 +322,10 @@ and DNSNR.
 
 ## NO, NSEC2 and DNSNR ##
 The NO record was the first to introduce the idea of hashed owner names. It also fixed other shortcomings
-of the NXT record. At the time (around 2000) zone walking was not considered important enough
-to warrant the new record. People were also worried that deployment would be hindered by
-developing an alternate means of denial of existence. Thus the effort was shelved and
+of the NXT record. At that time (around 2000) zone walking was not considered important enough
+to warrant the new record. People were also worried that
+developing an alternate means of denial of existence, DNSSEC deployment would be hindered.
+Thus the effort was shelved and
 NXT remained. When the new DNSSEC specification was written, NSEC saw the light and
 inherited the two issues from NXT.
 
@@ -332,14 +334,13 @@ of NSEC. The NSEC2 draft contains the following paragraph:
 
 > This document proposes an alternate scheme which hides owner names
 > while permitting authenticated denial of existence of non-existent
-> names.  The scheme uses two new RR types: NSEC2 and EXIST.
+> names.  The scheme uses two new RRtypes: NSEC2 and EXIST.
 
 When an authenticated denial of existence scheme starts to talk
-about EXIST records it is worth paying extra attention.
+about EXIST records, it is worth paying extra attention.
 
 NSEC2 solved the zone walking issue, by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
-
 But it did not have opt-out. Although promising, the proposal
 did not make it because of issues with wildcards and the odd EXIST
 resource record.
@@ -353,12 +354,16 @@ problem.
 ## NSEC3 ##
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
 both opt-out and the hashing of names. NSEC3 solves any issues people might
-have with NSEC, but it introduces some additional complexity.
+have with NSEC, at the cost of additional complexity.
 
 NSEC3 did not supersede NSEC, they are both defined for
 DNSSEC. So DNSSEC is blessed with two different means to perform authenticated
 denial of existence: NSEC and NSEC3. 
-In NSEC3 every name is hashed, including the owner name.
+In NSEC3 every name is hashed, including the owner name. This means
+that NSEC3 chain is sorted in hash order, instead of canonical order.
+Because the owner names are hashed, the next owner name for `example.org` is unlikely to
+be `a.example.org`, like with NSEC. Hashing changes the order, so that zone walking
+becomes more difficult.
 
 SHA1 is always used for
 the hashing. To make it even more difficult to retrieve the original names,
@@ -388,39 +393,11 @@ The "1 0 2 DEAD" section of the NSEC3 states:
 * Hash Iterations = 2; 
 * Salt = "DEAD". 
 
-At the end we see the type bit map, which is identical to NSEC's bit map, that
+At the end we see the type bitmap, which is identical to NSEC's bitmap, that
 lists the types present at the original owner name. Note that the type NSEC3
 is absent from the list in the example above. This is due to the fact that the
 original owner name (`example.org`) does not have the NSEC3 type. It only exists
 for the hashed name.
-
-You may be wondering why the next hashed owner of `example.org` is
-`d.example.org`, unlike NSEC where the next owner name was `a.example.org`.
-This is because NSEC3 sorts the names in the zone not by the original owner
-name but by the hashed owner name. So in our tiny example zone, the sorted
-list looks like this: 04SKNAPCA5AL7QOS3KM2L9TL3P5OKQ4C (a.example.org),
-15BG9L6359F5CH23E34DDUA6N1RIHL9H (example.org),
-A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84 (d.example.org).
-
-If you have understood the fundamental concept of NSEC -- signing the gaps
-between existing names -- then NSEC3 may seem counter-intuitive:
-When hashing two consecutive owner names, there may always be
-other owner names in the zone whose hashed version falls between the two
-resulting hashes. Or, generally speaking, the following is clearly not
-true: SHA1(x) < SHA1(y) for all x < y. In fact, if we hash `a.example.org`
-and `d.example.org`, which are consecutive in unhashed form, the hash of
-`example.org` falls between them. So how can it work?
-
-As it turns out, it does not matter that the order of the owner names
-is mixed up by the hashing. Remember that all we want to achieve is
-thwarting replay attacks. Let's assume that you're querying for a name
-that actually exists and a man in the middle sends you an NSEC3 record
-as a response. For the attack to be successful, the hashed version of
-the name you where asking for has to fall between the hashed owner name
-and the next hashed owner of the NSEC3 record. By definition, that
-can't be true and the attack will therefore fail. So whereas NSEC signs
-the gaps between existing names, NSEC3 signs the gaps between the hashed
-versions of existing names.
 
 Names like `1.h.example.org` hash to one label in NSEC3,
 `1.h.example.org` becomes: `117GERCPRCJGG8J04EV1NDRK8D1JT14K.example.org` when
@@ -430,17 +407,17 @@ introduces a flat space of names, as opposed to NSEC.
 
 In fact the domain name used above (`1.h.example.org`) creates an empty non-terminal. 
 Empty non-terminals are domain names that have no RRs associated with them, and exist only
-because they have one or more sub domains that do ([](#RFC5155), Section 1.3). 
+because they have one or more sub domains that do ([](#RFC5155), Section 1.3). The record:
 
         1.h.example.org.    TXT "1.h record"
 
-Creates 2 names:
+creates two names:
 
 1. `1.h.example.org` that has the type: TXT;
 2. `h.example.org` which has no types. This is the empty non-terminal. An empty
    non-terminal will get an NSEC3 records, but not an NSEC record.
 
-## Loading an NSEC3 Zone into an Authoritative Server
+### Loading an NSEC3 Zone into an Authoritative Server
 Whenever an authoritative server receives a query for a non-existing record,
 it has to hash the incoming query name to determine into which interval
 between two existing hashes it falls. To do that it needs to know the
@@ -458,10 +435,13 @@ where an authoritative name server can directly see the NSEC3 parameters used.
 If NSEC3 were designed in the early days of
 DNS (+/- 1985) this information would probably have been put in the SOA record.
 
-## Wildcards in the DNS ##
-In the above sections we have not revealed the entire story. There is a complication: wildcards.
+### Wildcards in the DNS
+So far, we have only talked about denial of existence in negative responses. However,
+denial of existence may also occur in positive responses, i.e., where the ANSWER section
+of the response is not empty. This can happen because of wildcards.
+
 Wildcards have been part of the DNS since the first DNS RFCs. They allow to define
-*all* names for a certain type in one go. In our `example.org` zone we could for instance
+all names for a certain type in one go. In our `example.org` zone we could for instance
 add a wildcard record:
 
     *.example.org.      TXT "wildcard record"
@@ -476,7 +456,7 @@ For completeness, our (unsigned) zone now looks like this:
                         TXT "d record"
 
 <!-- * keep vim's syntax happy --> If a resolver asks for `z.example.org TXT`, 
-the name server will respond with an *expanded wildcard*, instead of an NXDOMAIN:
+the name server will respond with an expanded wildcard, instead of an NXDOMAIN:
 
     ;; status: NOERROR, id: 13658
 
@@ -510,17 +490,13 @@ indeed allowed.
 > out of thin air. This is not the case. The signature for `z.example.org` does not exist.
 > The signature you are seeing is the one for `*.example.org` which does exist, only 
 > the owner name is switched to `z.example.org`. So even
-> with wildcards, no signatures are created on the fly.
-
-One thing you may notice is that this reply has an NSEC record in it *even though*
-it is not an NXDOMAIN nor NODATA reply.
+> with wildcards, no signatures have to be created on the fly.
 
 In the reply above we see that `z.example.org` was generated via wildcard
 expansion. The DNSSEC standard mandates that an NSEC (or NSEC3) is included in such responses.
 If it wasn't, an attacker could mount a replay attack and poison the cache with false data:
-
- Suppose that the resolver has asked for
-`a.example.org TXT`, an attacker could modify the packet in such way that it looks
+Suppose that the resolver has asked for
+`a.example.org TXT`. An attacker could modify the packet in such way that it looks
 like the response was generated through wildcard expansion, even though
 there exists a record for `a.example.org TXT`: `a.example.org.  TXT "a record"`
 
@@ -538,28 +514,66 @@ believes that `a.example.org TXT` is a wildcard record, and the real record
 is obscured. This is bad and defeats all the security DNSSEC
 can deliver. Because of this, the NSEC or NSEC3 must be present.
 
-Thus a resolver can detect such a spoofing attempt:
-
-1. If the NSEC(3) is not present, assume the answer is spoofed;
-2. If the NSEC(3) is there, check it. If the signature is not correct,
-   assume a spoofed answer.
-
 Another way of putting this is that DNSSEC is there to ensure
 the name server has followed the steps as outlined in [](#RFC1034), Section 4.3.2
 for looking up names in the zone. 
 It explicitly lists wildcard look up as one of these steps (3c), so with DNSSEC this must be
 communicated to the resolver: hence the NSEC(3) record.
 
-With NSEC the maximum number of NSEC records a resolver can get back is
+### And now with CNAME records
+
+So far, the maximum number of NSEC records a response will have is
 two: one for the denial of existence and another for the wildcard.
 We say maximum, because sometimes a single NSEC can prove both.
-With NSEC3 it is three, as to why, we will explain in the next 
-section.
+With NSEC3, this is three (as to why, we will explain in the next section).
 
-## Returning Three NSEC3s
-With NSEC3, matters are even more complicated. 
-So we have an NSEC3 that denies the existence of the requested name and
-an NSEC3 that denies wildcard synthesis. What do we miss?
+When we introduce CNAME wildcard records, we can have more NSEC(3) records.
+For every wildcard expansion, we need to prove that the expansion was allowed.
+Lets add some CNAME wildcard records to our zone:
+
+    example.org.        SOA ( ... )
+    *.example.org.      TXT "wildcard record"
+    a.example.org.      A 192.0.2.1
+                        TXT "a record"
+    *.a.example.org.    CNAME w.b
+    *.b.example.org.    CNAME w.c
+    *.c.example.org.    A 192.0.2.1
+    d.example.org.      A 192.0.2.1
+                        TXT "d record"
+    w.example.org.      CNAME w.a
+
+<!-- * keep vim's syntax happy --> A query for `w.example.org A` will result in
+the following response:
+
+    ;; status: NOERROR, id: 4307
+
+    ;; ANSWER SECTION:
+    w.example.org.      CNAME w.a.example.org.
+    w.example.org.      RRSIG(CNAME) ( ... )
+    w.a.example.org.    CNAME w.b.example.org.
+    w.a.example.org.    RRSIG(CNAME) ( ... )
+    w.b.example.org.    CNAME w.c.example.org.
+    w.b.example.org.    RRSIG(CNAME) ( ... )
+    w.c.example.org.	A 1.2.3.5
+    w.c.example.org.    RRSIG(A) ( ... )
+
+    ;; AUTHORITY SECTION:
+    *.a.example.org.    NSEC *.b.example.org. CNAME RRSIG NSEC
+    *.a.example.org.    RRSIG(NSEC) ( ... )
+    *.b.example.org.	NSEC *.c.example.org. CNAME RRSIG NSEC
+    *.b.example.org.    RRSIG(NSEC) ( ... )
+    *.c.example.org.	NSEC d.example.org. A RRSIG NSEC
+    *.c.example.org.    RRSIG(NSEC) ( ... )
+
+The NSEC record `*.a.example.org` proves that wildcard expansion to `w.a.example.org`
+was appropriate: `w.a.` falls in the gap `*.a` to `*.b`. Similar, the NSEC record
+`*.b.example.org` proves that there was no direct match for `w.b.example.org` and
+`*.c.example.org` denies the direct match for `w.c.example.org`.
+
+## The Closest Encloser NSEC3 Record
+
+We can have one or more NSEC3 records that deny the existence of the requested name
+and one NSEC3 record that deny wildcard synthesis. What do we miss?
 
 The short answer is that due to the hashing in NSEC3 you loose the depth
 of your zone: Everything is hashed into a flat plane. To make up for this
@@ -573,7 +587,7 @@ Closest encloser:
 :   Introduced in [](#RFC4592),
     "The closest encloser is the node in the zone's tree of existing
     domain names that has the most labels matching the query name
-    (consecutively, counting from the root label downward)."
+ 	   (consecutively, counting from the root label downward)."
     If the query name is `x.2.example.org`
     then `example.org` is the `closest encloser` in our example;
 
