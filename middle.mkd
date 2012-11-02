@@ -401,7 +401,8 @@ This is because NSEC3 sorts the names in the zone not by the original owner
 name but by the hashed owner name. So in our tiny example zone, the sorted
 list looks like this: 04SKNAPCA5AL7QOS3KM2L9TL3P5OKQ4C (a.example.org),
 15BG9L6359F5CH23E34DDUA6N1RIHL9H (example.org),
-A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84 (d.example.org).
+A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84 (d.example.org). See [](#list-of-hashed-owner-names)
+for all complete list of hashes.
 
 If you have understood the fundamental concept of NSEC -- signing the gaps
 between existing names -- then NSEC3 may seem counter-intuitive:
