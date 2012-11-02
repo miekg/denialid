@@ -131,7 +131,7 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
 2. The DNS packet header is not signed. 
     This means that a `status: NXDOMAIN` 
     can not be trusted. In fact the entire header may be forged, including
-    the AD bit (AD stands for Authenticated Data, see RFC 3655 [](#RFC3655)), 
+    the AD bit (AD stands for Authentic Data, see RFC 3655 [](#RFC3655)), 
     which may give some food for thought;
 
 3. DNS wildcards complicate matters significantly. More
