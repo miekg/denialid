@@ -265,15 +265,15 @@ harm since it is provably the proper response to the query.
 
 ## NODATA Responses
 NSEC records are also used in NODATA responses. In that case we need to look more closely 
-at the type bit map. The
-type bit map in an NSEC record tells which types are defined for
+at the type bitmap. The
+type bitmap in an NSEC record tells which types are defined for
 a name. If we look at the NSEC record of `a.example.org` (see the reply
 below or [](#fig:the-signed) for an example of the record) we
-see the following types in the bit map: A, TXT, NSEC and RRSIG. So
+see the following types in the bitmap: A, TXT, NSEC and RRSIG. So
 for the name `a` this indicates we must have an A, TXT, NSEC and RRSIG record in the
 zone. 
 
-With the type bit map of the NSEC record a resolver can establish
+With the type bitmap of the NSEC record a resolver can establish
 that a name is there, but the type is not. A resolver
 asks for `a.example.org AAAA`. This is the reply that comes
 back:
@@ -289,7 +289,7 @@ back:
 Now the resolver should check the AUTHORITY section and conclude that: 
 
 1. `a.example.org` exists (because of the NSEC with that owner name) and;
-2. that the type (AAAA) does not as it is not listed in the type bit map.
+2. that the type (AAAA) does not as it is not listed in the type bitmap.
 
 The techniques used by NSEC are the basics of authenticated denial of
 existence in DNSSEC.
@@ -389,7 +389,7 @@ The "1 0 2 DEAD" section of the NSEC3 states:
 * Hash Iterations = 2; 
 * Salt = "DEAD". 
 
-At the end we see the type bit map, which is identical to NSEC's bit map, that
+At the end we see the type bitmap, which is identical to NSEC's bitmap, that
 lists the types present at the original owner name. Note that the type NSEC3
 is absent from the list in the example above. This is due to the fact that the
 original owner name (`example.org`) does not have the NSEC3 type. It only exists
