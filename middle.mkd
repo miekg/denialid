@@ -135,17 +135,7 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
     which may give some food for thought;
 
 3. DNS wildcards complicate matters significantly. More
-    about this in later sections.
-
-So if the packet header is not signed (as per the second requirement),
-why can't we just work around this by including in each NXDOMAIN response
-a *generic* signed record which denies the existence of whichever record was
-requested? It turns out that such a naive attempt at authenticated
-denial of existence is susceptible to replay attacks: When you're querying
-a nameserver for a record which actually exists, a man in the middle may
-replay that generic signed NXDOMAIN response and it would be impossible
-to tell whether that response was genuine or forged by the man in the middle.
-Consequently, the NXDOMAIN response has to be specific to the record requested.
+    about this in later sections ([](#wildcards-in-the-dns)).
 
 The first requirement implies that all denial of existence answers need to be 
 pre-computed, but it is impossible to precompute (all conceivable) non-existence answers.
@@ -167,6 +157,16 @@ be signed beforehand and given to the resolver.
 > always a challenge. Another issue was (and is) key management, for online
 > signing to work you need access to the private key(s). This is considered a
 > security risk. 
+
+If the packet header is not signed (as per the second requirement),
+why can't we just work around this by including in each NXDOMAIN response
+a *generic* signed record which denies the existence of whichever record was
+requested? It turns out that such a naive attempt at authenticated
+denial of existence is susceptible to replay attacks: When you're querying
+a nameserver for a record which actually exists, a man in the middle may
+replay that generic signed NXDOMAIN response and it would be impossible
+to tell whether that response was genuine or forged by the man in the middle.
+Consequently, the NXDOMAIN response has to be specific to the record requested.
 
 The road to the current solution (NSEC/NSEC3) was long. It
 started with the NXT (next) record. The NO (not existing) record was introduced,
