@@ -430,7 +430,7 @@ used as an owner name.  This is an important observation.
 By hashing the names you lose the depth of a zone - hashing
 introduces a flat space of names, as opposed to NSEC.
 
-In fact the domain name used above (`1.h.example.org`) creates an empty non-terminal. 
+The domain name used above (`1.h.example.org`) creates an empty non-terminal. 
 Empty non-terminals are domain names that have no RRs associated with them, and exist only
 because they have one or more sub domains that do ([](#RFC5155), Section 1.3). 
 
