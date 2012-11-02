@@ -42,7 +42,7 @@ And these provide some general DNSSEC information.
 These three drafts give some background information on the NSEC3
 development.
 
-* The NO recor [](#I-D.ietf-dnsext-not-existing-rr);
+* The NO record [](#I-D.ietf-dnsext-not-existing-rr);
 * The NSEC2 record [](#I-D.laurie-dnsext-nsec2v2);
 * The DNSNR record [](#I-D.arends-dnsnr).
 
