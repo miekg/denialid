@@ -255,7 +255,7 @@ does just do that: `b`
 should come after `a`, but the next owner name is `d.example.org`, so
 `b` does not exist.
 
-Only by making that calculation, can a resolver conclude that the name
+Only by making that calculation, a resolver is able to conclude that the name
 `b` does not exist. If the signature of the NSEC record is valid, `b`
 is proven not to exist. We have *authenticated denial of existence*.
 
