@@ -357,6 +357,10 @@ NSEC3 did not supersede NSEC, they are both defined for
 DNSSEC. So DNSSEC is blessed with two different means to perform authenticated
 denial of existence: NSEC and NSEC3. 
 In NSEC3 every name is hashed, including the owner name.
+This means
+that NSEC3 chain is sorted in hash order, instead of canonical order.
+Because the owner names are hashed, the next owner name for `example.org` is unlikely to
+be `a.example.org`, like with NSEC.
 
 SHA1 is always used for
 the hashing. To make it even more difficult to retrieve the original names,
