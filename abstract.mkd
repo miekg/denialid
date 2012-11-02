@@ -1,7 +1,7 @@
 Authenticated denial of existence allows a resolver to
 validate that a certain domain name does not exist.
 It is also used to signal that a domain
-name exists, but does not have the specific RRtype you were asking for.
+name exists, but does not have the specific RR type you were asking for.
 This document attempts to answer two simple questions.
 
 When returning a negative DNSSEC response, a name server may

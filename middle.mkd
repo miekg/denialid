@@ -6,7 +6,7 @@ One such area is "authenticated denial of existence".
 Authenticated denial of existence allows a DNSSEC enabled resolver to
 validate that a certain domain name does not exist.
 It is also used to signal that a domain
-name exists, but does not have the specific RRtype you were asking for.
+name exists, but does not have the specific RR type you were asking for.
 
 The first is referred to as an NXDOMAIN [](#RFC2308) (non-existent domain) and the 
 latter a NODATA [](#RFC2308) response, and are referred to as negative responses.
@@ -175,7 +175,7 @@ The first attempt to specify authenticated denial of existence was NXT
 
 > "The NXT resource record is used to securely indicate that RRs with an
 > owner name in a certain name interval do not exist in a zone and to
-> indicate what RRtypes are present for an existing name."
+> indicate what RR types are present for an existing name."
 
 By specifying what you do have, you implicitly tell what you don't have. NXT
 is superseded by NSEC. In the next section we explain how NSEC (and thus NXT) works.
@@ -334,7 +334,7 @@ of NSEC. The NSEC2 draft contains the following paragraph:
 
 > This document proposes an alternate scheme which hides owner names
 > while permitting authenticated denial of existence of non-existent
-> names.  The scheme uses two new RRtypes: NSEC2 and EXIST.
+> names.  The scheme uses two new RR types: NSEC2 and EXIST.
 
 When an authenticated denial of existence scheme starts to talk
 about EXIST records, it is worth paying extra attention.
