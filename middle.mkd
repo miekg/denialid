@@ -84,7 +84,7 @@ our answer. The AUTHORITY section holds the names of the name servers
 that have information concerning the `example.org` zone. Note that including
 this information is optional.
 
-If a resolver now asks for `b.example.org TXT` it gets an answer that
+If a resolver asks for `b.example.org TXT` it gets an answer that
 this name does not exist:
 
     ;; status: NXDOMAIN, id: 7042
