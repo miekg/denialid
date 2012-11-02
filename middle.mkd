@@ -212,11 +212,11 @@ records, we now have something that can be signed.
                         example.org
                            **
                        +-- ** <--+
-                      /  .    .   \
+                  (1) /  .    .   \  (3)
                      /  .      .   \
                     |  .        .  |
                     v .          . |
-                    **            **
+                    **    (2)     **
       a.example.org ** ---------> ** d.example.org
       Figure: The NSEC records of example.org. The arrows represent NSEC records, starting
       from the apex.
@@ -639,7 +639,7 @@ the NSEC3 records it got?
                     v .    |     .                    . 
                     **     |      **                  ++
       h.example.org ** ----+----> ** 3.example.org    ++ 2.example.org
-                    .     /  (3)   . |                .
+                    .     /   (3)  . |                .
                     .    /         . | (2)            . 
                     .   /          . |                .
                     .  /           . v                .
