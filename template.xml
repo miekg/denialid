@@ -13,7 +13,7 @@
 <rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-01">
 <front>
 
-<title abbrev="Authenticated Denial in DNS">Authenticated Denial of Existence in the DNS Explained</title>
+<title abbrev="Authenticated Denial in DNS">Authenticated Denial of Existence in the DNS</title>
 
         <author initials='R.' surname='Gieben' fullname='R. (Miek) Gieben'>
             <organization>SIDN Labs</organization>
