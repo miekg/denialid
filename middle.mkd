@@ -42,9 +42,9 @@ And these provide some general DNSSEC information.
 These three drafts give some background information on the NSEC3
 development.
 
-* The NO RR [](#I-D.ietf-dnsext-not-existing-rr);
-* The NSEC2 RR [](#I-D.laurie-dnsext-nsec2v2);
-* The DNSNR RR [](#I-D.arends-dnsnr).
+* The NO recor [](#I-D.ietf-dnsext-not-existing-rr);
+* The NSEC2 record [](#I-D.laurie-dnsext-nsec2v2);
+* The DNSNR record [](#I-D.arends-dnsnr).
 
 # Denial of Existence
 We start with the basics and take a look at
@@ -345,7 +345,7 @@ But it did not have opt-out. Although promising, the proposal
 did not make it because of issues with wildcards and the odd EXIST
 resource record.
 
-The DNSNR RR was another attempt that used hashed names to
+The DNSNR record was another attempt that used hashed names to
 foil zone walking and it also introduced the concept of opting out (called
 "Authoritative Only Flag") which limited the use of DNSNR in delegation heavy zones.
 This proposal didn't make it either, but it provided valuable insights into the
@@ -584,12 +584,12 @@ Next closer name:
 
 An NSEC3 `closest encloser proof` consists of:
 
-1. An NSEC3 RR that **matches** the `closest encloser`. This means the
+1. An NSEC3 record that **matches** the `closest encloser`. This means the
    unhashed owner name of the record is the closest encloser. This bit of
    information tells a resolver: "The name you are asking for does 
    not exist, the closest I have is this". 
 
-2. An NSEC3 RR that **covers** the `next closer name`. This means it
+2. An NSEC3 record that **covers** the `next closer name`. This means it
    defines an interval in which the `next closer name` falls. This
    tells the resolver: "The name in your question falls in
    this interval, and therefore the name in your question does not exist. In fact,
