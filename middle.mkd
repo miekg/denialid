@@ -60,6 +60,7 @@ in the following unsigned zone file:
                         TXT "a record"
     d.example.org.      A 192.0.2.1
                         TXT "d record"
+    Figure: The unsigned example.org zone.
 
 ## NXDOMAIN
 If a resolver asks for the TXT type belonging to `a.example.org` to the
