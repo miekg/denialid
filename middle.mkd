@@ -396,35 +396,6 @@ is absent from the list in the example above. This is due to the fact that the
 original owner name (`example.org`) does not have the NSEC3 type. It only exists
 for the hashed name.
 
-You may be wondering why the next hashed owner of `example.org` is
-`d.example.org`, unlike NSEC where the next owner name was `a.example.org`.
-This is because NSEC3 sorts the names in the zone not by the original owner
-name but by the hashed owner name. So in our tiny example zone, the sorted
-list looks like this: 04SKNAPCA5AL7QOS3KM2L9TL3P5OKQ4C (a.example.org),
-15BG9L6359F5CH23E34DDUA6N1RIHL9H (example.org),
-A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84 (d.example.org). See [](#list-of-hashed-owner-names)
-for all complete list of hashes.
-
-If you have understood the fundamental concept of NSEC -- signing the gaps
-between existing names -- then NSEC3 may seem counter-intuitive:
-When hashing two consecutive owner names, there may always be
-other owner names in the zone whose hashed version falls between the two
-resulting hashes. Or, generally speaking, the following is clearly not
-true: SHA1(x) < SHA1(y) for all x < y. In fact, if we hash `a.example.org`
-and `d.example.org`, which are consecutive in unhashed form, the hash of
-`example.org` falls between them. So how can it work?
-
-As it turns out, it does not matter that the order of the owner names
-is mixed up by the hashing. Remember that all we want to achieve is
-thwarting replay attacks. Let's assume that you're querying for a name
-that actually exists and a man in the middle sends you an NSEC3 record
-as a response. For the attack to be successful, the hashed version of
-the name you where asking for has to fall between the hashed owner name
-and the next hashed owner of the NSEC3 record. By definition, that
-can't be true and the attack will therefore fail. So whereas NSEC signs
-the gaps between existing names, NSEC3 signs the gaps between the hashed
-versions of existing names.
-
 Names like `1.h.example.org` hash to one label in NSEC3,
 `1.h.example.org` becomes: `117GERCPRCJGG8J04EV1NDRK8D1JT14K.example.org` when
 used as an owner name.  This is an important observation. 
