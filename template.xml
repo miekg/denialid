@@ -1,5 +1,26 @@
-<?xml version='1.0' encoding="UTF-8"?>
-<!DOCTYPE rfc SYSTEM 'rfc2629.dtd'>
+<?xml version="1.0" ?>
+<!DOCTYPE rfc SYSTEM 'rfc2629.dtd' [
+<!ENTITY pandocMiddle PUBLIC '' 'middle.xml'>
+<!ENTITY abstract     PUBLIC '' 'abstract.xml'>
+
+<!ENTITY RFC1034    PUBLIC '' 'bib/reference.RFC.1034'>
+<!ENTITY RFC2308    PUBLIC '' 'bib/reference.RFC.2308'>
+<!ENTITY RFC4033    PUBLIC '' 'bib/reference.RFC.4033'>
+<!ENTITY RFC4034    PUBLIC '' 'bib/reference.RFC.4034'>
+<!ENTITY RFC4035    PUBLIC '' 'bib/reference.RFC.4035'>
+<!ENTITY RFC4592    PUBLIC '' 'bib/reference.RFC.4592'>
+<!ENTITY RFC5155    PUBLIC '' 'bib/reference.RFC.5155'>
+
+<!ENTITY RFC2535    PUBLIC '' 'bib/reference.RFC.2535'>
+<!ENTITY RFC3655    PUBLIC '' 'bib/reference.RFC.3655'>
+<!ENTITY RFC3755    PUBLIC '' 'bib/reference.RFC.3755'>
+<!ENTITY RFC4956    PUBLIC '' 'bib/reference.RFC.4956'>
+<!ENTITY draftdnsnr    PUBLIC '' 'bib/reference.I-D.arends-dnsnr.xml'>
+<!ENTITY draftnsec2v2  PUBLIC '' 'bib/reference.I-D.laurie-dnsext-nsec2v2.xml'>
+<!ENTITY draftexist    PUBLIC '' 'bib/reference.I-D.ietf-dnsext-not-exsiting-rr.xml'>
+]>
+
+<rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-01">
 <?rfc toc="yes"?>         <!-- generate a table of contents -->
 <?rfc tocompact="no"?>
 <?rfc tocdepth="6"?>
@@ -10,7 +31,6 @@
 <?rfc autobreaks="yes"?>
 <?rfc compact="yes" ?>    <!-- conserve vertical whitespace -->
 <?rfc subcompact="no" ?>  <!-- but keep a blank line between list items -->
-<rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-01">
 <front>
 
 <title abbrev="Authenticated Denial in DNS">Authenticated Denial of Existence in the DNS</title>
@@ -58,15 +78,33 @@
         <keyword>NSEC</keyword>
         <keyword>NSEC3</keyword>
         <abstract>
-        <?rfc include="abstract.xml"?>
+            &abstract;
         </abstract>
 </front>
 
 <middle>
-<?rfc include="middle.xml"?>
+&pandocMiddle;
 </middle>
 
 <back>
- <?rfc include="refs.xml"?>
+<references title="Normative References">
+    &RFC1034;
+    &RFC2308;
+    &RFC4033;
+    &RFC4034;
+    &RFC4035;
+    &RFC4592;
+    &RFC5155;
+</references>
+
+<references title="Informative References">
+    &RFC2535;
+    &RFC3655;
+    &RFC3755;
+    &RFC4956;
+    &draftdnsnr;
+    &draftnsec2v2;
+    &draftexist;
+</references>
 </back>
 </rfc>
