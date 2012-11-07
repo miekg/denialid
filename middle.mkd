@@ -449,6 +449,7 @@ For completeness, our (unsigned) zone now looks like this:
                         TXT "a record"
     d.example.org.      A 192.0.2.1
                         TXT "d record"
+    Figure: The example.org zone with a wildcard record.
 
 <!-- * keep vim's syntax happy --> If a resolver asks for `z.example.org TXT`, 
 the name server will respond with an *expanded wildcard*, instead of an NXDOMAIN:
