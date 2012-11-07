@@ -528,7 +528,7 @@ is two: one for the denial of existence and another for the wildcard.
 We say maximum, because sometimes a single NSEC can prove both.
 With NSEC3 it is three, as to why, we will explain in the next 
 section. N.B. When following CNAME chains the NSEC(3) records accumulate, resulting
-in a packet contains much more than two (or three) NSEC(3) records.
+in a packet containing much more than two (or three) NSEC(3) records.
 
 ## Returning Three NSEC3s
 With NSEC3, matters are even more complicated. 
