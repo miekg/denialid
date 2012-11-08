@@ -804,7 +804,7 @@ resolver that `x.2.example.org` does not exist, while in fact it could have been
 via wildcard expansion. With the NSEC3 matching the closest encloser `example.org`, the resolver
 can be sure that the wildcard expansion should occur at `*.example.org` and nowhere else.
 
-When we have validated the signatures, we reached our goal: authenticated denial
+When we have validated all the signatures, we reached our goal: authenticated denial
 of existence.
 
 Coming back to the original question: why do we need (up to) three NSEC3
