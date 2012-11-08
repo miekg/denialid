@@ -529,14 +529,6 @@ for looking up names in the zone.
 It explicitly lists wildcard look up as one of these steps (3c), so with DNSSEC this must be
 communicated to the resolver: hence the NSEC(3) record.
 
-With NSEC the maximum number of NSEC records a resolver can get back per denial
-is two: one for the denial of existence and another for the wildcard.
-We say maximum, because sometimes a single NSEC can prove both.
-With NSEC3 it is three, as to why, we will explain in the next 
-section. N.B. When following CNAME chains (or synthesized CNAMEs [](#RFC6672))
-the NSEC(3) records accumulate, resulting
-in a packet containing much more than two (or three) NSEC(3) records.
-
 ### And now with CNAME records
 
 So far, the maximum number of NSEC records a response will have is
