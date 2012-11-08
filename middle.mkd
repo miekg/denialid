@@ -443,7 +443,10 @@ If NSEC3 were designed in the early days of
 DNS (+/- 1984) this information would probably have been put in the SOA record.
 
 ### Wildcards in the DNS
-In the above sections we have not revealed the entire story. There is a complication: wildcards.
+So far, we have only talked about denial of existence in negative responses. However,
+denial of existence may also occur in positive responses, i.e., where the ANSWER section
+of the response is not empty. This can happen because of wildcards.
+
 Wildcards have been part of the DNS since the first DNS RFCs. They allow to define
 all names for a certain type in one go. In our `example.org` zone we could for instance
 add a wildcard record:
