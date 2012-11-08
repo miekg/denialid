@@ -20,7 +20,7 @@ DNSNR also briefly make their appearance, as they have paved the
 way for NSEC3.
 
 To complete the picture, we also need to explain DNS wildcards
-as these complicate matters.
+as these complicate matters, especially combined with CNAME records.
 
 Note: In this document, domain names in zone file examples will have a trailing dot, in the
 running text they will not.
@@ -533,6 +533,56 @@ With NSEC3 it is three, as to why, we will explain in the next
 section. N.B. When following CNAME chains (or synthesized CNAMEs [](#RFC6672))
 the NSEC(3) records accumulate, resulting
 in a packet containing much more than two (or three) NSEC(3) records.
+
+### And now with CNAME records
+
+So far, the maximum number of NSEC records a response will have is
+two: one for the denial of existence and another for the wildcard.
+We say maximum, because sometimes a single NSEC can prove both.
+With NSEC3, this is three (as to why, we will explain in the next section).
+
+When we introduce CNAME wildcard records, we can have more NSEC(3) records.
+For every wildcard expansion, we need to prove that the expansion was allowed.
+Lets add some CNAME wildcard records to our zone:
+
+    example.org.        SOA ( ... )
+    *.example.org.      TXT "wildcard record"
+    a.example.org.      A 192.0.2.1
+                        TXT "a record"
+    *.a.example.org.    CNAME w.b
+    *.b.example.org.    CNAME w.c
+    *.c.example.org.    A 192.0.2.1
+    d.example.org.      A 192.0.2.1
+                        TXT "d record"
+    w.example.org.      CNAME w.a
+    Figure: The example.org zone with a wildcard CNAME chain.
+
+A query for `w.example.org A` will result in the following response:
+
+    ;; status: NOERROR, id: 4307
+
+    ;; ANSWER SECTION:
+    w.example.org.      CNAME w.a.example.org.
+    w.example.org.      RRSIG(CNAME) ( ... )
+    w.a.example.org.    CNAME w.b.example.org.
+    w.a.example.org.    RRSIG(CNAME) ( ... )
+    w.b.example.org.    CNAME w.c.example.org.
+    w.b.example.org.    RRSIG(CNAME) ( ... )
+    w.c.example.org.    A 1.2.3.5
+    w.c.example.org.    RRSIG(A) ( ... )
+
+    ;; AUTHORITY SECTION:
+    *.a.example.org.    NSEC *.b.example.org. CNAME RRSIG NSEC
+    *.a.example.org.    RRSIG(NSEC) ( ... )
+    *.b.example.org.    NSEC *.c.example.org. CNAME RRSIG NSEC
+    *.b.example.org.    RRSIG(NSEC) ( ... )
+    *.c.example.org.    NSEC d.example.org. A RRSIG NSEC
+    *.c.example.org.    RRSIG(NSEC) ( ... )
+
+The NSEC record `*.a.example.org` proves that wildcard expansion to `w.a.example.org`
+was appropriate: `w.a.` falls in the gap `*.a` to `*.b`. Similar, the NSEC record
+`*.b.example.org` proves that there was no direct match for `w.b.example.org` and
+`*.c.example.org` denies the direct match for `w.c.example.org`.
 
 ## Returning Three NSEC3s
 With NSEC3, matters are even more complicated. 
