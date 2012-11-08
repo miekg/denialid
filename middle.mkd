@@ -670,7 +670,7 @@ When the resolver has found the closest encloser, the next step is
 to construct the `next closer name`. This is the closest encloser
 with the last chopped label from query name prepended to it:
 "\<last chopped label\>.\<closest encloser\>". The hash of this name should 
-be covered by the interval set in any of the other NSEC3 records.
+be covered by the interval set in any of the NSEC3 records.
 
 Then the resolver needs to check the presence of a wildcard.
 It creates the wildcard name by prepending the wildcard
