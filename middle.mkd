@@ -531,7 +531,7 @@ section. N.B. When following CNAME chains (or synthesized CNAMEs [](#RFC6672))
 the NSEC(3) records accumulate, resulting
 in a packet containing much more than two (or three) NSEC(3) records.
 
-## Returning Three NSEC3s
+## The Closest Encloser NSEC3 Record
 With NSEC3, matters are even more complicated. 
 So we have an NSEC3 that denies the existence of the requested name and
 an NSEC3 that denies wildcard synthesis. What do we miss?
