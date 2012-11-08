@@ -287,7 +287,7 @@ back is:
     a.example.org.      NSEC d.example.org. A TXT NSEC RRSIG
     a.example.org.      RRSIG(NSEC) ( ... )
 
-Now the resolver should check the AUTHORITY section and conclude that: 
+The resolver should check the AUTHORITY section and conclude that: 
 
 1. `a.example.org` exists (because of the NSEC with that owner name) and;
 2. the type (AAAA) does not as it is not listed in the type bitmap.
