@@ -22,7 +22,7 @@ way for NSEC3.
 To complete the picture, we also need to explain DNS wildcards
 as these complicate matters.
 
-Note: In this document domain names in zone file examples will have a trailing dot, in the
+Note: In this document, domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
 of DNSSEC. NSEC3 opt-out and secure delegations are out of scope for this document.
