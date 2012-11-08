@@ -490,11 +490,6 @@ name `*.example.org`.
 > the owner name is switched to `z.example.org`. So even
 > with wildcards, no signatures have to be created on the fly.
 
-The AUTHORITY section holds an NSEC *even though* it is not an NXDOMAIN nor an NODATA reply.
-This NSEC proves that the queried name
-`z.example.org` does not exist, and wildcard name expansion was
-indeed allowed.
-
 The DNSSEC standard mandates that an NSEC (or NSEC3) is included in such responses.
 If it wasn't, an attacker could mount a replay attack and poison the cache with false data:
 
