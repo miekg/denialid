@@ -246,7 +246,7 @@ NS records are left out and the SOA, DNSKEY and RRSIG records are shortened.
 If a DNSSEC aware resolver asks for `b.example.org`, it gets
 back a `status: NXDOMAIN` packet, which by itself is meaningless
 as the header can be forged. To be able to securely detect that `b` does not exist,
-there must also be a signed NSEC record which *covers* the name space
+there must also be a signed NSEC record which covers the name space
 where `b` lives:
 
     a.example.org.      NSEC d.example.org.
@@ -257,7 +257,7 @@ should come after `a`, but the next owner name is `d.example.org`, so
 
 Only by making that calculation, a resolver is able to conclude that the name
 `b` does not exist. If the signature of the NSEC record is valid, `b`
-is proven not to exist. We have *authenticated denial of existence*.
+is proven not to exist. We have authenticated denial of existence.
 
 Note that a man in the middle may still replay this NXDOMAIN response
 when you're querying for, say, c.example.org. But it would not do any
@@ -455,7 +455,7 @@ For completeness, our (unsigned) zone now looks like this:
     Figure: The example.org zone with a wildcard record.
 
 If a resolver asks for `z.example.org TXT`, 
-the name server will respond with an *expanded wildcard*, instead of an NXDOMAIN:
+the name server will respond with an expanded wildcard, instead of an NXDOMAIN:
 
     ;; status: NOERROR, id: 13658
 
