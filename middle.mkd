@@ -357,7 +357,7 @@ problem.
 ## NSEC3 ##
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
 both opt-out and the hashing of names. NSEC3 solves any issues people might
-have with NSEC, but it introduces some additional complexity.
+have with NSEC, at the cost of additional complexity.
 
 NSEC3 did not supersede NSEC, they are both defined for
 DNSSEC. So DNSSEC is blessed with two different means to perform authenticated
