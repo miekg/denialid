@@ -11,7 +11,7 @@ name exists, but does not have the specific RR type you were asking for.
 The first is referred to as an NXDOMAIN [](#RFC2308) (non-existent domain) and the 
 latter a NODATA [](#RFC2308) response. Both are also known as negative responses.
 
-In this document we will explain how authenticated denial
+In this document, we will explain how authenticated denial
 of existence works.
 We begin by explaining the current technique in the DNS
 and work our way up to DNSSEC. We explain the first steps
@@ -19,7 +19,7 @@ taken in DNSSEC and describe how NXT, NSEC and NSEC3 work. NO, NSEC2 and
 DNSNR also briefly make their appearance, as they have paved the
 way for NSEC3.
 
-To complete the picture we also need to explain DNS wildcards
+To complete the picture, we also need to explain DNS wildcards
 as these complicate matters.
 
 Note: In this document domain names in zone file examples will have a trailing dot, in the
@@ -51,7 +51,7 @@ We start with the basics and take a look at
 NXDOMAIN handling in the DNS. To make it more visible
 we are going to use a small DNS zone, with
 3 names (`example.org`, `a.example.org` and `d.example.org`) and 3 types (SOA,
-A and TXT). For brevity the class is not shown (defaults to IN), the
+A and TXT). For brevity, the class is not shown (defaults to IN), the
 NS records are left out and the SOA and RRSIG records are shortened, resulting
 in the following unsigned zone file:
 
@@ -80,7 +80,7 @@ and this is the data", resulting in this reply:
 
 
 The `status: NOERROR` signals that everything is OK, `id` is an integer
-used to match questions and answers. In the ANSWER section we find
+used to match questions and answers. In the ANSWER section, we find
 our answer. The AUTHORITY section holds the names of the name servers
 that have information concerning the `example.org` zone. Note that including
 this information is optional.
@@ -270,7 +270,7 @@ see the following types in the bitmap: A, TXT, NSEC and RRSIG. So
 for the name `a` this indicates we must have an A, TXT, NSEC and RRSIG record in the
 zone. 
 
-With the type bitmap of the NSEC record a resolver can establish
+With the type bitmap of the NSEC record, a resolver can establish
 that a name is there, but the type is not. A resolver
 asks for `a.example.org AAAA`. This is the reply that comes
 back:
