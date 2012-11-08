@@ -769,8 +769,8 @@ hashes `*.example.org` to `22670TRPLHSR72PQQMEDLTG1KDQEOLB7` and is covered by t
 NSEC3. The hash falls in
 the interval set by `1AVVQN74SG75UKFVF25DGCETHGQ638EK` and
 `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ` (this is our third NSEC3).
-This means there is no wildcard
-at the closest encloser and `x.2.example.org` definitely does not exist.
+This means there is no wildcard record directly below
+the closest encloser and `x.2.example.org` definitely does not exist.
 
 When we have validated the signatures, we reached our goal: authenticated denial
 of existence.
