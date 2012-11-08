@@ -567,7 +567,7 @@ An NSEC3 `closest encloser proof` consists of:
 
 2. An NSEC3 record that **covers** the `next closer name`. This means it
    defines an interval in which the `next closer name` falls. This
-   tells the resolver: "The name in your question falls in
+   tells the resolver: "The next closer name falls in
    this interval, and therefore the name in your question does not exist. In fact,
    the closest encloser is indeed the closest I have".
 
