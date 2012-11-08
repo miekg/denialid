@@ -619,6 +619,20 @@ An NSEC3 `closest encloser proof` consists of:
    this interval, and therefore the name in your question does not exist. In fact,
    the closest encloser is indeed the closest I have".
 
+These two records already deny the existence of the requested name, so we do not
+need an NSEC3 record that covers the actual queried name: By denying the existence
+of the next closer name, you also deny the existence of the queried name.
+
+For a given query name, there can only be one place where wildcard expansion is possible.
+This is the source of synthesis, and is defined as:
+
+    <asterisk label>.<closest encloser>
+
+In other words, to deny wildcard synthesis, the
+resolver needs to know the hash of the source of synthesis.
+Since it does not know on forehand the closest encloser of the query name, it
+must be provided in the answer.
+
 Take the following example. We take our zone, but now with the following
 two records and it is signed with NSEC3. 
 As said these records create two non-terminals: "h.example.org" and "3.example.org",
