@@ -724,7 +724,7 @@ the interval set by `1AVVQN74SG75UKFVF25DGCETHGQ638EK` and
 This means there is no wildcard record directly below
 the closest encloser and `x.2.example.org` definitely does not exist.
 
-When we have validated the signatures, we reached our goal: authenticated denial
+When we have validated all the signatures, we reached our goal: authenticated denial
 of existence.
 
 Coming back to the original question: why do we need (up to) three NSEC3
