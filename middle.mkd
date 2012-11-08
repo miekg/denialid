@@ -772,6 +772,38 @@ the interval set by `1AVVQN74SG75UKFVF25DGCETHGQ638EK` and
 This means there is no wildcard record directly below
 the closest encloser and `x.2.example.org` definitely does not exist.
 
+One extra NSEC3 record plus additional signature may seem a lot just to deny the
+existence of the wildcard record. But we cannot leave it out. If the standard would
+not mandate the closest encloser NSEC3 record, but instead required two NSEC3 records: one
+to deny the query name and one to deny the wildcard record. An attacker could fool the resolver
+that source of synthesis does not exist, while it in fact does.
+
+Suppose the wildcard record does exist and our unsigned zone looks like this:
+
+   example.org.        SOA ( ... )
+   *.example.org.      TXT "wildcard record"
+   1.h.example.org.    TXT "1.h record"
+   3.3.example.org.    TXT "3.3 record"
+
+The query `x.2.example.org TXT` would no have to be expanded to:
+
+   x.2.example.org.   TXT "wildcard record"
+
+An attacker can deny the wildcard expansion by creating a hash for a fake wildcard name `*.2.example.org`:
+`FBQ73BFKJLRKDOQS27K5QF81AQQD7HHO`. This hash is covered by the NSEC3 record of `3.3.`:
+`8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ` to `15BG9L6359F5CH23E34DDUA6N1RIHL9H`. This record coincedentally also
+covers the query name 'x.2.example.org` (which hashes to `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`).
+An attacker just adds the following NSEC3 record in the AUTHORITY section:
+
+    8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ.example.org. (
+     NSEC3 1 0 2 DEAD 15BG9L6359F5CH23E34DDUA6N1RIHL9H TXT
+            RRSIG )
+
+to deny both `x.2.example.org` and some wildcard expansion. The attacker has succesfully fooled the
+resolver that `x.2.example.org` does not exist, while in fact it could have been synthesized
+via wildcard expansion. With the NSEC3 matching the closest encloser `example.org`, the resolver
+can be sure that the wildcard expansion should occur at `*.example.org` and nowhere else.
+
 When we have validated the signatures, we reached our goal: authenticated denial
 of existence.
 
