@@ -159,7 +159,7 @@ response was genuine or spoofed.
 
 > Given all these troubles, why didn't the designers of
 > DNSSEC go for the (easy) route and allowed for online signing? Well,
-> at the time (pre 2000), online signing was not feasible with the
+> at that time (pre 2000), online signing was not feasible with the
 > current hardware. Keep in mind that the larger servers get
 > between 2000 and 6000 queries per second (qps), with peaks up to 20,000 qps
 > or more.  Scaling signature generation to these kind of levels is
@@ -324,7 +324,7 @@ and DNSNR.
 
 ## NO, NSEC2 and DNSNR ##
 The NO record was the first to introduce the idea of hashed owner names. It also fixed other shortcomings
-of the NXT record. At the time (around 2000) zone walking was not considered important enough
+of the NXT record. At that time (around 2000) zone walking was not considered important enough
 to warrant the new record. People were also worried that deployment would be hindered by
 developing an alternate means of denial of existence. Thus the effort was shelved and
 NXT remained. When the new DNSSEC specification was written, NSEC saw the light and
