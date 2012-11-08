@@ -676,7 +676,7 @@ It creates the wildcard name by prepending the wildcard
 label to the closest encloser: "*.\<closest encloser\>", and uses the
 hash of that.
 
-Going back to our example the resolver must first detect the NSEC3 that
+Going back to our example, the resolver must first detect the NSEC3 that
 matches the closest encloser. It does this by chopping up the query name,
 hashing each instance (with the same number of iterations and hash
 as the zone it is querying) and comparing that to the answers
