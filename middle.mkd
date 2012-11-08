@@ -486,7 +486,7 @@ name `*.example.org`.
 > out of thin air. This is not the case. The signature for `z.example.org` does not exist.
 > The signature you are seeing is the one for `*.example.org` which does exist, only 
 > the owner name is switched to `z.example.org`. So even
-> with wildcards, no signatures are created on the fly.
+> with wildcards, no signatures have to be created on the fly.
 
 The AUTHORITY section holds an NSEC *even though* it is not an NXDOMAIN nor an NODATA reply.
 This NSEC proves that the queried name
