@@ -689,14 +689,6 @@ And the last NSEC3 also isn't of any help.
 What is a resolver to do? It has been given the maximum amount of NSEC3s and 
 they all seem useless.
 
-A question that you might have at this point is why does the server not send an NSEC3
-that covers the hash of `x.2.example.org`, so the resolver can validate in one step? 
-While this indeed denies the existence of `x.2.example.org` it is only half the
-answer. As explained, a denial of existence answer needs to say something about
-whether or not a wildcard should have been expanded. And to communicate
-which wildcard could have been, you need to tell the resolver what the closest encloser
-is. 
-
 So this is where the closest encloser proof comes into play. And for the proof
 to work, the resolver needs to know what the `closest encloser` is. There must
 be an existing ancestor in the zone: a name must exist that is shorter than the
