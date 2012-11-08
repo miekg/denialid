@@ -95,7 +95,8 @@ this name does not exist:
 
 In this case, we do not get an ANSWER section and the status
 is set to NXDOMAIN. From this the resolver concludes that `b.example.org` does not
-exist.
+exist. The AUTHORITY section holds the SOA record of `example.org` that the
+resolver can use to cache the negative response.
 
 ## NODATA
 It is important to realize that NXDOMAIN is not the only type
@@ -110,8 +111,9 @@ answer:
     example.org.        SOA ( ... )
 
 The status is NOERROR meaning that the `a.example.org` name exists.
-But the reply does not contain an ANSWER section. Instead it has
-an AUTHORITY section which holds the SOA record of `example.org`. The resolver
+But the reply does not contain an ANSWER section. This differentiates a
+NODATA response from an NXDOMAIN response, the rest of the packet is
+awfully similar. The resolver
 has to put these pieces of information together and conclude that
 `a.example.org` exists, but it does not have an `AAAA` record.
 
