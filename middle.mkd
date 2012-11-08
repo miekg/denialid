@@ -290,7 +290,7 @@ back is:
 Now the resolver should check the AUTHORITY section and conclude that: 
 
 1. `a.example.org` exists (because of the NSEC with that owner name) and;
-2. that the type (AAAA) does not as it is not listed in the type bitmap.
+2. the type (AAAA) does not as it is not listed in the type bitmap.
 
 The techniques used by NSEC are the basics of authenticated denial of
 existence in DNSSEC.
