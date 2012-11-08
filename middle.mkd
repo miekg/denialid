@@ -515,12 +515,6 @@ believes that `a.example.org TXT` is a wildcard record, and the real record
 is obscured. This is bad and defeats all the security DNSSEC
 can deliver. Because of this, the NSEC or NSEC3 must be present.
 
-Thus a resolver can detect such a spoofing attempt:
-
-1. If the NSEC(3) is not present, assume the answer is spoofed;
-2. If the NSEC(3) is there, check it. If the signature is not correct,
-   assume a spoofed answer.
-
 Another way of putting this is that DNSSEC is there to ensure
 the name server has followed the steps as outlined in [](#RFC1034), Section 4.3.2
 for looking up names in the zone. 
