@@ -421,7 +421,7 @@ creates two names:
 2. `h.example.org` which has no types. This is the empty non-terminal. An empty
    non-terminal will get an NSEC3 records, but not an NSEC record.
 
-## Loading an NSEC3 Zone into an Authoritative Server
+## Loading an NSEC3 Zone
 Whenever an authoritative server receives a query for a non-existing record,
 it has to hash the incoming query name to determine into which interval
 between two existing hashes it falls. To do that it needs to know the
