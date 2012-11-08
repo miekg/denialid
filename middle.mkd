@@ -142,10 +142,12 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
 
 The first requirement implies that all denial of existence answers need to be 
 pre-computed, but it is impossible to precompute (all conceivable) non-existence answers.
-In the example above, you need
-a way to tell somebody who is asking for `b.example.org` that it
-does not exist without using the name `b.example.org` in the
-answer. 
+A generic denial record which can be used in all denial of existence proofs is
+not an option: such a record is susceptible to replat attacks. When you are querying
+a nameserver for a record that actually exists, a man in the middle may
+replay that generic denial record and it would be impossible
+to tell whether the response was genuine or spoofed.
+
 This has been solved by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
 defines the holes (non-existing names) in the zone. This record can 
