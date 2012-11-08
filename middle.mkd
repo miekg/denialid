@@ -442,7 +442,7 @@ DNS (+/- 1984) this information would probably have been put in the SOA record.
 ## Wildcards in the DNS ##
 In the above sections we have not revealed the entire story. There is a complication: wildcards.
 Wildcards have been part of the DNS since the first DNS RFCs. They allow to define
-*all* names for a certain type in one go. In our `example.org` zone we could for instance
+all names for a certain type in one go. In our `example.org` zone we could for instance
 add a wildcard record:
 
     *.example.org.      TXT "wildcard record"
