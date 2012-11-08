@@ -712,7 +712,7 @@ So what does the resolver learn from this?
 * `example.org` exists;
 * `2.example.org` does not exist.
 
-And if `2.example.org` does not exist, `x.2.example.org` also does not exist.
+And if `2.example.org` does not exist, there is also no direct match for `x.2.example.org`.
 But only if there was no wildcard configured. So this is the last step: Check if
 there is a wildcard configured at the closest encloser. 
 
