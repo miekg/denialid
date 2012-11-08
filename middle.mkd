@@ -143,7 +143,7 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
 The first requirement implies that all denial of existence answers need to be 
 pre-computed, but it is impossible to precompute (all conceivable) non-existence answers.
 A generic denial record which can be used in all denial of existence proofs is
-not an option: such a record is susceptible to replat attacks. When you are querying
+not an option: such a record is susceptible to replay attacks. When you are querying
 a nameserver for a record that actually exists, a man in the middle may
 replay that generic denial record and it would be impossible
 to tell whether the response was genuine or spoofed.
@@ -411,7 +411,7 @@ introduces a flat space of names, as opposed to NSEC.
 
 The domain name used above (`1.h.example.org`) creates an empty non-terminal. 
 Empty non-terminals are domain names that have no RRs associated with them, and exist only
-because they have one or more sub domains that do ([](#RFC5155), Section 1.3). The record:
+because they have one or more subdomains that do ([](#RFC5155), Section 1.3). The record:
 
         1.h.example.org.    TXT "1.h record"
 
