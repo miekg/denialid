@@ -2,12 +2,11 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <!-- 
-    Version: 0.8.10
-    (c) Miek Gieben
-    Licensed under the GPL version 2.
+    Version: 2.0.1 - for xml2rfc version 2.x
+    (c) Miek Gieben, Licensed under the GPL version 2.
 
     Convert DocBook XML as created by Pandoc to XML suitable for RFCs and thus
-    parseable with xml2rfc. 
+    parseable with xml2rfc version 2.x. 
 -->
 
 <xsl:output method="xml" omit-xml-declaration="yes"/>
@@ -251,7 +250,7 @@
             <xsl:value-of select="normalize-space(translate(./term, '&#x20;&#x9;&#xD;&#xA;', ' '))"/>
         </xsl:attribute>
         <!-- OPTION: enable this to get a newline after the hangText -->
-        <xsl:element name="vspace"/>
+        <!-- <xsl:element name="vspace"/> -->
         <xsl:apply-templates select="./listitem"/>
     </t>
 </xsl:template>
@@ -292,7 +291,7 @@
             <xsl:when test="contains(., 'Figure: ')">
                 <xsl:attribute name="anchor">
                     <xsl:text>fig:</xsl:text>
-                    <xsl:value-of select="translate( translate(substring(normalize-space(translate( substring-after(., 'Figure: ') , '&#xA;', ' ')), 1, 10), ' ', '-'), $uppercase, $smallcase)"/>
+                    <xsl:value-of select='translate( translate(substring(normalize-space(translate( substring-after(., "Figure: ") , "&#xA;&#x27;", "  ")), 1, 10), " ", "-"), $uppercase, $smallcase)'/>
                 </xsl:attribute>
                 <!-- If there is an caption, center the figure -->
                 <xsl:attribute name="align">
@@ -344,13 +343,13 @@
         <xsl:if test="./caption">
             <xsl:attribute name="anchor">
                 <xsl:text>tab:</xsl:text>
-                <xsl:value-of select="translate( translate(substring(normalize-space(translate(./caption, '&#xA;', ' ')), 1, 10), ' ', '-'), $uppercase, $smallcase)" />
+                <xsl:value-of select='translate( translate(substring(normalize-space(translate(./caption, "&#xA;&#x27;", "  ")), 1, 10), " ", "-"), $uppercase, $smallcase)' />
             </xsl:attribute>
         </xsl:if>
         <xsl:if test="./title">
             <xsl:attribute name="anchor">
                 <xsl:text>tab:</xsl:text>
-                <xsl:value-of select="translate( translate(substring(normalize-space(translate(./title, '&#xA;', ' ')), 1, 10), ' ', '-'), $uppercase, $smallcase)" />
+                <xsl:value-of select='translate( translate(substring(normalize-space(translate(./title, "&#xA;&#x27;", "  ")), 1, 10), " ", "-"), $uppercase, $smallcase)' />
             </xsl:attribute>
         </xsl:if>
         <xsl:apply-templates/>
