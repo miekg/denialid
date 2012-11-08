@@ -269,8 +269,7 @@ harm since it is provably the proper response to the query.
 NSEC records are also used in NODATA responses. In that case we need to look more closely 
 at the type bitmap. The
 type bitmap in an NSEC record tells which types are defined for
-a name. If we look at the NSEC record of `a.example.org` (see the reply
-below or [](#fig:the-signed) for an example of the record) we
+a name. If we look at the NSEC record of `a.example.org`, we
 see the following types in the bitmap: A, TXT, NSEC and RRSIG. So
 for the name `a` this indicates we must have an A, TXT, NSEC and RRSIG record in the
 zone. 
