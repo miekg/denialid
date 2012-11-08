@@ -800,12 +800,6 @@ can be sure that the wildcard expansion should occur at `*.example.org` and nowh
 When we have validated all the signatures, we reached our goal: authenticated denial
 of existence.
 
-Coming back to the original question: why do we need (up to) three NSEC3
-records? The resolver needs to be explicitly told what the `closest encloser` is
-and this takes up a full NSEC3 record. Then the next closer name needs to be covered
-in an NSEC3 record, and finally an NSEC3 must say something about the wildcard. That
-makes three records.
-
 # List of Hashed Owner Names
 The following owner names are used in this document. The
 origin for these names is `example.org`.
