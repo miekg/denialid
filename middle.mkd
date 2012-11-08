@@ -366,7 +366,8 @@ In NSEC3 every name is hashed, including the owner name.
 This means
 that NSEC3 chain is sorted in hash order, instead of canonical order.
 Because the owner names are hashed, the next owner name for `example.org` is unlikely to
-be `a.example.org`, like with NSEC.
+be `a.example.org`, like with NSEC. Hashing changes the order, so that zone walking
+becomes more difficult.
 
 SHA1 is always used for
 the hashing. To make it even more difficult to retrieve the original names,
