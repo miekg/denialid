@@ -573,7 +573,7 @@ was appropriate: `w.a.` falls in the gap `*.a` to `*.b`. Similar, the NSEC recor
 `*.b.example.org` proves that there was no direct match for `w.b.example.org` and
 `*.c.example.org` denies the direct match for `w.c.example.org`.
 
-## Returning Three NSEC3s
+## The Closest Encloser NSEC3 Record
 With NSEC3, matters are even more complicated. 
 So we have an NSEC3 that denies the existence of the requested name and
 an NSEC3 that denies wildcard synthesis. What do we miss?
