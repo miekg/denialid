@@ -713,12 +713,12 @@ So what does the resolver learn from this?
 * `2.example.org` does not exist.
 
 And if `2.example.org` does not exist, there is also no direct match for `x.2.example.org`.
-But only if there was no wildcard configured. So this is the last step: Check if
-there is a wildcard configured at the closest encloser. 
+The last step is to deny the existence of the source of synthesis, to prove that no wildcard
+expansion was possible.
 
 The resolver
-hashes `*.example.org` to `22670TRPLHSR72PQQMEDLTG1KDQEOLB7`. Only the last
-NSEC3 covers this hash. The hash falls in
+hashes `*.example.org` to `22670TRPLHSR72PQQMEDLTG1KDQEOLB7` and is covered by the last
+NSEC3. The hash falls in
 the interval set by `1AVVQN74SG75UKFVF25DGCETHGQ638EK` and
 `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ` (this is our third NSEC3).
 This means there is no wildcard
