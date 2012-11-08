@@ -247,6 +247,7 @@ This signed zone is loaded into the name server. It looks like this:
 Again for brevity, the class is not shown (defaults to IN), the
 NS records are left out and the SOA, DNSKEY and RRSIG records are shortened.
 
+### NXDOMAIN Responses
 If a DNSSEC aware resolver asks for `b.example.org`, it gets
 back a `status: NXDOMAIN` packet, which by itself is meaningless
 as the header can be forged. To be able to securely detect that `b` does not exist,
@@ -267,7 +268,7 @@ Note that a man in the middle may still replay this NXDOMAIN response
 when you're querying for, say, c.example.org. But it would not do any
 harm since it is provably the proper response to the query.
 
-## NODATA Responses
+### NODATA Responses
 NSEC records are also used in NODATA responses. In that case we need to look more closely 
 at the type bitmap. The
 type bitmap in an NSEC record tells which types are defined for
@@ -297,7 +298,7 @@ The resolver should check the AUTHORITY section and conclude that:
 The techniques used by NSEC are the basics of authenticated denial of
 existence in DNSSEC.
 
-## Drawbacks of NSEC
+### Drawbacks of NSEC
 There were two issues with NSEC (and NXT).
 The first is that it allows for zone walking. NSEC
 records point from one name to another, in our example: `example.org`, points
@@ -441,7 +442,7 @@ where an authoritative name server can directly see the NSEC3 parameters used.
 If NSEC3 were designed in the early days of
 DNS (+/- 1984) this information would probably have been put in the SOA record.
 
-## Wildcards in the DNS ##
+### Wildcards in the DNS
 In the above sections we have not revealed the entire story. There is a complication: wildcards.
 Wildcards have been part of the DNS since the first DNS RFCs. They allow to define
 all names for a certain type in one go. In our `example.org` zone we could for instance
