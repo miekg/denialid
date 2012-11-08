@@ -61,6 +61,8 @@ in the following zone file:
     d.example.org.      A 192.0.2.1
                         TXT "d record"
 
+    Figure: The unsigned example.org zone.
+
 ## NXDOMAIN
 If a resolver asks for the TXT type belonging to `a.example.org` to the
 name server serving this zone, it sends the following question: `a.example.org TXT`
@@ -298,7 +300,7 @@ The resolver should check the AUTHORITY section and conclude that:
 The techniques used by NSEC are the basics of authenticated denial of
 existence in DNSSEC.
 
-### Drawbacks of NSEC
+## Drawbacks of NSEC
 There were two issues with NSEC (and NXT).
 The first is that it allows for zone walking. NSEC
 records point from one name to another, in our example: `example.org`, points
@@ -460,6 +462,8 @@ For completeness, our (unsigned) zone now looks like this:
                         TXT "a record"
     d.example.org.      A 192.0.2.1
                         TXT "d record"
+
+    Figure: The example.org zone with a wildcard record.
 
 <!-- * keep vim's syntax happy --> If a resolver asks for `z.example.org TXT`, 
 the name server will respond with an expanded wildcard, instead of an NXDOMAIN:
