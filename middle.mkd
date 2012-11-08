@@ -275,9 +275,9 @@ for the name `a` this indicates we must have an A, TXT, NSEC and RRSIG record in
 zone. 
 
 With the type bitmap of the NSEC record, a resolver can establish
-that a name is there, but the type is not. A resolver
-asks for `a.example.org AAAA`. This is the reply that comes
-back:
+that a name is there, but the type is not. For example, if a resolver
+asks for `a.example.org AAAA`, the reply that comes
+back is:
 
     ;; status: NOERROR, id: 44638
 
