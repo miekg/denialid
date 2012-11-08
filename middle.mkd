@@ -409,11 +409,11 @@ introduces a flat space of names, as opposed to NSEC.
 
 The domain name used above (`1.h.example.org`) creates an empty non-terminal. 
 Empty non-terminals are domain names that have no RRs associated with them, and exist only
-because they have one or more sub domains that do ([](#RFC5155), Section 1.3). 
+because they have one or more sub domains that do ([](#RFC5155), Section 1.3). The record:
 
         1.h.example.org.    TXT "1.h record"
 
-Creates 2 names:
+creates two names:
 
 1. `1.h.example.org` that has the type: TXT;
 2. `h.example.org` which has no types. This is the empty non-terminal. An empty
