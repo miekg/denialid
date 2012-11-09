@@ -98,7 +98,7 @@ is set to NXDOMAIN. From this the resolver concludes that `b.example.org` does n
 exist. The AUTHORITY section holds the SOA record of `example.org` that the
 resolver can use to cache the negative response.
 
-## NODATA
+## NODATA Responses
 It is important to realize that NXDOMAIN is not the only type
 of does-not-exist. A name may exist, but the type you are asking
 for may not. This occurrence of non-existence is called a NODATA [](#RFC2308) response.
