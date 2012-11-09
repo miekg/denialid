@@ -541,7 +541,7 @@ Lets add some CNAME wildcard records to our zone:
     d.example.org.      A 192.0.2.1
                         TXT "d record"
     w.example.org.      CNAME w.a
-    Figure: The example.org zone with a wildcard CNAME chain.
+    Figure: A wildcard CNAME chain added to the example.org zone.
 
 A query for `w.example.org A` will result in the following response:
 
