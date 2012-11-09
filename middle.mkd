@@ -327,7 +327,7 @@ and DNSNR.
 ## NO, NSEC2 and DNSNR ##
 The NO record was the first to introduce the idea of hashed owner names. It also fixed other shortcomings
 of the NXT record. At that time (around 2000) zone walking was not considered important enough
-to warrant the new record. People were also worried that deployment would be hindered by
+to warrant the new record. People were also worried that DNSSEC deployment would be hindered by
 developing an alternate means of denial of existence. Thus the effort was shelved and
 NXT remained. When the new DNSSEC specification was written, NSEC saw the light and
 inherited the two issues from NXT.
