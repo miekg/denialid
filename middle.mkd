@@ -662,19 +662,19 @@ the NSEC3 records it got?
 
                         example.org
                            ** 
-                       +-- ** .....................
+                       +-- ** . . . . . . . . . . .
                   (1) /  . /\ .                    .
                      /  .  |   .                    .
                     |  .   |    .                    .
                     v .    |     .                    . 
-                    **     |      **                  ++
-      h.example.org ** ----+----> ** 3.example.org    ++ 2.example.org
+                    **     |      **                  --
+      h.example.org ** ----+----> ** 3.example.org    -- 2.example.org
                     .     /   (3)  . |                .
                     .    /         . | (2)            . 
                     .   /          . |                .
                     .  /           . v                .
-    1.h.example.org **            **                  ++ 
-                    ** <--------- ** 3.3.example.org  ++ x.2.example.org
+    1.h.example.org **            **                  -- 
+                    ** <--------- ** 3.3.example.org  -- x.2.example.org
     Figure: x.2.example.org does not exist. The arrows represent the NSEC3 records, the ones
     numbered (1), (2) and (3) are the NSEC3s returned in our answer.
 
@@ -822,6 +822,9 @@ handle this aspect of DNSSEC create a severe hole in the security DNSSEC can add
 This document aims to "fill this documentation gap" and provide would-be
 implementors and other interested parties with enough background knowledge to
 better understand authenticated denial of existence. 
+
+4641bis + man the middle
+
 
 # IANA Considerations
 This document has no actions for IANA.
