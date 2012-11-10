@@ -819,12 +819,19 @@ Table: Hashed owner names for `example.org` in hash order.
 The RFCs describing authenticated denial of existence are concise about why
 certain design choices have been made. Implementations that do not correctly
 handle this aspect of DNSSEC create a severe hole in the security DNSSEC can add.
-This document aims to "fill this documentation gap" and provide would-be
+Specifically this can lead to a situation where a resolver can not establish
+the existence of a DS records and has to fall back to DNS for the remainder
+of the query resolution.
+
+This document aims to fill "this documentation gap" and provide would-be
 implementors and other interested parties with enough background knowledge to
 better understand authenticated denial of existence. 
 
-4641bis + man the middle
-
+DNSSEC does not
+protect against denial of service attacks, nor does it provide
+confidentiality.  For more general security considerations related to
+DNSSEC, please see RFC 4033, RFC 4034, RFC 4035 and RFC 5155
+([](#RFC4033), [](#RFC4034), [](#RFC4035) and [](#RFC5155)).
 
 # IANA Considerations
 This document has no actions for IANA.
