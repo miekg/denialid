@@ -315,7 +315,7 @@ These two issues eventually lead to NSEC3 which:
   Later this was incorporated into RFC 5155 [](#RFC5155).
 
 But before we delve into NSEC3, let us first take a look at its predecessors: NO, NSEC2
-and DNSNR.
+and, DNSNR.
 
 ## NO, NSEC2 and DNSNR ##
 The NO record was the first to introduce the idea of hashed owner names. It also fixed other shortcomings
