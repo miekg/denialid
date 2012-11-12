@@ -153,12 +153,6 @@ interval between two existing names. Or to put it another way: it
 defines the holes (non-existing names) in the zone. This record can 
 be signed beforehand and given to the resolver.
 
-A generic denial record which can be used in all denial of existence proofs is
-not an option: such a record is susceptible to replay attacks. When you are
-querying a name server for a record that actually exists, a man-in-the-middle may
-replay that generic denial record and it would be impossible to tell whether the
-response was genuine or spoofed.
-
 > Given all these troubles, why didn't the designers of
 > DNSSEC go for the (easy) route and allowed for online signing? Well,
 > at that time (pre 2000), online signing was not feasible with the
