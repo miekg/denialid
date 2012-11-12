@@ -236,7 +236,7 @@ This signed zone is loaded into the name server. It looks like this:
                         RRSIG(A) ( ... )
                         RRSIG(TXT) ( ... )
                         RRSIG(NSEC) ( ... )
-    Figure: The signed example.org zone.
+    Figure: The signed and sorted example.org zone with the added NSEC records (and signatures).
 
 Again for brevity, the class is not shown (defaults to IN), the
 NS records are left out and the SOA, DNSKEY and RRSIG records are shortened.
