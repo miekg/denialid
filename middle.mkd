@@ -491,7 +491,7 @@ If it wasn't, an attacker could mount a replay attack and poison the cache with 
 Suppose that the resolver has asked for
 `a.example.org TXT`. An attacker could modify the packet in such way that it looks
 like the response was generated through wildcard expansion, even though
-there exists a record for `a.example.org TXT`: `a.example.org.  TXT "a record"`
+there exists a record for `a.example.org TXT`.
 
 The tweaking simply consists of adjusting the ANSWER section to:
 
