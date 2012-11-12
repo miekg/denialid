@@ -257,7 +257,7 @@ Only by making that calculation, is a resolver able to conclude that the name
 is proven not to exist. We have authenticated denial of existence.
 
 Note that a man-in-the-middle may still replay this NXDOMAIN response
-when you're querying for, say, c.example.org. But it would not do any
+when you're querying for, say, `c.example.org`. But it would not do any
 harm since it is provably the proper response to the query.
 
 ## NODATA Responses
