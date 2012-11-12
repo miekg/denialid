@@ -426,7 +426,7 @@ is at least one complete set of NSEC3 records for the zone using the same
 parameters. Therefore, it would need to inspect all NSEC3 records.
 
 A more graceful solution was designed. 
-This solution was to create a new record, NSEC3PARAM, which must be placed at
+The solution was to create a new record, NSEC3PARAM, which must be placed at
 the apex of the zone.  Its sole role is to provide a single, fixed place
 where an authoritative name server can directly see the NSEC3 parameters used.
 If NSEC3 were designed in the early days of
