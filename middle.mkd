@@ -363,8 +363,7 @@ Because the owner names are hashed, the next owner name for `example.org` is unl
 be `a.example.org`. Also because the next owner name is hashed, zone walking becomes
 more difficult.
 
-SHA1 is always used for
-the hashing. To make it even more difficult to retrieve the original names,
+To make it even more difficult to retrieve the original names,
 the hashing can be repeated several times each time taking the previous hash
 as input. To thwart rainbow table attacks, a custom salt is also added. In the NSEC3
 for `example.org` we have hashed the names twice and use the salt `DEAD`.
