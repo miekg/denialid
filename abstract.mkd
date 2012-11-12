@@ -4,4 +4,4 @@ It is also used to signal that a domain
 name exists, but does not have the specific RR type you were asking for.
 When returning a negative DNSSEC response, a name server may
 include up to two NSEC records. With NSEC3 the maximum amount is three.
-This document attempts to answer the reasons on why this is the case.
+This document answers the reasons on why this is the case.
