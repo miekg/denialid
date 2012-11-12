@@ -144,7 +144,7 @@ The first requirement implies that all denial of existence answers need to be
 pre-computed, but it is impossible to precompute (all conceivable) non-existence answers.
 A generic denial record which can be used in all denial of existence proofs is
 not an option: such a record is susceptible to replay attacks. When you are querying
-a nameserver for a record that actually exists, a man in the middle may
+a nameserver for a record that actually exists, a man-in-the-middle may
 replay that generic denial record and it would be impossible
 to tell whether the response was genuine or spoofed.
 
@@ -155,7 +155,7 @@ be signed beforehand and given to the resolver.
 
 A generic denial record which can be used in all denial of existence proofs is
 not an option: such a record is susceptible to replay attacks. When you are
-querying a name server for a record that actually exists, a man in the middle may
+querying a name server for a record that actually exists, a man-in-the-middle may
 replay that generic denial record and it would be impossible to tell whether the
 response was genuine or spoofed.
 
@@ -263,7 +263,7 @@ Only by making that calculation, a resolver is able to conclude that the name
 `b` does not exist. If the signature of the NSEC record is valid, `b`
 is proven not to exist. We have authenticated denial of existence.
 
-Note that a man in the middle may still replay this NXDOMAIN response
+Note that a man-in-the-middle may still replay this NXDOMAIN response
 when you're querying for, say, c.example.org. But it would not do any
 harm since it is provably the proper response to the query.
 
