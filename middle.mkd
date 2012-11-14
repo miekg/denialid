@@ -693,7 +693,7 @@ with the last chopped label from query name prepended to it:
 be covered by the interval set in any of the NSEC3 records.
 
 Then the resolver needs to check the presence of a wildcard.
-It creates the wildcard name by prepending the wildcard
+It creates the wildcard name by prepending the asterisk
 label to the closest encloser: "*.\<closest encloser\>", and uses the
 hash of that.
 
