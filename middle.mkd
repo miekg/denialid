@@ -631,7 +631,7 @@ The resolver asks the following: `x.2.example.org TXT`.
 This leads to an NXDOMAIN response from the server, which contains
 three NSEC3 records. A list of hashed owner names
 can be found in [](#list-of-hashed-owner-names).
-Also see [](#fig:x.2.exampl) the numbers in the figure correspond
+Also see [](#fig:x.2.exampl) the numbers in that figure correspond
 with the following NSEC3 records:
 
     15BG9L6359F5CH23E34DDUA6N1RIHL9H.example.org. (
@@ -680,14 +680,14 @@ What is a resolver to do? It has been given the maximum amount of NSEC3s and
 they all seem useless.
 
 So this is where the closest encloser proof comes into play. And for the proof
-to work, the resolver needs to know what the `closest encloser` is. There must
+to work, the resolver needs to know what the closest encloser is. There must
 be an existing ancestor in the zone: a name must exist that is shorter than the
 query name. The resolver keeps hashing increasingly shorter names from
 the query name until an owner name of an NSEC3 matches. This owner name is
-the `closest encloser`.
+the closest encloser.
 
 When the resolver has found the closest encloser, the next step is
-to construct the `next closer name`. This is the closest encloser
+to construct the next closer name. This is the closest encloser
 with the last chopped label from query name prepended to it:
 "\<last chopped label\>.\<closest encloser\>". The hash of this name should 
 be covered by the interval set in any of the NSEC3 records.
