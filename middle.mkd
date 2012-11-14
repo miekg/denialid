@@ -602,7 +602,7 @@ An NSEC3 `closest encloser proof` consists of:
    this interval, and therefore the name in your question does not exist. In fact,
    the closest encloser is indeed the closest I have".
 
-These two records already deny the existence of the requested name, so we do not
+These two records deny the existence of the requested name, so we do not
 need an NSEC3 record that covers the actual queried name: By denying the existence
 of the next closer name, you also deny the existence of the queried name.
 
