@@ -747,7 +747,7 @@ the closest encloser and `x.2.example.org` definitely does not exist.
 When we have validated the signatures, we reached our goal: authenticated denial
 of existence.
 
-## Two is Not Enough
+## Two Is Not Enough
 One extra NSEC3 record plus additional signature may seem a lot just to deny the
 existence of the wildcard record, but we cannot leave it out. If the standard would
 not mandate the closest encloser NSEC3 record, but instead required two NSEC3 records: one
