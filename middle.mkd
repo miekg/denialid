@@ -563,13 +563,14 @@ was appropriate: `w.a.` falls in the gap `*.a` to `*.b`. Similar, the NSEC recor
 `*.c.example.org` denies the direct match for `w.c.example.org`.
 
 ## The Closest Encloser NSEC3 Record
-We can have one or more NSEC3 records that deny the existence of the requested name
-and one NSEC3 record that deny wildcard synthesis. What do we miss?
+In the normal case there is one NSEC3 record that denies the existence of the
+requested name and one NSEC3 record that deny wildcard synthesis. What do we
+miss?
 
-The short answer is that, due to the hashing in NSEC3 you loose the depth
-of your zone: Everything is hashed into a flat plane. To make up for this
-loss of information you need an extra record.
-The more detailed explanation is quite a bit longer...
+The short answer is that, due to the hashing in NSEC3 you loose the depth of
+your zone: Everything is hashed into a flat plane. To make up for this loss of
+information you need an extra record. The more detailed explanation is quite a
+bit longer...
 
 To understand NSEC3, we will need two definitions:
 
