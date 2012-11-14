@@ -513,7 +513,7 @@ for looking up names in the zone.
 It explicitly lists wildcard look up as one of these steps (3c), so with DNSSEC this must be
 communicated to the resolver: hence the NSEC(3) record.
 
-## CNAME records
+## CNAME Records
 So far, the maximum number of NSEC records a response will have is two: one for
 the denial of existence and another for the wildcard. We say maximum, because
 sometimes a single NSEC can prove both. With NSEC3, this is three (as to why, we
@@ -747,7 +747,7 @@ the closest encloser and `x.2.example.org` definitely does not exist.
 When we have validated the signatures, we reached our goal: authenticated denial
 of existence.
 
-# Section title to be thought of
+## Section title to be thought of
 One extra NSEC3 record plus additional signature may seem a lot just to deny the
 existence of the wildcard record, but we cannot leave it out. If the standard would
 not mandate the closest encloser NSEC3 record, but instead required two NSEC3 records: one
@@ -780,8 +780,7 @@ covers the query name `x.2.example.org` (`NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`).
 Now an attacker adds this NSEC3 record to the AUTHORITY section of the reply
 to deny both `x.2.example.org` and the wildcard expansion. The net result is
 that the resolver determines that `x.2.example.org` does not exist, while in fact it 
-should have been synthesized
-via wildcard expansion. 
+should have been synthesized via wildcard expansion. 
 With the NSEC3 matching the closest encloser `example.org`, the resolver
 can be sure that the wildcard expansion should occur at `*.example.org` and nowhere else.
 
