@@ -607,7 +607,7 @@ need an NSEC3 record that covers the actual queried name: By denying the existen
 of the next closer name, you also deny the existence of the queried name.
 
 But for a given query name, there is one place where wildcard expansion is possible.
-This is the source of synthesis, and is defined as:
+This is the `source of synthesis`, and is defined as:
 
     <asterisk label>.<closest encloser>
 
