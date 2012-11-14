@@ -774,8 +774,8 @@ this hash:
 This record also
 covers the query name `x.2.example.org` (hashes to `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`).
 
-Now an attacker adds this NSEC3 to the AUTHORITY section of the reply to
-to deny both `x.2.example.org` and some wildcard expansion. 
+Now an attacker adds this NSEC3 record to the AUTHORITY section of the reply to
+to deny both `x.2.example.org` and the wildcard expansion. 
 
 The attacker has successfully fooled the
 resolver that `x.2.example.org` does not exist, while in fact it could have been synthesized
