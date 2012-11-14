@@ -769,7 +769,7 @@ the interval
 
 This record also
 covers the query name `x.2.example.org` (which hashes to `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`).
-An attacker just adds the following NSEC3 record in the AUTHORITY section:
+So an attacker adds the following NSEC3 record in the AUTHORITY section:
 
     8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ.example.org. (
        NSEC3 1 0 2 DEAD 15BG9L6359F5CH23E34DDUA6N1RIHL9H TXT RRSIG )
