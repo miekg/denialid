@@ -761,7 +761,7 @@ The query `x.2.example.org TXT` would now have to be expanded to:
 
     x.2.example.org.    TXT "wildcard record"
 
-An attacker can deny the wildcard expansion by creating a hash for a fake wildcard name `*.2.example.org`:
+An attacker can deny this wildcard expansion by creating a hash for a fake wildcard name `*.2.example.org`:
 `FBQ73BFKJLRKDOQS27K5QF81AQQD7HHO`. This hash is covered by the NSEC3 record of `3.3.`:
 `8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ` to `15BG9L6359F5CH23E34DDUA6N1RIHL9H`. This record coincidentally also
 covers the query name `x.2.example.org` (which hashes to `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`).
