@@ -737,7 +737,7 @@ The last step is to deny the existence of the source of synthesis, to prove that
 expansion was possible.
 
 The resolver
-hashes `*.example.org` to `22670TRPLHSR72PQQMEDLTG1KDQEOLB7` and is covered by the last
+hashes `*.example.org` to `22670TRPLHSR72PQQMEDLTG1KDQEOLB7` and checks that it is covered by the last
 NSEC3. The hash falls in
 the interval set by `1AVVQN74SG75UKFVF25DGCETHGQ638EK` and
 `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ` (this is our third NSEC3).
