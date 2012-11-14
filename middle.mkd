@@ -617,19 +617,15 @@ resolver needs to know the hash of the source of synthesis.
 Since it does not know beforehand what the closest encloser of the query name is, it
 must be provided in the answer.
 
-Take the following example. We take our zone, but now with the following
-two records and it is signed with NSEC3. 
-As said these records create two non-terminals: "h.example.org" and "3.example.org",
-but that is irrelevant for the theory here.
-
-    1.h.example.org.    TXT "1.h record"
-    3.3.example.org.    TXT "3.3 record"
-
-The complete unsigned zone now looks like this.
+Take the following example. We take our zone, and put two TXT records to it. The
+records added are `1.h.example.org` and `3.3.example.org`. It is signed with NSEC3,
+resulting in the following unsigned zone.
 
     example.org.        SOA ( ... )
     1.h.example.org.    TXT "1.h record"
     3.3.example.org.    TXT "3.3 record"
+    Figure: The added TXT records in example.org. These records create two non-terminals:
+    `h.example.org` and `3.example.org` but that is irrelevant for the theory here.
 
 The resolver asks the following: `x.2.example.org TXT`.
 This leads to an NXDOMAIN response from the server, which contains
