@@ -613,7 +613,7 @@ This is the `source of synthesis`, and is defined as:
 
 In other words, to deny wildcard synthesis, the
 resolver needs to know the hash of the source of synthesis.
-Since it does not know on forehand the closest encloser of the query name, it
+Since it does not know beforehand what the closest encloser of the query name is, it
 must be provided in the answer.
 
 Take the following example. We take our zone, but now with the following
