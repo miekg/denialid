@@ -791,7 +791,6 @@ makes three records.
 When we have validated the signatures, we reached our goal: authenticated denial
 of existence.
 
-
 # List of Hashed Owner Names
 The following owner names are used in this document. The
 origin for these names is `example.org`.
