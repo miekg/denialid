@@ -751,14 +751,14 @@ not mandate the closest encloser NSEC3 record, but instead required two NSEC3 re
 to deny the query name and one to deny the wildcard record. An attacker could fool the resolver
 that the source of synthesis does not exist, while it in fact does.
 
-Suppose the wildcard record does exist and our unsigned zone looks like this:
+Suppose the wildcard record does exist, so our unsigned zone looks like this:
 
     example.org.        SOA ( ... )
     *.example.org.      TXT "wildcard record"
     1.h.example.org.    TXT "1.h record"
     3.3.example.org.    TXT "3.3 record"
 
-The query `x.2.example.org TXT` would now have to be expanded to:
+The query `x.2.example.org TXT` should now be answered with:
 
     x.2.example.org.    TXT "wildcard record"
 
