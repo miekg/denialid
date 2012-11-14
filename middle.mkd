@@ -519,7 +519,7 @@ the denial of existence and another for the wildcard. We say maximum, because
 sometimes a single NSEC can prove both. With NSEC3, this is three (as to why, we
 will explain in the next section).
 
-When we introduce CNAME wildcard records, we can have more NSEC(3) records.
+When we take CNAME wildcard records into account, we can have more NSEC(3) records.
 For every wildcard expansion, we need to prove that the expansion was allowed.
 Lets add some CNAME wildcard records to our zone:
 
