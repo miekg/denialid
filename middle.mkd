@@ -606,7 +606,7 @@ These two records deny the existence of the requested name, so we do not
 need an NSEC3 record that covers the actual queried name: By denying the existence
 of the next closer name, you also deny the existence of the queried name.
 
-But for a given query name, there is one (and only one) place where wildcard expansion is possible.
+For a given query name, there is one (and only one) place where wildcard expansion is possible.
 This is the `source of synthesis`, and is defined 
 ([](#RFC4592), Section 2.1.1 and Section 3.3.1) as:
 
