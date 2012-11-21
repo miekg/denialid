@@ -738,10 +738,9 @@ expansion was possible.
 
 The resolver
 hashes `*.example.org` to `22670TRPLHSR72PQQMEDLTG1KDQEOLB7` and checks that it is
-covered: in this case by the last NSEC3. The hash falls in
+covered: in this case by the last NSEC3 (see [](#fig:x.2.exampl)), the hash falls in
 the interval set by `1AVVQN74SG75UKFVF25DGCETHGQ638EK` and
-`75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ` (this is our third NSEC3, see
-[](#fig:x.2.exampl))
+`75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ`.
 This means there is no wildcard record directly below
 the closest encloser and `x.2.example.org` definitely does not exist.
 
