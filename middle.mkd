@@ -789,7 +789,7 @@ Coming back to the original question: why do we need up to three NSEC3
 records to deny a requested name? The resolver needs to be explicitly told what the `closest encloser` is
 and this takes up a full NSEC3 record. Then, the next closer name needs to be covered
 in an NSEC3 record, and finally an NSEC3 must say something about whether wildcard expansion was possible. That
-makes three records.
+makes three to tango.
 
 # List of Hashed Owner Names
 The following owner names are used in this document. The
