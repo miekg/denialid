@@ -819,15 +819,16 @@ confidentiality.  For more general security considerations related to
 DNSSEC, please see RFC 4033, RFC 4034, RFC 4035 and RFC 5155
 ([](#RFC4033), [](#RFC4034), [](#RFC4035) and [](#RFC5155)).
 
-But these RFCs are concise about why certain design choices have been made
+These RFCs are concise about why certain design choices have been made
 in the area of authenticated denial of existence.
 Implementations that do not correctly
-handle this aspect of DNSSEC create a severe hole in the security DNSSEC can add.
-Specifically this can lead to a situation where a resolver can not establish
-the existence of a DS record and has to fall back to DNS for the remainder
-of the query resolution. 
+handle this aspect of DNSSEC, create a severe hole in the security DNSSEC adds.
+This is specifically troublesome for secure delegations: If an attacker is able
+to deny the existence of a DS record, the resolver cannot establish a chain of
+trust, and the resolver has to fall back to insecure DNS for the remainder of
+the query resolution.
 
-This document aims to fill "this documentation gap" and provide would-be
+This document aims to fill this "documentation gap" and provide would-be
 implementors and other interested parties with enough background knowledge to
 better understand authenticated denial of existence. 
 
