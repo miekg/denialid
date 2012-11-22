@@ -1,0 +1,17 @@
+# Changelog
+
+[This section should be removed by the RFC editor before publishing]
+
+## -00
+
+1. Initial document
+
+## -01
+
+1. Style and language changes
+1. Figure captions
+1. Security considerations added
+1. Fix erroneous NSEC3 RR
+1. Section on CNAMEs added
+1. More detailed text on closest encloser proof
+

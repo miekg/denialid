@@ -1,4 +1,4 @@
-XML=middle.xml abstract.xml
+XML=middle.xml abstract.xml appendix.xml
 RFC=xml2rfc
 # This assumes double quotes in the docName!
 TITLE=$(shell grep docName template.xml | sed -e 's/.*docName=\"//' -e 's/\">//')
