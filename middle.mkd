@@ -377,9 +377,9 @@ Lets look at typical NSEC3 record:
             SOA RRSIG DNSKEY NSEC3PARAM )
 
 On the first line we see the hashed owner name: `15BG9L6359F5CH23E34DDUA6N1RIHL9H.example.org`, this
-is the hashed name of `example.org`. Note that even though we hashed `example.org`, the 
+is the hashed name of the fully qualified domain name (FQDN) `example.org`. Note that even though we hashed `example.org`, the 
 zone's name is added to make it look like a domain name again. 
-The basic format is `SHA1(example.org).example.org`.
+In case of our zone, the basic format is `SHA1(FQDN).example.org`.
 
 The next hashed owner name `A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84` (line 2) is the hashed version of `d.example.org`.
 Note that `.example.org` is not added to the next hashed owner name, as this
