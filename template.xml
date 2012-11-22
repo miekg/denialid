@@ -2,6 +2,7 @@
 <!DOCTYPE rfc SYSTEM 'rfc2629.dtd' [
 <!ENTITY pandocMiddle PUBLIC '' 'middle.xml'>
 <!ENTITY abstract     PUBLIC '' 'abstract.xml'>
+<!ENTITY appendix     PUBLIC '' 'appendix.xml'>
 
 <!-- normative -->
 <!ENTITY RFC1034    PUBLIC '' 'bib/reference.RFC.1034'>
@@ -110,5 +111,6 @@
     &draftnsec2v2;
     &draftexist;
 </references>
+&appendix;
 </back>
 </rfc>
