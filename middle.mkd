@@ -581,8 +581,8 @@ Closest encloser:
     "The closest encloser is the node in the zone's tree of existing
     domain names that has the most labels matching the query name
     (consecutively, counting from the root label downward)."
-    If the query name is `x.2.example.org`
-    then `example.org` is the `closest encloser` in our example;
+    In our example, if the query name is `x.2.example.org`
+    then `example.org` is the `closest encloser`;
 
 Next closer name:
 
