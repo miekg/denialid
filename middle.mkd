@@ -258,7 +258,10 @@ is proven not to exist. We have authenticated denial of existence.
 
 Note that a man-in-the-middle may still replay this NXDOMAIN response
 when you're querying for, say, `c.example.org`. But it would not do any
-harm since it is provably the proper response to the query.
+harm since it is provably the proper response to the query. In the future, there
+may be data published for `c.example.org`. Therefore, the RRSIGs RDATA 
+include a validity period (not visible in the zone above), so that an attacker
+cannot replay this NXDOMAIN response for `c.example.org` forever.
 
 ## NODATA Responses
 NSEC records are also used in NODATA responses. In that case we need to look more closely 
