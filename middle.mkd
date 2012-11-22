@@ -626,7 +626,7 @@ resulting in the following unsigned zone.
     1.h.example.org.    TXT "1.h record"
     3.3.example.org.    TXT "3.3 record"
     Figure: The added TXT records in example.org. These records create two non-terminals:
-    `h.example.org` and `3.example.org` but that is irrelevant for the theory here.
+    `h.example.org` and `3.example.org`.
 
 The resolver asks the following: `x.2.example.org TXT`.
 This leads to an NXDOMAIN response from the server, which contains
