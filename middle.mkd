@@ -15,8 +15,8 @@ In this document, we will explain how authenticated denial
 of existence works.
 We begin by explaining the current technique in the DNS
 and work our way up to DNSSEC. We explain the first steps
-taken in DNSSEC and describe how NXT, NSEC and NSEC3 work. NO, NSEC2 and
-DNSNR also briefly make their appearance, as they have paved the
+taken in DNSSEC and describe how NXT, NSEC and NSEC3 work. The NO, NSEC2 and
+DNSNR records also briefly make their appearance, as they have paved the
 way for NSEC3.
 
 To complete the picture, we also need to explain DNS wildcards
