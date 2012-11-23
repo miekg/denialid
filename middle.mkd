@@ -35,7 +35,7 @@ understanding the problem space.
 
 And these provide some general DNSSEC information.
 
-* RFC 4033, RFC 4034, RFC 4035 [](#RFC4033), [](#RFC4034), [](#RFC4035) - DNSSEC Spec;
+* RFC 4033, RFC 4034, RFC 4035 [](#RFC4033), [](#RFC4034), [](#RFC4035) - DNSSEC Specification;
 * RFC 4956 [](#RFC4956) - DNS Security (DNSSEC) Opt-In. This RFC has experimental 
     status, but is a good read.
 
