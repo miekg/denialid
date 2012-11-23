@@ -237,7 +237,7 @@ This signed zone is loaded into the name server. It looks like this:
                         RRSIG(TXT) ( ... )
                         RRSIG(NSEC) ( ... )
     Figure: The signed and sorted "example.org" zone with the added NSEC records (and signatures).
-    Again for brevity, the class is not shown (defaults to IN), the
+    For brevity, the class is not shown (defaults to IN), the
     NS records are left out and the SOA, DNSKEY and RRSIG records are shortened.
 
 If a DNSSEC aware resolver asks for `b.example.org`, it gets
@@ -254,7 +254,7 @@ should come after `a`, but the next owner name is `d.example.org`, so
 
 Only by making that calculation, is a resolver able to conclude that the name
 `b` does not exist. If the signature of the NSEC record is valid, `b`
-is proven not to exist. We have authenticated denial of existence.
+is proven not to exist. We have: authenticated denial of existence.
 
 Note that a man-in-the-middle may still replay this NXDOMAIN response
 when you're querying for, say, `c.example.org`. But it would not do any
