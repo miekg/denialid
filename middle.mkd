@@ -62,6 +62,7 @@ in the following zone file:
                         TXT "d record"
     Figure: The unsigned example.org zone.
 
+## NXDOMAIN Responses
 If a resolver asks for the TXT type belonging to `a.example.org` to the
 name server serving this zone, it sends the following question: `a.example.org TXT`
 
