@@ -128,7 +128,7 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
     attitude in mind.
     It is rather asymmetrical, but a lot of the design in DNSSEC
     stems from fact that you need to accommodate authenticated
-    denial of existence. If the DNS didn't have NXDOMAIN, DNSSEC would be a
+    denial of existence. If the DNS did not have NXDOMAIN, DNSSEC would be a
     lot simpler, but a lot less useful!
 
 2. The DNS packet header is not signed. 
