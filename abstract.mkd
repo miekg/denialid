@@ -1,7 +1,6 @@
-Authenticated denial of existence allows a resolver to
-validate that a certain domain name does not exist.
-It is also used to signal that a domain
-name exists, but does not have the specific RR type you were asking for.
-When returning a negative DNSSEC response, a name server usually
-includes up to two NSEC records. With NSEC3 this amount is three.
-This document answers the reasons on why this is the case.
+Authenticated denial of existence allows a resolver to validate that a certain
+domain name does not exist. It is also used to signal that a domain name exists,
+but does not have the specific RR type you were asking for. When returning a
+negative DNSSEC response, a name server usually includes up to two NSEC records.
+With NSEC3 this amount is three. This document provides extra documentation and
+context behind the mechanisms of NSEC and NSEC3.
