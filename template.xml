@@ -12,7 +12,6 @@
 <!ENTITY RFC4035    PUBLIC '' 'bib/reference.RFC.4035'>
 <!ENTITY RFC4592    PUBLIC '' 'bib/reference.RFC.4592'>
 <!ENTITY RFC5155    PUBLIC '' 'bib/reference.RFC.5155'>
-<!ENTITY RFC6672    PUBLIC '' 'bib/reference.RFC.6672'>
 
 <!-- informative -->
 <!ENTITY RFC2535    PUBLIC '' 'bib/reference.RFC.2535'>
@@ -106,7 +105,6 @@
     &RFC3655;
     &RFC3755;
     &RFC4956;
-    &RFC6672;
     &draftdnsnr;
     &draftnsec2v2;
     &draftexist;
