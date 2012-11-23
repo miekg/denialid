@@ -60,7 +60,7 @@ in the following zone file:
                         TXT "a record"
     d.example.org.      A 192.0.2.1
                         TXT "d record"
-    Figure: The unsigned example.org zone.
+    Figure: The unsigned "example.org" zone.
 
 ## NXDOMAIN Responses
 If a resolver asks for the TXT type belonging to `a.example.org` to the
@@ -213,7 +213,7 @@ records, we now have something that can be signed.
                     v .          . |
                     **    (2)     **
       a.example.org ** ---------> ** d.example.org
-      Figure: The NSEC records of example.org. The arrows represent NSEC records, starting
+      Figure: The NSEC records of "example.org". The arrows represent NSEC records, starting
       from the apex.
 
 This signed zone is loaded into the name server. It looks like this:
