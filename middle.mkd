@@ -810,7 +810,7 @@ Original Name     Hashed Name
 `b`               `IUU8L5LMT76JELTP0BIR3TMG4U3UU8E7`
 `x.2`             `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`
 
-Table: Hashed owner names for `example.org` in hash order.
+Table: Hashed owner names for "example.org" in hash order.
 
 # Security Considerations
 DNSSEC does not
