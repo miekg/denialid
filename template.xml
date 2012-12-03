@@ -11,6 +11,7 @@
 <!ENTITY RFC4034    PUBLIC '' 'bib/reference.RFC.4034'>
 <!ENTITY RFC4035    PUBLIC '' 'bib/reference.RFC.4035'>
 <!ENTITY RFC4592    PUBLIC '' 'bib/reference.RFC.4592'>
+<!ENTITY RFC4648    PUBLIC '' 'bib/reference.RFC.4648'>
 <!ENTITY RFC5155    PUBLIC '' 'bib/reference.RFC.5155'>
 
 <!-- informative -->
@@ -23,7 +24,7 @@
 <!ENTITY draftexist    PUBLIC '' 'bib/reference.I-D.ietf-dnsext-not-exsiting-rr.xml'>
 ]>
 
-<rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-01">
+<rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-02">
 <?rfc toc="yes"?>         <!-- generate a table of contents -->
 <?rfc tocompact="no"?>
 <?rfc tocdepth="6"?>
@@ -97,6 +98,7 @@
     &RFC4034;
     &RFC4035;
     &RFC4592;
+    &RFC4648;
     &RFC5155;
 </references>
 
