@@ -15,3 +15,7 @@
 1. Section on CNAMEs added;
 1. More detailed text on closest encloser proof.
 
+## -02
+
+1. Lowercase NSEC3 hashed ownernames;
+1. Add reference to Base32.
