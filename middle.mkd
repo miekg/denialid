@@ -382,7 +382,7 @@ Note that even though we hashed `example.org`, the
 zone's name is added to make it look like a domain name again. 
 In our zone, the basic format is `Base32(SHA1(FQDN)).example.org`.
 The next hashed owner name `A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84` (line 2) is the hashed version of `d.example.org`,
-also encoded as Base32.
+represented as Base32.
 Note that `.example.org` is not added to the next hashed owner name, as this
 name always falls in the current zone.
 
