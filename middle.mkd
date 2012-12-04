@@ -372,11 +372,11 @@ as input. To thwart rainbow table attacks, a custom salt is also added. In the N
 for `example.org` we have hashed the names thrice ([](#RFC5155), Section 5) and use the salt `DEAD`.
 Lets look at typical NSEC3 record:
 
-    15BG9L6359F5CH23E34DDUA6N1RIHL9H.example.org. (
+    15bg9l6359f5ch23e34ddua6n1rihl9h.example.org. (
        NSEC3 1 0 2 DEAD A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84
             SOA RRSIG DNSKEY NSEC3PARAM )
 
-On the first line we see the hashed owner name: `15BG9L6359F5CH23E34DDUA6N1RIHL9H.example.org`, this
+On the first line we see the hashed owner name: `15bg9l6359f5ch23e34ddua6n1rihl9h.example.org`, this
 is the hashed name of the fully qualified domain name (FQDN) `example.org` encoded as Base32 ([](#RFC4648)).
 Note that even though we hashed `example.org`, the 
 zone's name is added to make it look like a domain name again. 
@@ -401,7 +401,7 @@ original owner name (`example.org`) does not have the NSEC3 type. It only exists
 for the hashed name.
 
 Names like `1.h.example.org` hash to one label in NSEC3,
-`1.h.example.org` becomes: `117GERCPRCJGG8J04EV1NDRK8D1JT14K.example.org` when
+`1.h.example.org` becomes: `117gercprcjgg8j04ev1ndrk8d1jt14k.example.org` when
 used as an owner name.  This is an important observation. 
 By hashing the names you lose the depth of a zone - hashing
 introduces a flat space of names, as opposed to NSEC.
@@ -636,15 +636,14 @@ can be found in [](#list-of-hashed-owner-names).
 Also see [](#fig:x.2.exampl) the numbers in that figure correspond
 with the following NSEC3 records:
 
-    15BG9L6359F5CH23E34DDUA6N1RIHL9H.example.org. (
-     NSEC3 1 0 2 DEAD 1AVVQN74SG75UKFVF25DGCETHGQ638EK SOA 
-            RRSIG DNSKEY NSEC3PARAM )
+    15bg9l6359f5ch23e34ddua6n1rihl9h.example.org. (
+     NSEC3 1 0 2 DEAD 1AVVQN74SG75UKFVF25DGCETHGQ638EK SOA RRSIG 
+            DNSKEY NSEC3PARAM )
 
-    75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ.example.org. (
-     NSEC3 1 0 2 DEAD 8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ TXT
-            RRSIG )
+    75b9id679qqov6ldfhd8ocshsssb6jvq.example.org. (
+     NSEC3 1 0 2 DEAD 8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ TXT RRSIG )
 
-    1AVVQN74SG75UKFVF25DGCETHGQ638EK.example.org. (
+    1avvqn74sg75ukfvf25dgcethgq638ek.example.org. (
         NSEC3 1 0 2 DEAD 75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ )
 
 If we would follow the NSEC approach, the resolver is only interested in
@@ -670,13 +669,13 @@ the NSEC3 records it got?
     Figure: x.2.example.org does not exist. The arrows represent the NSEC3 records, the ones
     numbered (1), (2) and (3) are the NSEC3s returned in our answer.
 
-The hash of `x.2.example.org` is `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`.
+The hash of `x.2.example.org` is `ndtu6dste50pr4a1f2qvr1v31g00i2i1`.
 Checking this hash on the first NSEC3 yields that it does not fall
-in between the interval: `15BG9L6359F5CH23E34DDUA6N1RIHL9H`
-and `1AVVQN74SG75UKFVF25DGCETHGQ638EK`.
+in between the interval: `15bg9l6359f5ch23e34ddua6n1rihl9h`
+and `1avvqn74sg75ukfvf25dgcethgq638ek`.
 For the second NSEC3 the answer is also negative: the hash sorts outside
-the interval described by `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ` and
-`8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ`.
+the interval described by `75b9id679qqov6ldfhd8ocshsssb6jvq` and
+`8555t7qegau7pjtksnbchg4td2m0jnpj`.
 And the last NSEC3 also isn't of any help.
 What is a resolver to do? It has been given the maximum amount of NSEC3s and 
 they all seem useless.
@@ -707,18 +706,18 @@ given. So it has the following hashes to work with:
 
 `x.2.example.org`: 
 
-:   `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`, last chopped label: "\<empty\>";
+:   `ndtu6dste50pr4a1f2qvr1v31g00i2i1`, last chopped label: "\<empty\>";
 
 `2.example.org`: 
 
-:   `7T70DRG4EKC28V93Q7GNBLEOPA7VLP6Q`, last chopped label: "x";
+:   `7t70drg4ekc28v93q7gnbleopa7vlp6q`, last chopped label: "x";
 
 `example.org`: 
 
-:   `15BG9L6359F5CH23E34DDUA6N1RIHL9H`, last chopped label: "2";
+:   `15bg9l6359f5ch23e34ddua6n1rihl9h`, last chopped label: "2";
 
 Of these hashes only one matches the owner name of one of the NSEC3
-records: `15BG9L6359F5CH23E34DDUA6N1RIHL9H`. This must be the closest
+records: `15bg9l6359f5ch23e34ddua6n1rihl9h`. This must be the closest
 encloser (unhashed: `example.org`). That's the main purpose of that NSEC3 record:
 tell the resolver what the closest encloser is.
 
@@ -726,8 +725,8 @@ From that knowledge the resolver constructs the next closer, which
 in this case is: `2.example.org`; `2` is the last label chopped, when `example.org` is the closest
 encloser.
 The hash of this name should be
-covered in any of the other NSEC3s. And it is, `7T70DRG4EKC28V93Q7GNBLEOPA7VLP6Q` falls in the interval
-set by: `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ` and `8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ` (this is our second NSEC3).
+covered in any of the other NSEC3s. And it is, `7t70drg4ekc28v93q7gnbleopa7vlp6q` falls in the interval
+set by: `75b9id679qqov6ldfhd8ocshsssb6jvq` and `8555t7qegau7pjtksnbchg4td2m0jnpj` (this is our second NSEC3).
 
 So what does the resolver learn from this?
 
@@ -739,10 +738,10 @@ The last step is to deny the existence of the source of synthesis, to prove that
 expansion was possible.
 
 The resolver
-hashes `*.example.org` to `22670TRPLHSR72PQQMEDLTG1KDQEOLB7` and checks that it is
+hashes `*.example.org` to `22670trplhsr72pqqmedltg1kdqeolb7` and checks that it is
 covered: in this case by the last NSEC3 (see [](#fig:x.2.exampl)), the hash falls in
-the interval set by `1AVVQN74SG75UKFVF25DGCETHGQ638EK` and
-`75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ`.
+the interval set by `1avvqn74sg75ukfvf25dgcethgq638ek` and
+`75b9id679qqov6ldfhd8ocshsssb6jvq`.
 This means there is no wildcard record directly below
 the closest encloser and `x.2.example.org` definitely does not exist.
 
@@ -769,15 +768,15 @@ The query `x.2.example.org TXT` should now be answered with:
 
 An attacker can deny this wildcard expansion by calculating the hash for the wildcard
 name `*.2.example.org` and searching for an NSEC3 record that covers that hash. The
-hash of `*.2.example.org` is `FBQ73BFKJLRKDOQS27K5QF81AQQD7HHO`.
+hash of `*.2.example.org` is `fbq73bfkjlrkdoqs27k5qf81aqqd7hho`.
 Looking through the NSEC3 records in our zone we see that the NSEC3 record of `3.3` covers
 this hash:
 
-    8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ.example.org. (
+    8555t7qegau7pjtksnbchg4td2m0jnpj.example.org. (
         NSEC3 1 0 2 DEAD 15BG9L6359F5CH23E34DDUA6N1RIHL9H TXT RRSIG )
 
 This record also
-covers the query name `x.2.example.org` (`NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`).
+covers the query name `x.2.example.org` (`ndtu6dste50pr4a1f2qvr1v31g00i2i1`).
 
 Now an attacker adds this NSEC3 record to the AUTHORITY section of the reply
 to deny both `x.2.example.org` and any wildcard expansion. The net result is
@@ -798,18 +797,18 @@ origin for these names is `example.org`.
 
 Original Name     Hashed Name
 -------------     -----------
-`a`               `04SKNAPCA5AL7QOS3KM2L9TL3P5OKQ4C`
-`1.h`             `117GERCPRCJGG8J04EV1NDRK8D1JT14K`
-`@`               `15BG9L6359F5CH23E34DDUA6N1RIHL9H`
-`h`               `1AVVQN74SG75UKFVF25DGCETHGQ638EK`
-`*`               `22670TRPLHSR72PQQMEDLTG1KDQEOLB7`
-`3`               `75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ`
-`2`               `7T70DRG4EKC28V93Q7GNBLEOPA7VLP6Q`
-`3.3`             `8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ`
-`d`               `A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84`
-`*.2`             `FBQ73BFKJLRKDOQS27K5QF81AQQD7HHO`
-`b`               `IUU8L5LMT76JELTP0BIR3TMG4U3UU8E7`
-`x.2`             `NDTU6DSTE50PR4A1F2QVR1V31G00I2I1`
+`a`               `04sknapca5al7qos3km2l9tl3p5okq4c`
+`1.h`             `117gercprcjgg8j04ev1ndrk8d1jt14k`
+`@`               `15bg9l6359f5ch23e34ddua6n1rihl9h`
+`h`               `1avvqn74sg75ukfvf25dgcethgq638ek`
+`*`               `22670trplhsr72pqqmedltg1kdqeolb7`
+`3`               `75b9id679qqov6ldfhd8ocshsssb6jvq`
+`2`               `7t70drg4ekc28v93q7gnbleopa7vlp6q`
+`3.3`             `8555t7qegau7pjtksnbchg4td2m0jnpj`
+`d`               `a6edkb6v8vl5ol8jnqqlt74qmj7heb84`
+`*.2`             `fbq73bfkjlrkdoqs27k5qf81aqqd7hho`
+`b`               `iuu8l5lmt76jeltp0bir3tmg4u3uu8e7`
+`x.2`             `ndtu6dste50pr4a1f2qvr1v31g00i2i1`
 
 Table: Hashed owner names for "example.org" in hash order.
 
