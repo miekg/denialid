@@ -284,7 +284,7 @@ should come after `a`, but the next owner name is `d.example.org`, so
 
 Only by making that calculation, is a resolver able to conclude that the name
 `b` does not exist. If the signature of the NSEC record is valid, `b`
-is proven not to exist. We have: authenticated denial of existence.
+is proven not to exist. We have authenticated denial of existence.
 
 Note that a man-in-the-middle may still replay this NXDOMAIN response
 when you're querying for, say, `c.example.org`. But it would not do any
