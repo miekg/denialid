@@ -322,10 +322,8 @@ There were two issues with NSEC (and NXT).
 The first is that it allows for zone walking. NSEC
 records point from one name to another, in our example: `example.org`, points
 to `a.example.org` which points to `d.example.org` which points back to
-`example.org`. So we can reconstruct the entire `example.org` zone even when 
-zone transfers (AXFR) on the server are denied. 
-
-<!-- Geoff: add text about why zone walking is a problem -->
+`example.org`. So we can reconstruct the entire `example.org` zone,
+thus defeat attempts to administratively block zone transfers.
 
 The second issue is that when a large, delegation-centric ([](#RFC5155), Section 1.1),
 zone deploys DNSSEC, every name in the zone gets an NSEC plus
