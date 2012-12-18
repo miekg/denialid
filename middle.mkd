@@ -331,7 +331,9 @@ to `a.example.org` which points to `d.example.org` which points back to
 `example.org`. So we can reconstruct the entire `example.org` zone even when 
 zone transfers (AXFR) on the server are denied. 
 
-The second issue is that when a large, delegation heavy,
+<!-- Geoff: add text about why zone walking is a problem -->
+
+The second issue is that when a large, delegation-centric ([](#RFC5155), Section 1.1),
 zone deploys DNSSEC, every name in the zone gets an NSEC plus
 RRSIG. This leads to a huge increase in the zone
 size (when signed). This would in turn mean that operators of such zones
