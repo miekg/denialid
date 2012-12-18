@@ -551,6 +551,8 @@ The tweaking simply consists of adjusting the ANSWER section to:
     a.example.org.      TXT "wildcard record"
     a.example.org.      RRSIG(TXT) ( ... )
 
+<!-- Geoff: hang on - what is the difference here from the above example output? -->
+
 Which would be a perfectly valid answer if we would not require the 
 inclusion of an NSEC or NSEC3 record in the wildcard answer response. The resolver
 believes that `a.example.org TXT` is a wildcard record, and the real record
