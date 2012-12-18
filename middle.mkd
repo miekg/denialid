@@ -3,6 +3,21 @@ DNSSEC can be somewhat of a complicated matter, and there are certain areas
 of the specification that are more difficult to comprehend than others.
 One such area is "authenticated denial of existence".
 
+<!-- Geoff:
+A paragraph explaining why this is hard may be useful - i.e.
+conventionally we use cryptography to sign a valid response - i.e. "here
+is the artefact and here is the sign over the artefact". However in this
+case the response is "here is a null response" which gets difficult to
+sign over. To further complicate this matter there is the desire to
+pre-generate responses - i.e. the signed "this name is not here"
+response has to be pre-computed and be applicable for effectively all
+queries for non-existent names in the signed zone.
+
+I think that a paragraph or two on the original objectives of
+authenticated denial of existence in the DNS would be be helpful as part
+of the introductory section of this paragraph.
+-->
+
 Authenticated denial of existence allows a DNSSEC enabled resolver to
 validate that a certain domain name does not exist.
 It is also used to signal that a domain
