@@ -360,6 +360,10 @@ developing an alternate means of denial of existence. Thus the effort was shelve
 NXT remained. When the new DNSSEC specification was written, NSEC saw the light and
 inherited the two issues from NXT.
 
+<!-- Geoff: I'm confused - where does the NO record fit in the overall scheme of things?
+What is the relation of this to the NSEC record and the NXT record? What
+was the semantics of the NO record?
+-->
 Several years after that NSEC2 was introduced as a way to solve the two issues
 of NSEC. The NSEC2 draft contains the following paragraph:
 
