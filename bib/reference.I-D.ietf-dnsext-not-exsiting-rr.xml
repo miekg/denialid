@@ -18,5 +18,5 @@ This draft present an alternative to NXT records, used to achieve authenticated 
 
 <seriesInfo name='Internet-Draft' value='draft-ietf-dnsext-not-existing-rr-01' />
 <format type='TXT'
-        target='http://www.ietf.org/internet-drafts/draft-ietf-dnsext-not-existing-rr-01.txt' />
+    target='http://tools.ietf.org/id/draft-ietf-dnsext-not-existing-rr-01.txt' />
 </reference>
