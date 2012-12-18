@@ -522,7 +522,7 @@ the name server will respond with an expanded wildcard, instead of an NXDOMAIN:
 
     ;; ANSWER SECTION:
     z.example.org.      TXT "wildcard record"
-    
+
 Note however that the resolver can not detect that this answer came from a wildcard. It just
 sees the answer as-is. How will this answer look with DNSSEC?
 
