@@ -320,7 +320,7 @@ The resolver should check the AUTHORITY section and conclude that:
 II.  `a.example.org` exists (because of the NSEC with that owner name) and;
 II.  the type (AAAA) does not as it is not listed in the type bitmap.
 
-The techniques used by NSEC, form the basics of authenticated denial of
+The techniques used by NSEC form the basics of authenticated denial of
 existence in DNSSEC.
 
 ## Drawbacks of NSEC
