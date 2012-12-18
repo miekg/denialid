@@ -566,6 +566,7 @@ It explicitly lists wildcard look up as one of these steps (3c), so with DNSSEC 
 communicated to the resolver: hence the NSEC(3) record.
 
 ## CNAME Records
+<!-- Geoff: DNAME? -->
 So far, the maximum number of NSEC records a response will have is two: one for
 the denial of existence and another for the wildcard. We say maximum, because
 sometimes a single NSEC can prove both. With NSEC3, this is three (as to why, we
@@ -620,8 +621,7 @@ and one NSEC3 record that deny wildcard synthesis. What do we miss?
 
 The short answer is that, due to the hashing in NSEC3 you loose the depth of
 your zone: Everything is hashed into a flat plane. To make up for this loss of
-information you need an extra record. The more detailed explanation is quite a
-bit longer...
+information you need an extra record. 
 
 To understand NSEC3, we will need two definitions:
 
