@@ -420,7 +420,8 @@ more difficult.
 
 To make it even more difficult to retrieve the original names,
 the hashing can be repeated several times each time taking the previous hash
-as input. To thwart rainbow table attacks, a custom salt is also added. In the NSEC3
+as input. To prevent the reuse of pre-calculated hash values between zones a
+(per zone) salt can also be added. In the NSEC3
 for `example.org` we have hashed the names thrice ([](#RFC5155), Section 5) and use the salt `DEAD`.
 Lets look at typical NSEC3 record:
 <!-- Geoff comment: what is custom salt, rainbow attack -->
