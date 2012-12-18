@@ -389,6 +389,8 @@ foil zone walking and it also introduced the concept of opting out (called
 This proposal didn't make it either, but it provided valuable insights into the
 problem.
 
+<!-- Geoff comment: add section about what insights -->
+
 ## NSEC3 ##
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
 both opt-out and the hashing of names. NSEC3 solves any issues people might
