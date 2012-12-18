@@ -390,7 +390,7 @@ resource record.
 
 The DNSNR record was another attempt that used hashed names to
 foil zone walking and it also introduced the concept of opting out (called
-"Authoritative Only Flag") which limited the use of DNSNR in delegation heavy zones.
+"Authoritative Only Flag") which limited the use of DNSNR in delegation-centric zones.
 This proposal didn't make it either, but it provided valuable insights into the
 problem.
 
