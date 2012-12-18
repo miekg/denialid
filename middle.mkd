@@ -209,8 +209,9 @@ is superseded by NSEC. In the next section we explain how NSEC (and thus NXT) wo
 
 ## NSEC
 In RFC 3755 [](#RFC3755) all the DNSSEC types were given new names, SIG was renamed RRSIG,
-KEY became DNSKEY and NXT was renamed to NSEC and a few minor 
-issues were fixed in the process.
+KEY became DNSKEY and NXT was renamed to NSEC and a minor 
+issue was fixed in the process, namely the type bitmap was redefined to allow more
+than 127 types to be listed ([](#RFC2535), Section 5.2).
 
 Just as NXT, NSEC is used to describe an interval
 between names: it indirectly tells a resolver which names do not exist in
