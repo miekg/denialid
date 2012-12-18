@@ -169,7 +169,11 @@ but never made it to RFC. Later on, NXT was superseded by the
 NSEC (next secure) record. From there it went through NSEC2/DNSNR to finally reach
 NSEC3 (next secure, version 3) in RFC 5155.
 
-## NXT ##
+# Experimental and Deprecated Mechanisms
+
+# Production Mechanisms
+
+## NXT
 The first attempt to specify authenticated denial of existence was NXT 
 (RFC 2535 [](#RFC2535)).  Section 5.1 of that RFC introduces the record:
 
@@ -180,7 +184,7 @@ The first attempt to specify authenticated denial of existence was NXT
 By specifying what you do have, you implicitly tell what you don't have. NXT
 is superseded by NSEC. In the next section we explain how NSEC (and thus NXT) works.
 
-## NSEC ##
+## NSEC
 In RFC 3755 [](#RFC3755) all the DNSSEC types were given new names, SIG was renamed RRSIG,
 KEY became DNSKEY and NXT was renamed to NSEC and a few minor 
 issues were fixed in the process.
