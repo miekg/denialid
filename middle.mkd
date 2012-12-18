@@ -374,6 +374,8 @@ of NSEC. The NSEC2 draft contains the following paragraph:
 When an authenticated denial of existence scheme starts to talk
 about EXIST records, it is worth paying extra attention.
 
+<!-- EXIST record expanden -->
+
 NSEC2 solved the zone walking issue, by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
 
