@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='RFC2065'>
+
+<front>
+<title abbrev='DNS Security Extensions'>Domain Name System Security Extensions</title>
+<author initials='D.E.' surname='Eastlake' fullname='Donald E. Eastlake 3rd'>
+<organization>CyberCash, Inc.</organization>
+<address>
+<postal>
+<street>318 Acton Street</street>
+<city>Carlisle</city>
+<region>MA</region>
+<code>01741</code>
+<country>US</country></postal>
+<phone>+1 508 287 4877</phone>
+<facsimile>+1 508 371 7148</facsimile>
+<email>dee@cybercash.com</email></address></author>
+<author initials='C.' surname='Kaufman' fullname='Charles W. Kaufman'>
+<organization>Iris Associates</organization>
+<address>
+<postal>
+<street>1 Technology Park Drive</street>
+<city>Westford</city>
+<region>MA</region>
+<code>01886</code>
+<country>US</country></postal>
+<phone>+1 508 392 5276</phone>
+<email>charlie_kaufman@iris.com</email></address></author>
+<date year='1997' month='January' />
+<abstract>
+<t>The Domain Name System (DNS) has become a critical operational part of the Internet infrastructure yet it has no strong security mechanisms to assure data integrity or authentication.  Extensions to the DNS are described that provide these services to security aware resolvers or applications through the use of cryptographic digital signatures.  These digital signatures are included in secured zones as resource records.  Security can still be provided even through non-security aware DNS servers in many cases.</t>
+<t>The extensions also provide for the storage of authenticated public keys in the DNS.  This storage of keys can support general public key distribution service as well as DNS security.  The stored keys enable security aware resolvers to learn the authenticating key of zones in addition to those for which they are initially configured.  Keys associated with DNS names can be retrieved to support other protocols.  Provision is made for a variety of key types and algorithms.</t>
+<t>In addition, the security extensions provide for the optional authentication of DNS protocol transactions.</t></abstract></front>
+
+<seriesInfo name='RFC' value='2065' />
+<format type='TXT' octets='97718' target='http://www.rfc-editor.org/rfc/rfc2065.txt' />
+</reference>

@@ -323,7 +323,7 @@ The first is that it allows for zone walking. NSEC
 records point from one name to another, in our example: `example.org`, points
 to `a.example.org` which points to `d.example.org` which points back to
 `example.org`. So we can reconstruct the entire `example.org` zone,
-thus defeat attempts to administratively block zone transfers.
+thus defeat attempts to administratively block zone transfers ([](#RFC2065) Section 5.5).
 
 The second issue is that when a large, delegation-centric ([](#RFC5155), Section 1.1),
 zone deploys DNSSEC, every name in the zone gets an NSEC plus
