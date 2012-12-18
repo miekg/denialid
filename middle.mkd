@@ -392,9 +392,16 @@ The DNSNR record was another attempt that used hashed names to
 foil zone walking and it also introduced the concept of opting out (called
 "Authoritative Only Flag") which limited the use of DNSNR in delegation-centric zones.
 This proposal didn't make it either, but it provided valuable insights into the
-problem.
+problem. 
 
-<!-- Geoff comment: add section about what insights -->
+To summerize:
+
+* The NO record introduced hashing, but this idea lingered in the background for
+    a long time;
+* The NSEC2 record made it clear that wildcards were not completely understood;
+* The DNSNR record used a new flag field in the RDATA to signal opt-out;
+* And the DNNR record said that when using a hash algorithm, 
+   the owner name *and* the next owner name must be hashed.
 
 ## NSEC3 ##
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
