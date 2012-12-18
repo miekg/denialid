@@ -840,27 +840,6 @@ and this takes up a full NSEC3 record. Then, the next closer name needs to be co
 in an NSEC3 record, and finally an NSEC3 must say something about whether wildcard expansion was possible. That
 makes three to tango.
 
-# List of Hashed Owner Names
-The following owner names are used in this document. The
-origin for these names is `example.org`.
-
-Original Name     Hashed Name
--------------     -----------
-`a`               `04sknapca5al7qos3km2l9tl3p5okq4c`
-`1.h`             `117gercprcjgg8j04ev1ndrk8d1jt14k`
-`@`               `15bg9l6359f5ch23e34ddua6n1rihl9h`
-`h`               `1avvqn74sg75ukfvf25dgcethgq638ek`
-`*`               `22670trplhsr72pqqmedltg1kdqeolb7`
-`3`               `75b9id679qqov6ldfhd8ocshsssb6jvq`
-`2`               `7t70drg4ekc28v93q7gnbleopa7vlp6q`
-`3.3`             `8555t7qegau7pjtksnbchg4td2m0jnpj`
-`d`               `a6edkb6v8vl5ol8jnqqlt74qmj7heb84`
-`*.2`             `fbq73bfkjlrkdoqs27k5qf81aqqd7hho`
-`b`               `iuu8l5lmt76jeltp0bir3tmg4u3uu8e7`
-`x.2`             `ndtu6dste50pr4a1f2qvr1v31g00i2i1`
-
-Table: Hashed owner names for "example.org" in hash order.
-
 # Security Considerations
 DNSSEC does not
 protect against denial of service attacks, nor does it provide
