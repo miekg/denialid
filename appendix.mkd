@@ -38,6 +38,5 @@ Table: Hashed owner names for "example.org" in hash order.
 
 ## -02
 
-1. Lowercase NSEC3 hashed ownernames;
-1. Add reference to Base32.
-1. ...
+1. Lowercase NSEC3 hashed ownernames and add reference to Base32;
+1. Process the comments from Joe Abley and Geoff Huston.
