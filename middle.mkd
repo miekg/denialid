@@ -270,13 +270,15 @@ This signed zone is loaded into the name server. It looks like this:
 
 If a DNSSEC aware resolver asks for `b.example.org`, it gets
 back a `status: NXDOMAIN` packet, which by itself is meaningless
-as the header can be forged. To be able to securely detect that `b` does not exist,
+as the packet header can be forged (only the resource record sets 
+are signed in a packet, the header is not).
+To be able to securely detect that `b` does not exist,
 there must also be a signed NSEC record which covers the name space
 where `b` lives. The record:
 
     a.example.org.      NSEC d.example.org.
 
-does just do that: `b`
+does precicely that: `b`
 should come after `a`, but the next owner name is `d.example.org`, so
 `b` does not exist.
 
