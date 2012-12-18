@@ -424,7 +424,6 @@ as input. To prevent the reuse of pre-calculated hash values between zones a
 (per zone) salt can also be added. In the NSEC3
 for `example.org` we have hashed the names thrice ([](#RFC5155), Section 5) and use the salt `DEAD`.
 Lets look at typical NSEC3 record:
-<!-- Geoff comment: what is custom salt, rainbow attack -->
 
     15bg9l6359f5ch23e34ddua6n1rihl9h.example.org. (
        NSEC3 1 0 2 DEAD A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84
