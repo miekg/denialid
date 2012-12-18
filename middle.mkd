@@ -169,6 +169,14 @@ but never made it to RFC. Later on, NXT was superseded by the
 NSEC (next secure) record. From there it went through NSEC2/DNSNR to finally reach
 NSEC3 (next secure, version 3) in RFC 5155.
 
+<!-- JA: A small structural suggestion: it might be good to gather the                                                        
+descriptions of query handling with zones using NSEC and NSEC3 into a                                                 
+single section entitled "Production Mechanisms" or some such, and                                                     
+relegate the NXT, NSEC2, NO, etc discussion into a separate section                                                   
+called something like "Experimental and Deprecated Mechanisms". It would                                              
+be a shame if a neophyte reader gained the impression that there were                                                 
+other options than NSEC and NSEC3 today. -->
+
 # Experimental and Deprecated Mechanisms
 
 # Production Mechanisms
