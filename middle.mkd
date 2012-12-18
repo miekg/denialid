@@ -345,18 +345,20 @@ But before we delve into NSEC3, let us first take a look at its predecessors: NO
 and, DNSNR.
 
 ## NO, NSEC2 and DNSNR ##
-The NO record was the first to introduce the idea of hashed owner names. It also fixed other shortcomings
-of the NXT record. At that time (around 2000) zone walking was not considered important enough
+The NO record was the first to introduce the idea of hashed owner names. 
+It also fixed the type bitmap issue of the NXT record.
+At that time (around 2000) zone walking was not considered important enough
 to warrant the new record. People were also worried that DNSSEC deployment would be hindered by
 developing an alternate means of denial of existence. Thus the effort was shelved and
-NXT remained. When the new DNSSEC specification was written, NSEC saw the light and
-inherited the two issues from NXT.
+NXT remained. 
 
-<!-- Geoff: I'm confused - where does the NO record fit in the overall scheme of things?
-What is the relation of this to the NSEC record and the NXT record? What
-was the semantics of the NO record?
--->
-Several years after that NSEC2 was introduced as a way to solve the two issues
+When the new DNSSEC specification was written, NSEC saw the light, and inherited
+the two issues from NXT. But still people were not convinced that zone walking
+was a problem that should be solved at this time. Other issues, like the introduction
+of the DS record ([](#RFC3658) and making DNSSEC work were more important (TODO(mg): ohja?).
+
+But the zone walking problem did not went awat and several years after that NSEC2 was 
+introduced as a way to solve the two issues
 of NSEC. The NSEC2 draft contains the following paragraph:
 
 > "This document proposes an alternate scheme which hides owner names
@@ -364,9 +366,20 @@ of NSEC. The NSEC2 draft contains the following paragraph:
 > names.  The scheme uses two new RR types: NSEC2 and EXIST."
 
 When an authenticated denial of existence scheme starts to talk
-about EXIST records, it is worth paying extra attention.
+about EXIST records, it is worth paying extra attention. The EXIST record
+is defined as a record without RDATA that would be used to signal the
+presence of a domain name. From the draft:
 
-<!-- EXIST record expanden -->
+> "In order to prove the nonexistence of a record that might be covered
+>  by a wildcard, it is necessary to prove the existence of its closest
+>  encloser.  This record does that.  Its owner is the closest encloser.
+>  It has no RDATA.  If there is another RR that proves the existence of
+>  the closest encloser, this SHOULD be used instead of an EXIST record."
+
+The introduction of this record led to all kind of questions on what
+wildcards actually means (especially in the context of DNSSEC) and indirectly
+led to "The Role of Wildcards in the Domain Name System" ([](#RFC4592)).
+(TODO(mg): misschien nog meer text?)
 
 NSEC2 solved the zone walking issue, by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
