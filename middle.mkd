@@ -589,7 +589,6 @@ It explicitly lists wildcard look up as one of these steps (3c), so with DNSSEC 
 communicated to the resolver: hence the NSEC(3) record.
 
 ## CNAME Records
-<!-- Geoff: DNAME? -->
 So far, the maximum number of NSEC records a response will have is two: one for
 the denial of existence and another for the wildcard. We say maximum, because
 sometimes a single NSEC can prove both. With NSEC3, this is three (as to why, we
@@ -637,6 +636,8 @@ The NSEC record `*.a.example.org` proves that wildcard expansion to `w.a.example
 was appropriate: `w.a.` falls in the gap `*.a` to `*.b`. Similar, the NSEC record
 `*.b.example.org` proves that there was no direct match for `w.b.example.org` and
 `*.c.example.org` denies the direct match for `w.c.example.org`.
+
+DNAME records and wildcard names should not be used as reiterated in [](#RFC6672) Section 3.3.
 
 ## The Closest Encloser NSEC3 Record
 We can have one or more NSEC3 records that deny the existence of the requested name
