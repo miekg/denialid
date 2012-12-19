@@ -420,7 +420,7 @@ more difficult.
 
 To make it even more difficult to retrieve the original names,
 the hashing can be repeated several times each time taking the previous hash
-as input. To prevent the reuse of pre-calculated hash values between zones a
+as input. To prevent the reuse of pre-generated hash values between zones a
 (per zone) salt can also be added. In the NSEC3
 for `example.org` we have hashed the names thrice ([](#RFC5155), Section 5) and use the salt `DEAD`.
 Lets look at typical NSEC3 record:
@@ -487,7 +487,8 @@ The solution was to create a new record, NSEC3PARAM, which must be placed at
 the apex of the zone.  Its sole role is to provide a single, fixed place
 where an authoritative name server can directly see the NSEC3 parameters used.
 If NSEC3 were designed in the early days of
-DNS (+/- 1984) this information would probably have been put in the SOA record.
+DNS (+/- 1984) this information would probably have been put in the SOA record. Like
+the SOA record, the NSEC3PARAM record is useless to a resolver.
 
 <!-- Geoff: 
 Does the validating resolver "see" this NSEC3PARAM? Why is it a resource
