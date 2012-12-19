@@ -16,6 +16,7 @@
 <!ENTITY RFC4592    PUBLIC '' 'bib/reference.RFC.4592'>
 <!ENTITY RFC4648    PUBLIC '' 'bib/reference.RFC.4648'>
 <!ENTITY RFC5155    PUBLIC '' 'bib/reference.RFC.5155'>
+<!ENTITY RFC6672    PUBLIC '' 'bib/reference.RFC.6672'>
 
 <!-- informative -->
 <!ENTITY RFC2535    PUBLIC '' 'bib/reference.RFC.2535'>
@@ -106,6 +107,7 @@
     &RFC4592;
     &RFC4648;
     &RFC5155;
+    &RFC6672;
 </references>
 
 <references title="Informative References">
