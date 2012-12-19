@@ -495,16 +495,12 @@ parameters. Therefore, it would need to inspect all NSEC3 records.
 
 A more graceful solution was designed. 
 The solution was to create a new record, NSEC3PARAM, which must be placed at
-the apex of the zone.  Its sole role is to provide a fixed place
-where an authoritative name server can directly see the NSEC3 parameters used.
+the apex of the zone.  Its role is to provide a fixed place
+where an authoritative name server can directly see the NSEC3 parameters used, and
+by putting it in the zone it allows for easy transfer to the secondaries.
 If NSEC3 were designed in the early days of
 DNS (+/- 1984) this information would probably have been put in the SOA record. Like
 the SOA record, the NSEC3PARAM record is useless to a resolver.
-
-<!-- Geoff: 
-Does the validating resolver "see" this NSEC3PARAM? Why is it a resource
-record in the zone? 
--->
 
 ## Wildcards in the DNS
 So far, we have only talked about denial of existence in negative responses. However,
