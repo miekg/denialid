@@ -350,6 +350,10 @@ I'm confused - where does the NO record fit in the overall scheme of
 things?
 What is the relation of this to the NSEC record and the NXT record? What                       
 was the semantics of the NO record?  
+
+MM: We kunnen wel iets zeggen over dat de EXIST rr empty non-terminals                             
+tot non-empty non-terminals maakt, of dat het inefficient was (je kon                              
+ook de NSEC2 van de ent gebruiken)
 -->
 Long before NSEC was defied, the NO record was introduced. 
 It was the first to use the idea of hashed owner names. 
