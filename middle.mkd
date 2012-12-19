@@ -400,7 +400,7 @@ To summerize:
     a long time;
 * The NSEC2 record made it clear that wildcards were not completely understood;
 * The DNSNR record used a new flag field in the RDATA to signal opt-out;
-* And the DNNR record said that when using a hash algorithm, 
+* And the DNSNR record said that when using a hash algorithm, 
    the owner name *and* the next owner name must be hashed.
 
 ## NSEC3 ##
