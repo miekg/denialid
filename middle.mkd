@@ -345,6 +345,12 @@ But before we delve into NSEC3, let us first take a look at its predecessors: NO
 and, DNSNR.
 
 ## NO, NSEC2 and DNSNR ##
+<!-- vertel hier dat het NO record lang van tevoren werd bedacht
+I'm confused - where does the NO record fit in the overall scheme of                  
+things?
+What is the relation of this to the NSEC record and the NXT record? What                       
+was the semantics of the NO record?  
+-->
 The NO record was the first to introduce the idea of hashed owner names. 
 It also fixed the type bitmap issue of the NXT record.
 At that time (around 2000) zone walking was not considered important enough
