@@ -362,8 +362,7 @@ NXT remained.
 
 When the new DNSSEC specification was written, NSEC saw the light, and inherited
 the two issues from NXT. But still people were not convinced that zone walking
-was a problem that should be solved at this time. Other issues, like the introduction
-of the DS record ([](#RFC3658) and making DNSSEC work were more important (TODO(mg): ohja?).
+was a problem that should be solved at this time. 
 
 But the zone walking problem did not went away and several years after that NSEC2 was 
 introduced as a way to solve the two issues
