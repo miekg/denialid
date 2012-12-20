@@ -351,6 +351,8 @@ tot non-empty non-terminals maakt, of dat het inefficient was (je kon
 ook de NSEC2 van de ent gebruiken)
 -->
 Long before NSEC was defied, the NO record was introduced. 
+It was the first record to use the idea of hashed owner names, to fix the issue of zone walking
+that was present with the NXT record.
 It was the first to use the idea of hashed owner names. 
 It also fixed the type bitmap issue of the NXT record, but not in a graceful way.
 At that time (around 2000) zone walking was not considered important enough
