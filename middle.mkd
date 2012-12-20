@@ -176,20 +176,6 @@ but never made it to RFC. Later on, NXT was superseded by the
 NSEC (next secure) record. From there it went through NSEC2/DNSNR to finally reach
 NSEC3 (next secure, version 3) in RFC 5155.
 
-<!-- JA: A small structural suggestion: it might be good to gather the                                                        
-descriptions of query handling with zones using NSEC and NSEC3 into a                                                 
-single section entitled "Production Mechanisms" or some such, and                                                     
-relegate the NXT, NSEC2, NO, etc discussion into a separate section                                                   
-called something like "Experimental and Deprecated Mechanisms". It would                                              
-be a shame if a neophyte reader gained the impression that there were                                                 
-other options than NSEC and NSEC3 today. -->
-
-# Experimental and Deprecated Mechanisms
-
-[MM: Todo, reordering of the text]
-
-# Production Mechanisms
-
 ## NXT
 The first attempt to specify authenticated denial of existence was NXT 
 (RFC 2535 [](#RFC2535)).  Section 5.1 of that RFC introduces the record:
@@ -341,7 +327,7 @@ These two issues eventually lead to NSEC3 which:
 But before we delve into NSEC3, let us first take a look at its predecessors: NO, NSEC2
 and, DNSNR.
 
-## NO, NSEC2 and DNSNR ##
+# Experimental and Deprecated Mechanisms: NO, NSEC2 and DNSNR
 Long before NSEC was defied, the NO record was introduced. 
 It was the first record to use the idea of hashed owner names, to fix the issue of zone walking
 that was present with the NXT record.
@@ -378,7 +364,7 @@ The introduction of this record led to all kind of questions on what
 wildcards actually means (especially in the context of DNSSEC) and indirectly
 led to "The Role of Wildcards in the Domain Name System" ([](#RFC4592)).
 
-[MM: Is dat echt waar of speculatie?]
+[MM: Is dat echt waar of speculatie?, MG: speculatie: ik was er niet bij]
 
 NSEC2 solved the zone walking issue by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
@@ -405,7 +391,7 @@ To summarize:
 
 [MM: Summary niet echt nodig vind ik]
 
-## NSEC3 ##
+# NSEC3
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
 both opt-out and the hashing of names. NSEC3 solves any issues people might
 have with NSEC, but it introduces some additional complexity.
