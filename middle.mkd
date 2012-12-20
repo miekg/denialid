@@ -474,6 +474,8 @@ creates two names:
 
 An empty non-terminal will get an NSEC3 record, but not an NSEC record.
 
+[MM: Todo: beetje tekst dat we later in het document uitleggen hoe de validator dit interpreteert]
+
 ## Opt-Out ##
 
 [MM: Some text on opt-out.]
