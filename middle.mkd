@@ -360,12 +360,11 @@ to warrant the new record. People were also worried that DNSSEC deployment would
 developing an alternate means of denial of existence. Thus the effort was shelved and
 NXT remained. 
 
-When the new DNSSEC specification was written, NSEC saw the light, and inherited
-the two issues from NXT. But still people were not convinced that zone walking
-was a problem that should be solved at this time. 
+People were still not convinced that zone walking was a problem that
+should be solved at this time, and when the new DNSSEC specification was written,
+NSEC saw the light and inherited the two issues from NXT. 
 
-But the zone walking problem did not went away and several years after that NSEC2 was 
-introduced as a way to solve the two issues
+Several years after, NSEC2 was introduced as a way to solve the two issues
 of NSEC. The NSEC2 draft contains the following paragraph:
 
 > "This document proposes an alternate scheme which hides owner names
@@ -374,7 +373,7 @@ of NSEC. The NSEC2 draft contains the following paragraph:
 
 When an authenticated denial of existence scheme starts to talk
 about EXIST records, it is worth paying extra attention. The EXIST record
-is defined as a record without RDATA that would be used to signal the
+was defined as a record without RDATA that would be used to signal the
 presence of a domain name. From the draft:
 
 > "In order to prove the nonexistence of a record that might be covered
