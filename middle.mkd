@@ -3,22 +3,20 @@ DNSSEC can be somewhat of a complicated matter, and there are certain areas
 of the specification that are more difficult to comprehend than others.
 One such area is "authenticated denial of existence".
 
-Normally, when dealing with cryptography, there is always something
-to sign. In the case of DNSSEC resource record sets ([](#RFC2181) Section 5) 
-are signed. When dealing with a denial of existence responses there is no
-resource record set to sign, because it is absent. To further complicate
-this matter there is the desire to pre-generate these responses - i.e. the
-signed "this resource record set is not here" has to be pre-computed and be
-applicable for effectively all queries for non-existent names in the signed
-zone. Also see [](#secure-denial-of-existence).
+Denial of existence is a mechanism that informs a resolver
+that a certain domain name does not exist. It is also used
+to signal that a domain name exists, but does not have the specific
+RR type you were asking for.
 
-Authenticated denial of existence allows a DNSSEC enabled resolver to
-validate that a certain domain name does not exist.
-It is also used to signal that a domain
-name exists, but does not have the specific RR type you were asking for.
+The first is referred to as an NXDOMAIN [RFC2308] (non-existent
+domain) and the latter a NODATA [RFC2308] response.  Both are also
+known as negative responses.
 
-The first is referred to as an NXDOMAIN [](#RFC2308) (non-existent domain) and the 
-latter a NODATA [](#RFC2308) response. Both are also known as negative responses.
+Authenticated denial of existence uses cryptography to sign the
+negative response. However, if there is no answer, what is it that
+needs to be signed? To further complicate this matter there is the
+desire to pre-generate negative responses that are applicable for
+all queries for non-existent names in the signed zone.
 
 In this document, we will explain how authenticated denial
 of existence works.
