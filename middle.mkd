@@ -352,7 +352,7 @@ ook de NSEC2 van de ent gebruiken)
 -->
 Long before NSEC was defied, the NO record was introduced. 
 It was the first to use the idea of hashed owner names. 
-It also fixed the type bitmap issue of the NXT record, but not in efficient way.
+It also fixed the type bitmap issue of the NXT record, but not in a graceful way.
 At that time (around 2000) zone walking was not considered important enough
 to warrant the new record. People were also worried that DNSSEC deployment would be hindered by
 developing an alternate means of denial of existence. Thus the effort was shelved and
