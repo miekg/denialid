@@ -392,6 +392,8 @@ foil zone walking and it also introduced the concept of opting out (called
 This proposal didn't make it either, but it provided valuable insights into the
 problem. 
 
+[MM: Todo: provide more details on DNSNR insights]
+
 To summarize:
 
 * The NO record introduced hashing, but this idea lingered in the background for
