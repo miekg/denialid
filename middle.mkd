@@ -32,7 +32,7 @@ as these complicate matters, especially combined with CNAME records.
 Note: In this document, domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
-of DNSSEC. NSEC3 opt-out and secure delegations are out of scope for this document.
+of DNSSEC. 
 
 The following RFCs are not required reading, but they help in
 understanding the problem space.
@@ -334,10 +334,7 @@ These two issues eventually lead to NSEC3 which:
 * Adds a way to garble the next owner name, thus thwarting zone-walking;
 * Makes it possible to skip names for the next owner name. This feature
   is called opt-out. It means not all names in your zone get an NSEC3 plus
-  ditto signature, making it possible to "grow into" your DNSSEC deployment. Describing
-  opt-out is out of scope for this document. For those interested,
-  opt-out is explained in RFC 4956 [](#RFC4956), which is curiously titled "(DNSSEC) Opt-In".
-  Later this was incorporated into RFC 5155 [](#RFC5155).
+  ditto signature, making it possible to "grow into" your DNSSEC deployment.
 
 But before we delve into NSEC3, let us first take a look at its predecessors: NO, NSEC2
 and, DNSNR.
@@ -479,6 +476,10 @@ creates two names:
 1. `1.h.example.org` that has the type: TXT;
 2. `h.example.org` which has no types. This is the empty non-terminal. An empty
    non-terminal will get an NSEC3 records, but not an NSEC record.
+
+## Opt-Out ##
+
+[MM: Some text on opt-out.]
 
 ## Loading an NSEC3 Zone
 Whenever an authoritative server receives a query for a non-existing record,
