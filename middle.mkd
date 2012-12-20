@@ -186,6 +186,8 @@ other options than NSEC and NSEC3 today. -->
 
 # Experimental and Deprecated Mechanisms
 
+[MM: Todo, reordering of the text]
+
 # Production Mechanisms
 
 ## NXT
