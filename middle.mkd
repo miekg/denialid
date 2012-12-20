@@ -3,22 +3,20 @@ DNSSEC can be somewhat of a complicated matter, and there are certain areas
 of the specification that are more difficult to comprehend than others.
 One such area is "authenticated denial of existence".
 
-Normally, when dealing with cryptography, there is always something
-to sign. In the case of DNSSEC resource record sets ([](#RFC2181) Section 5) 
-are signed. When dealing with a denial of existence responses there is no
-resource record set to sign, because it is absent. To further complicate
-this matter there is the desire to pre-generate these responses - i.e. the
-signed "this resource record set is not here" has to be pre-computed and be
-applicable for effectively all queries for non-existent names in the signed
-zone. Also see [](#secure-denial-of-existence).
+Denial of existence is a mechanism that informs a resolver
+that a certain domain name does not exist. It is also used
+to signal that a domain name exists, but does not have the specific
+RR type you were asking for.
 
-Authenticated denial of existence allows a DNSSEC enabled resolver to
-validate that a certain domain name does not exist.
-It is also used to signal that a domain
-name exists, but does not have the specific RR type you were asking for.
+The first is referred to as an NXDOMAIN [RFC2308] (non-existent
+domain) and the latter a NODATA [RFC2308] response.  Both are also
+known as negative responses.
 
-The first is referred to as an NXDOMAIN [](#RFC2308) (non-existent domain) and the 
-latter a NODATA [](#RFC2308) response. Both are also known as negative responses.
+Authenticated denial of existence uses cryptography to sign the
+negative response. However, if there is no answer, what is it that
+needs to be signed? To further complicate this matter there is the
+desire to pre-generate negative responses that are applicable for
+all queries for non-existent names in the signed zone.
 
 In this document, we will explain how authenticated denial
 of existence works.
@@ -34,7 +32,7 @@ as these complicate matters, especially combined with CNAME records.
 Note: In this document, domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
-of DNSSEC. NSEC3 opt-out and secure delegations are out of scope for this document.
+of DNSSEC. 
 
 The following RFCs are not required reading, but they help in
 understanding the problem space.
@@ -188,6 +186,8 @@ other options than NSEC and NSEC3 today. -->
 
 # Experimental and Deprecated Mechanisms
 
+[MM: Todo, reordering of the text]
+
 # Production Mechanisms
 
 ## NXT
@@ -263,9 +263,8 @@ This signed zone is loaded into the name server. It looks like this:
     NS records are left out and the SOA, DNSKEY and RRSIG records are shortened.
 
 If a DNSSEC aware resolver asks for `b.example.org`, it gets
-back a `status: NXDOMAIN` packet, which by itself is meaningless
-as the packet header can be forged (only the resource record sets 
-are signed in a packet, the header is not).
+back a `status: NXDOMAIN` packet, which by itself is meaningless (remember
+that the DNS packet header is not signed and thus can be forged).
 To be able to securely detect that `b` does not exist,
 there must also be a signed NSEC record which covers the name space
 where `b` lives. The record:
@@ -327,7 +326,8 @@ thus defeating attempts to administratively block zone transfers ([](#RFC2065) S
 
 The second issue is that when a large, delegation-centric ([](#RFC5155), Section 1.1),
 zone deploys DNSSEC, every name in the zone gets an NSEC plus
-RRSIG. This leads to a huge increase in the zone
+RRSIG. It is considered quite costly to secure a delegation to an unsigned zone, given
+the perceived security benefit. Also, this leads to a huge increase in the zone
 size (when signed). This would in turn mean that operators of such zones
 who are deploying DNSSEC, face up front costs. This could hinder DNSSEC adoption.
 
@@ -336,40 +336,27 @@ These two issues eventually lead to NSEC3 which:
 * Adds a way to garble the next owner name, thus thwarting zone-walking;
 * Makes it possible to skip names for the next owner name. This feature
   is called opt-out. It means not all names in your zone get an NSEC3 plus
-  ditto signature, making it possible to "grow into" your DNSSEC deployment. Describing
-  opt-out is out of scope for this document. For those interested,
-  opt-out is explained in RFC 4956 [](#RFC4956), which is curiously titled "(DNSSEC) Opt-In".
-  Later this was incorporated into RFC 5155 [](#RFC5155).
+  ditto signature, making it possible to "grow into" your DNSSEC deployment.
 
 But before we delve into NSEC3, let us first take a look at its predecessors: NO, NSEC2
 and, DNSNR.
 
 ## NO, NSEC2 and DNSNR ##
-<!-- vertel hier dat het NO record lang van tevoren werd bedacht
-I'm confused - where does the NO record fit in the overall scheme of                  
-things?
-What is the relation of this to the NSEC record and the NXT record? What                       
-was the semantics of the NO record?  
-
-MM: We kunnen wel iets zeggen over dat de EXIST rr empty non-terminals                             
-tot non-empty non-terminals maakt, of dat het inefficient was (je kon                              
-ook de NSEC2 van de ent gebruiken)
--->
 Long before NSEC was defied, the NO record was introduced. 
+It was the first record to use the idea of hashed owner names, to fix the issue of zone walking
+that was present with the NXT record.
 It was the first to use the idea of hashed owner names. 
-It also fixed the type bitmap issue of the NXT record, but not in efficient way.
+It also fixed the type bitmap issue of the NXT record, but not in a graceful way.
 At that time (around 2000) zone walking was not considered important enough
 to warrant the new record. People were also worried that DNSSEC deployment would be hindered by
 developing an alternate means of denial of existence. Thus the effort was shelved and
 NXT remained. 
 
-When the new DNSSEC specification was written, NSEC saw the light, and inherited
-the two issues from NXT. But still people were not convinced that zone walking
-was a problem that should be solved at this time. Other issues, like the introduction
-of the DS record ([](#RFC3658) and making DNSSEC work were more important (TODO(mg): ohja?).
+People were still not convinced that zone walking was a problem that
+should be solved at this time, and when the new DNSSEC specification was written,
+NSEC saw the light and inherited the two issues from NXT. 
 
-But the zone walking problem did not went away and several years after that NSEC2 was 
-introduced as a way to solve the two issues
+Several years after, NSEC2 was introduced as a way to solve the two issues
 of NSEC. The NSEC2 draft contains the following paragraph:
 
 > "This document proposes an alternate scheme which hides owner names
@@ -378,7 +365,7 @@ of NSEC. The NSEC2 draft contains the following paragraph:
 
 When an authenticated denial of existence scheme starts to talk
 about EXIST records, it is worth paying extra attention. The EXIST record
-is defined as a record without RDATA that would be used to signal the
+was defined as a record without RDATA that would be used to signal the
 presence of a domain name. From the draft:
 
 > "In order to prove the nonexistence of a record that might be covered
@@ -390,11 +377,11 @@ presence of a domain name. From the draft:
 The introduction of this record led to all kind of questions on what
 wildcards actually means (especially in the context of DNSSEC) and indirectly
 led to "The Role of Wildcards in the Domain Name System" ([](#RFC4592)).
-(TODO(mg): misschien nog meer text?)
 
-NSEC2 solved the zone walking issue, by hashing (with SHA1 and a salt) the
+[MM: Is dat echt waar of speculatie?]
+
+NSEC2 solved the zone walking issue by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
-
 But it did not have opt-out. Although promising, the proposal
 did not make it because of issues with wildcards and the odd EXIST
 resource record.
@@ -405,7 +392,9 @@ foil zone walking and it also introduced the concept of opting out (called
 This proposal didn't make it either, but it provided valuable insights into the
 problem. 
 
-To summerize:
+[MM: Todo: provide more details on DNSNR insights]
+
+To summarize:
 
 * The NO record introduced hashing, but this idea lingered in the background for
     a long time;
@@ -413,6 +402,8 @@ To summerize:
 * The DNSNR record used a new flag field in the RDATA to signal opt-out;
 * And the DNSNR record said that when using a hash algorithm, 
    the owner name *and* the next owner name must be hashed.
+
+[MM: Summary niet echt nodig vind ik]
 
 ## NSEC3 ##
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
@@ -479,8 +470,15 @@ because they have one or more subdomains that do ([](#RFC5155), Section 1.3). Th
 creates two names:
 
 1. `1.h.example.org` that has the type: TXT;
-2. `h.example.org` which has no types. This is the empty non-terminal. An empty
-   non-terminal will get an NSEC3 records, but not an NSEC record.
+2. `h.example.org` which has no types. This is the empty non-terminal.
+
+An empty non-terminal will get an NSEC3 record, but not an NSEC record.
+
+[MM: Todo: beetje tekst dat we later in het document uitleggen hoe de validator dit interpreteert]
+
+## Opt-Out ##
+
+[MM: Some text on opt-out.]
 
 ## Loading an NSEC3 Zone
 Whenever an authoritative server receives a query for a non-existing record,
@@ -573,7 +571,7 @@ The tweaking simply consists of adjusting the ANSWER section to:
     a.example.org.      RRSIG(TXT) ( ... )
     Figure: A forged response without the expanded wildcard.
 
-Note the subtle differences from [](#fig:a-response). In this response we see a
+Note the subtle difference from [](#fig:a-response) in the owner name. In this response we see a
 `a.example.org TXT` record, for which a record with different RDATA (See [](#fig:the-exampl)) exist in the zone. 
 
 Which would be a perfectly valid answer if we would not require the 
@@ -699,7 +697,7 @@ resulting in the following unsigned zone.
     example.org.        SOA ( ... )
     1.h.example.org.    TXT "1.h record"
     3.3.example.org.    TXT "3.3 record"
-    Figure: The added TXT records in example.org. These records create two non-terminals:
+    Figure: The added TXT records in example.org. These records create two empty non-terminals:
     `h.example.org` and `3.example.org`.
 
 The resolver asks the following: `x.2.example.org TXT`.
