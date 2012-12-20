@@ -376,6 +376,8 @@ The introduction of this record led to all kind of questions on what
 wildcards actually means (especially in the context of DNSSEC) and indirectly
 led to "The Role of Wildcards in the Domain Name System" ([](#RFC4592)).
 
+[MM: Is dat echt waar of speculatie?]
+
 NSEC2 solved the zone walking issue, by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
 
