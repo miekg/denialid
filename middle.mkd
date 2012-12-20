@@ -261,9 +261,8 @@ This signed zone is loaded into the name server. It looks like this:
     NS records are left out and the SOA, DNSKEY and RRSIG records are shortened.
 
 If a DNSSEC aware resolver asks for `b.example.org`, it gets
-back a `status: NXDOMAIN` packet, which by itself is meaningless
-as the packet header can be forged (only the resource record sets 
-are signed in a packet, the header is not).
+back a `status: NXDOMAIN` packet, which by itself is meaningless (remember
+that the DNS packet header is not signed and thus can be forged).
 To be able to securely detect that `b` does not exist,
 there must also be a signed NSEC record which covers the name space
 where `b` lives. The record:
