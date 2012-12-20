@@ -463,6 +463,8 @@ An empty non-terminal will get an NSEC3 record, but not an NSEC record.
 
 ## Opt-Out
 
+
+
 [MM: Some text on Opt-Out.]
 
 ## Loading an NSEC3 Zone
