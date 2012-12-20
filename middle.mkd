@@ -312,8 +312,7 @@ thus defeating attempts to administratively block zone transfers ([](#RFC2065) S
 
 The second issue is that when a large, delegation-centric ([](#RFC5155), Section 1.1),
 zone deploys DNSSEC, every name in the zone gets an NSEC plus
-RRSIG. It is considered quite costly to secure a delegation to an unsigned zone, given
-the perceived security benefit. Also, this leads to a huge increase in the zone
+RRSIG. So this leads to a huge increase in the zone
 size (when signed). This would in turn mean that operators of such zones
 who are deploying DNSSEC, face up front costs. This could hinder DNSSEC adoption.
 
@@ -321,7 +320,7 @@ These two issues eventually lead to NSEC3 which:
 
 * Adds a way to garble the next owner name, thus thwarting zone-walking;
 * Makes it possible to skip names for the next owner name. This feature
-  is called opt-out. It means not all names in your zone get an NSEC3 plus
+  is called opt-out (See [](#Opt-Out)). It means not all names in your zone get an NSEC3 plus
   ditto signature, making it possible to "grow into" your DNSSEC deployment.
 
 But before we delve into NSEC3, let us first take a look at its predecessors: NO, NSEC2
