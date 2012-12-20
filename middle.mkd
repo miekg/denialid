@@ -320,7 +320,7 @@ These two issues eventually lead to NSEC3 which:
 
 * Adds a way to garble the next owner name, thus thwarting zone-walking;
 * Makes it possible to skip names for the next owner name. This feature
-  is called opt-out (See [](#Opt-Out)). It means not all names in your zone get an NSEC3 plus
+  is called Opt-Out (See [](#opt-out)). It means not all names in your zone get an NSEC3 plus
   ditto signature, making it possible to "grow into" your DNSSEC deployment.
 
 But before we delve into NSEC3, let us first take a look at its predecessors: NO, NSEC2
@@ -367,7 +367,7 @@ led to "The Role of Wildcards in the Domain Name System" ([](#RFC4592)).
 
 NSEC2 solved the zone walking issue by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
-But it did not have opt-out. Although promising, the proposal
+But it did not have Opt-Out. Although promising, the proposal
 did not make it because of issues with wildcards and the odd EXIST
 resource record.
 
@@ -384,7 +384,7 @@ To summarize:
 * The NO record introduced hashing, but this idea lingered in the background for
     a long time;
 * The NSEC2 record made it clear that wildcards were not completely understood;
-* The DNSNR record used a new flag field in the RDATA to signal opt-out;
+* The DNSNR record used a new flag field in the RDATA to signal Opt-Out;
 * And the DNSNR record said that when using a hash algorithm, 
    the owner name *and* the next owner name must be hashed.
 
@@ -392,7 +392,7 @@ To summarize:
 
 # NSEC3
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
-both opt-out and the hashing of names. NSEC3 solves any issues people might
+both Opt-Out and the hashing of names. NSEC3 solves any issues people might
 have with NSEC, but it introduces some additional complexity.
 
 NSEC3 did not supersede NSEC, they are both defined for
@@ -461,9 +461,9 @@ An empty non-terminal will get an NSEC3 record, but not an NSEC record.
 
 [MM: Todo: beetje tekst dat we later in het document uitleggen hoe de validator dit interpreteert]
 
-## Opt-Out ##
+## Opt-Out
 
-[MM: Some text on opt-out.]
+[MM: Some text on Opt-Out.]
 
 ## Loading an NSEC3 Zone
 Whenever an authoritative server receives a query for a non-existing record,
