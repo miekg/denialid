@@ -40,7 +40,7 @@ Table: Hashed owner names for "example.org" in hash order.
 
 1. Lowercase NSEC3 hashed ownernames and add reference to Base32;
 1. Process the comments from Joe Abley and Geoff Huston.
-    * Added section about opt-out;
+    * Added section about Opt-Out;
     * Move experimental records in their own section;
     * Added DNAME reference with respect to wildcards;
     * Clarify the difference between the wildcard answers;
