@@ -378,9 +378,8 @@ led to "The Role of Wildcards in the Domain Name System" ([](#RFC4592)).
 
 [MM: Is dat echt waar of speculatie?]
 
-NSEC2 solved the zone walking issue, by hashing (with SHA1 and a salt) the
+NSEC2 solved the zone walking issue by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
-
 But it did not have opt-out. Although promising, the proposal
 did not make it because of issues with wildcards and the odd EXIST
 resource record.
@@ -391,7 +390,7 @@ foil zone walking and it also introduced the concept of opting out (called
 This proposal didn't make it either, but it provided valuable insights into the
 problem. 
 
-To summerize:
+To summarize:
 
 * The NO record introduced hashing, but this idea lingered in the background for
     a long time;
@@ -399,6 +398,8 @@ To summerize:
 * The DNSNR record used a new flag field in the RDATA to signal opt-out;
 * And the DNSNR record said that when using a hash algorithm, 
    the owner name *and* the next owner name must be hashed.
+
+[MM: Summary niet echt nodig vind ik]
 
 ## NSEC3 ##
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
