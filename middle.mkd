@@ -571,7 +571,7 @@ The tweaking simply consists of adjusting the ANSWER section to:
     a.example.org.      RRSIG(TXT) ( ... )
     Figure: A forged response without the expanded wildcard.
 
-Note the subtle differences from [](#fig:a-response). In this response we see a
+Note the subtle difference from [](#fig:a-response) in the owner name. In this response we see a
 `a.example.org TXT` record, for which a record with different RDATA (See [](#fig:the-exampl)) exist in the zone. 
 
 Which would be a perfectly valid answer if we would not require the 
