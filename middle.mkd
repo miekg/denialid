@@ -879,4 +879,5 @@ Marco Davids, Esther Makaay, Antoin Verschuren, Lukas Wunner,
 Joe Abley and Geoff Huston.
 Also valuable was the source code of Unbound
 (`validator/val_nsec3.c`).
-Extensive feedback was received from Karst Koymans.
+
+Extensive feedback for early version was received from Karst Koymans.
