@@ -330,7 +330,7 @@ and, DNSNR.
 # Experimental and Deprecated Mechanisms: NO, NSEC2 and DNSNR
 Long before NSEC was defined, the NO record was introduced. 
 It was the first record to use the idea of hashed owner names, to fix the issue of zone walking
-that was present with the NSEC record.
+that was present with the NXT record.
 It also fixed the type bitmap issue of the NXT record, but not in a space efficient way.
 At that time (around 2000) zone walking was not considered important enough
 to warrant the new record. People were also worried that DNSSEC deployment would be hindered by
