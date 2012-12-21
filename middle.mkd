@@ -35,7 +35,6 @@ Note: In this document, domain names in zone file examples will have a trailing 
 running text they will not.
 This text is written for people who have a fair understanding
 of DNSSEC. 
-
 The following RFCs are not required reading, but they help in
 understanding the problem space.
 
@@ -110,7 +109,7 @@ resolver can use to cache the negative response.
 ## NODATA Responses
 It is important to realize that NXDOMAIN is not the only type
 of does-not-exist. A name may exist, but the type you are asking
-for may not. This occurrence of non-existence is called a NODATA [](#RFC2308) response.
+for may not. This occurrence of non-existence is called a NODATA response.
 Let us ask our name server for `a.example.org AAAA`, and look at the
 answer:
 
