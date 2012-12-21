@@ -8,13 +8,14 @@ that a certain domain name does not exist. It is also used
 to signal that a domain name exists, but does not have the specific
 RR type you were asking for.
 
-The first is referred to as an NXDOMAIN [RFC2308] (non-existent
-domain) and the latter a NODATA [RFC2308] response.  Both are also
+The first is referred to as an NXDOMAIN (non-existent domain) 
+([](#RFC2308) Section 2.1)
+and the latter a NODATA ([](#RFC2308) Section 2.2) response.  Both are also
 known as negative responses.
 
 Authenticated denial of existence uses cryptography to sign the
 negative response. However, if there is no answer, what is it that
-needs to be signed? To further complicate this matter there is the
+needs to be signed? To further complicate this matter, there is the
 desire to pre-generate negative responses that are applicable for
 all queries for non-existent names in the signed zone. See
 [](#secure-denial-of-existence) for the details.
@@ -23,9 +24,9 @@ In this document, we will explain how authenticated denial
 of existence works.
 We begin by explaining the current technique in the DNS
 and work our way up to DNSSEC. We explain the first steps
-taken in DNSSEC and describe how NXT, NSEC and NSEC3 work. The NO, NSEC2 and
+taken in DNSSEC and describe how NSEC and NSEC3 work. The NXT, NO, NSEC2 and
 DNSNR records also briefly make their appearance, as they have paved the
-way for NSEC3.
+way for NSEC and NSEC3.
 
 To complete the picture, we also need to explain DNS wildcards
 as these complicate matters, especially combined with CNAME records.
