@@ -328,7 +328,7 @@ But before we delve into NSEC3, let us first take a look at its predecessors: NO
 and, DNSNR.
 
 # Experimental and Deprecated Mechanisms: NO, NSEC2 and DNSNR
-Long before NSEC was defied, the NO record was introduced. 
+Long before NSEC was defined, the NO record was introduced. 
 It was the first record to use the idea of hashed owner names, to fix the issue of zone walking
 that was present with the NXT record.
 It was the first to use the idea of hashed owner names. 
