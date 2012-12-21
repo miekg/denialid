@@ -16,7 +16,8 @@ Authenticated denial of existence uses cryptography to sign the
 negative response. However, if there is no answer, what is it that
 needs to be signed? To further complicate this matter there is the
 desire to pre-generate negative responses that are applicable for
-all queries for non-existent names in the signed zone.
+all queries for non-existent names in the signed zone. See
+[](#secure-denial-of-existence) for the details.
 
 In this document, we will explain how authenticated denial
 of existence works.
