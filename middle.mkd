@@ -256,7 +256,7 @@ To be able to securely detect that `b` does not exist,
 there must also be a signed NSEC record which covers the name space
 where `b` lives. The record:
 
-    a.example.org.      NSEC d.example.org.
+    a.example.org.      NSEC d.example.org. A TXT NSEC RRSIG
 
 does precisely that: `b`
 should come after `a`, but the next owner name is `d.example.org`, so
