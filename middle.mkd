@@ -363,7 +363,8 @@ The introduction of this record led to all kind of questions on what
 wildcards actually means (especially in the context of DNSSEC) and indirectly
 led to "The Role of Wildcards in the Domain Name System" ([](#RFC4592)).
 
-[MM: Is dat echt waar of speculatie?, MG: speculatie: ik was er niet bij]
+[MM: Is dat echt waar of speculatie?, MG: speculatie: ik was er niet bij,
+ MM: Gevaarlijk, ik zou dit checken of weghalen]
 
 NSEC2 solved the zone walking issue by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
@@ -377,7 +378,7 @@ foil zone walking and it also introduced the concept of opting out (called
 This proposal didn't make it either, but it provided valuable insights into the
 problem. 
 
-[MM: Todo: provide more details on DNSNR insights]
+[MG: Todo: provide more details on DNSNR insights]
 
 To summarize:
 
@@ -388,7 +389,7 @@ To summarize:
 * And the DNSNR record said that when using a hash algorithm, 
    the owner name *and* the next owner name must be hashed.
 
-[MM: Summary niet echt nodig vind ik]
+[MG: Summary niet echt nodig vind ik]
 
 # NSEC3
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
@@ -458,14 +459,37 @@ creates two names:
 2. `h.example.org` which has no types. This is the empty non-terminal.
 
 An empty non-terminal will get an NSEC3 record, but not an NSEC record.
-
-[MM: Todo: beetje tekst dat we later in het document uitleggen hoe de validator dit interpreteert]
+In [](#the-closest-encloser-nsec3-record) is shown how the resolver uses
+these NSEC3 records to validate the denial of existence proofs.
 
 ## Opt-Out
 
+Hashing mitigates one problem of NSEC, zone walking. The other problem, the high
+costs of securing a delegation to an insecure zone, is tackled with Opt-Out.
+When using Opt-Out, names that are an insecure delegation (and empty non-terminals
+that are only derived from insecure delegations) don't require an NSEC3 record. 
+For each insecure delegation, the zone size can be decreased with at least two records:
+one NSEC3 record and one corresponding RRSIG record. If the insecure delegation would
+introduce empty non-terminals, even more records can be omitted from the zone. 
 
+Opt-Out NSEC3 records are not able to prove or deny the existence of the insecure
+delegations. In other words, those delegation do not benefit from the cryptographic
+security that DNSSEC provides. 
 
-[MM: Some text on Opt-Out.]
+A recently discovered corner case [MM: reference?] shows that not only those delegations 
+remain insecure, also the empty non-terminal space that is derived from those delegations
+are insecure. Because the names in this empty non-terminal space do exist according
+to the definition in [](#RFC4592), the server should response to queries for these names
+with a NODATA response. However, the validator requires an NSEC3 record proving the NODATA
+response ([](#RFC5155), Section 8.5):
+
+    The validator MUST verify that an NSEC3 RR that matches QNAME is
+    present and that both the QTYPE and the CNAME type are not set in its
+    Type Bit Maps field.
+
+A way to resolve this contradiction in the specification is to always provide
+empty non-terminals with an NSEC3 record, even if it is only derived from an insecure
+delegation.
 
 ## Loading an NSEC3 Zone
 Whenever an authoritative server receives a query for a non-existing record,
@@ -779,7 +803,13 @@ records: `15bg9l6359f5ch23e34ddua6n1rihl9h`. This must be the closest
 encloser (unhashed: `example.org`). That's the main purpose of that NSEC3 record:
 tell the resolver what the closest encloser is.
 
-From that knowledge the resolver constructs the next closer, which
+When using Opt-Out, it is possible that the actual closest encloser to the QNAME does
+not have an NSEC3 record. If so, we will have to do with the closest provable encloser,
+which is the closest enclosing authoritative name that does have a NSEC3 record. In the
+worst case, this is the NSEC3 record corresponding to the apex, this name must always
+have an NSEC3 record.
+
+With the closest (provable) encloser, the resolver constructs the next closer, which
 in this case is: `2.example.org`; `2` is the last label chopped, when `example.org` is the closest
 encloser.
 The hash of this name should be
