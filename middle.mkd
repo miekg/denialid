@@ -480,7 +480,7 @@ security that DNSSEC provides.
 A recently discovered corner case [MM: reference?] shows that not only those delegations 
 remain insecure, also the empty non-terminal space that is derived from those delegations
 are insecure. Because the names in this empty non-terminal space do exist according
-to the definition in [](#RFC4592), the server should response to queries for these names
+to the definition in [](#RFC4592), the server should respond to queries for these names
 with a NODATA response. However, the validator requires an NSEC3 record proving the NODATA
 response ([](#RFC5155), Section 8.5):
 
