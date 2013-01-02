@@ -362,7 +362,7 @@ presence of a domain name. From the draft:
 The introduction of this record led to questions on what
 wildcards actually means (especially in the context of DNSSEC). It is 
 probably not a coincidence that 
-"The Role of Wildcards in the Domain Name System" ([](#RFC4592)) was standarized
+"The Role of Wildcards in the Domain Name System" ([](#RFC4592)) was standardized
 before NSEC3.
 
 NSEC2 solved the zone walking issue by hashing (with SHA1 and a salt) the
@@ -550,7 +550,6 @@ The RRSIG of the `z.example.org` TXT record indicates there is a wildcard config
 the signature lists a label count [](#RFC4034), Section 3.1.3., of two (not visible in the answer above),
 but the owner name of the signature has three labels. 
 This mismatch indicates there is a wildcard `*.example.org` configured.
-<!-- Geoff comment: add how a resolver deals with these records - doen we toch verder op.. -->
 
 > An astute reader may notice that it appears as if a `z.example.org` RRSIG(TXT) is created
 > out of thin air. This is not the case. The signature for `z.example.org` does not exist.
