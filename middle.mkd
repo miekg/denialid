@@ -118,7 +118,7 @@ answer:
     ;; AUTHORITY SECTION:
     example.org.        SOA ( ... )
 
-The status is NOERROR shows that the `a.example.org` name exists,
+The status NOERROR shows that the `a.example.org` name exists,
 but the reply does not contain an ANSWER section. This differentiates a
 NODATA response from an NXDOMAIN response, the rest of the packet is
 very similar. The resolver
