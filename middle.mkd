@@ -463,7 +463,6 @@ In [](#the-closest-encloser-nsec3-record) is shown how the resolver uses
 these NSEC3 records to validate the denial of existence proofs.
 
 ## Opt-Out
-
 Hashing mitigates the zone walking issue of NSEC. The other issue, the high
 costs of securing a delegation to an insecure zone, is tackled with Opt-Out.
 When using Opt-Out, names that are an insecure delegation (and empty non-terminals
