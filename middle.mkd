@@ -459,8 +459,8 @@ creates two names:
 2. `h.example.org` which has no types. This is the empty non-terminal.
 
 An empty non-terminal will get an NSEC3 record, but not an NSEC record.
-
-[MM: Todo: beetje tekst dat we later in het document uitleggen hoe de validator dit interpreteert]
+In [](#the-closest-encloser-nsec3-record) is shown how the resolver uses
+these NSEC3 records to validate the denial of existence proofs.
 
 ## Opt-Out
 
