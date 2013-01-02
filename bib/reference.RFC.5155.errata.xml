@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='RFC5155-errata3441'>
+<front>
+<title>Technical Errata against RFC 5155 (not acknowledged)</title>
+
+<author initials='E' surname='Lewis' fullname='Edward Lewis'>
+    <organization />
+</author>
+
+<date month='January' day='1' year='2013' />
+</front>
+<format type='Errata submission' target='http://www.rfc-editor.org/errata_search.php?rfc=5155&amp;eid=3441' />
+</reference>

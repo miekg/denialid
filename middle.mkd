@@ -477,7 +477,7 @@ Opt-Out NSEC3 records are not able to prove or deny the existence of the insecur
 delegations. In other words, those delegation do not benefit from the cryptographic
 security that DNSSEC provides. 
 
-A recently discovered corner case [MM: reference?] shows that not only those delegations 
+A recently discovered corner case ([](#RFC5155-errata3441)) shows that not only those delegations 
 remain insecure, also the empty non-terminal space that is derived from those delegations
 are insecure. Because the names in this empty non-terminal space do exist according
 to the definition in [](#RFC4592), the server should respond to queries for these names
