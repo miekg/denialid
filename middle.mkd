@@ -483,9 +483,9 @@ to the definition in [](#RFC4592), the server should response to queries for the
 with a NODATA response. However, the validator requires an NSEC3 record proving the NODATA
 response ([](#RFC5155), Section 8.5):
 
-    The validator MUST verify that an NSEC3 RR that matches QNAME is
-    present and that both the QTYPE and the CNAME type are not set in its
-    Type Bit Maps field.
+> "The validator MUST verify that an NSEC3 RR that matches QNAME is
+> present and that both the QTYPE and the CNAME type are not set in its
+> Type Bit Maps field."
 
 A way to resolve this contradiction in the specification is to always provide
 empty non-terminals with an NSEC3 record, even if it is only derived from an insecure
