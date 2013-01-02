@@ -378,7 +378,7 @@ foil zone walking and it also introduced the concept of opting out (called
 This proposal didn't make it either, but it provided valuable insights into the
 problem. 
 
-[MM: Todo: provide more details on DNSNR insights]
+[MG: Todo: provide more details on DNSNR insights]
 
 To summarize:
 
@@ -389,7 +389,7 @@ To summarize:
 * And the DNSNR record said that when using a hash algorithm, 
    the owner name *and* the next owner name must be hashed.
 
-[MM: Summary niet echt nodig vind ik]
+[MG: Summary niet echt nodig vind ik]
 
 # NSEC3
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
