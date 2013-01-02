@@ -803,7 +803,13 @@ records: `15bg9l6359f5ch23e34ddua6n1rihl9h`. This must be the closest
 encloser (unhashed: `example.org`). That's the main purpose of that NSEC3 record:
 tell the resolver what the closest encloser is.
 
-From that knowledge the resolver constructs the next closer, which
+When using Opt-Out, it is possible that the actual closest encloser to the QNAME does
+not have an NSEC3 record. If so, we will have to do with the closest provable encloser,
+which is the closest enclosing authoritative name that does have a NSEC3 record. In the
+worst case, this is the NSEC3 record corresponding to the apex, this name must always
+have an NSEC3 record.
+
+With the closest (provable) encloser, the resolver constructs the next closer, which
 in this case is: `2.example.org`; `2` is the last label chopped, when `example.org` is the closest
 encloser.
 The hash of this name should be
