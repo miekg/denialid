@@ -118,7 +118,7 @@ answer:
     ;; AUTHORITY SECTION:
     example.org.        SOA ( ... )
 
-The status is NOERROR shows that the `a.example.org` name exists,
+The status NOERROR shows that the `a.example.org` name exists,
 but the reply does not contain an ANSWER section. This differentiates a
 NODATA response from an NXDOMAIN response, the rest of the packet is
 very similar. The resolver
@@ -367,21 +367,18 @@ before NSEC3.
 
 NSEC2 solved the zone walking issue by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
-But it did not have Opt-Out. Although promising, the proposal
-did not make it because of issues with wildcards and the odd EXIST
-resource record.
+But it did not have Opt-Out. 
 
 The DNSNR record was another attempt that used hashed names to
 foil zone walking and it also introduced the concept of opting out (called
 "Authoritative Only Flag") which limited the use of DNSNR in delegation-centric zones.
-This proposal didn't make it either. To summarize:
+
+All these proposals didn't make it, but did provide valuable insights. To summarize:
 
 * The NO record introduced hashing, but this idea lingered in the background for
-    a long time;
+  a long time;
 * The NSEC2 record made it clear that wildcards were not completely understood;
 * The DNSNR record used a new flag field in the RDATA to signal Opt-Out;
-* And the DNSNR record said that when using a hash algorithm, 
-   the owner name *and* the next owner name must be hashed.
 
 # NSEC3
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
@@ -423,7 +420,7 @@ The "1 0 2 DEAD" section of the NSEC3 states:
 
 * Hash Algorithm = 1 (SHA1, this is the default, no other hash algorithms are currently defined for 
     use in NSEC3); 
-* Opt-out = 0 (disabled);
+* Opt-Out = 0 (disabled);
 * Hash Iterations = 2, this yields three iterations, as a zero value is already one iteration; 
 * Salt = "DEAD". 
 
@@ -460,8 +457,8 @@ costs of securing a delegation to an insecure zone, is tackled with Opt-Out.
 When using Opt-Out, names that are an insecure delegation (and empty non-terminals
 that are only derived from insecure delegations) don't require an NSEC3 record. 
 For each insecure delegation, the zone size can be decreased (compared with a fully
-signed zone without using Opt-Out) with at least two records:
-one NSEC3 record and one corresponding RRSIG record. If the insecure delegation would
+signed zone without using Opt-Out) with at least two records: one NSEC3
+record and one corresponding RRSIG record. If the insecure delegation would
 introduce empty non-terminals, even more records can be omitted from the zone. 
 
 Opt-Out NSEC3 records are not able to prove or deny the existence of the insecure
@@ -500,8 +497,7 @@ the apex of the zone.  Its role is to provide a fixed place
 where an authoritative name server can directly see the NSEC3 parameters used, and
 by putting it in the zone it allows for easy transfer to the secondaries.
 If NSEC3 were designed in the early days of
-DNS (+/- 1984) this information would probably have been put in the SOA record. Like
-the SOA record, the NSEC3PARAM record is useless to a resolver.
+DNS (+/- 1984) this information would probably have been put in the SOA record.
 
 ## Wildcards in the DNS
 So far, we have only talked about denial of existence in negative responses. However,
