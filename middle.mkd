@@ -367,21 +367,20 @@ before NSEC3.
 
 NSEC2 solved the zone walking issue by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
-But it did not have Opt-Out. Although promising, the proposal
-did not make it because of issues with wildcards and the odd EXIST
-resource record.
+But it did not have Opt-Out. 
 
 The DNSNR record was another attempt that used hashed names to
 foil zone walking and it also introduced the concept of opting out (called
 "Authoritative Only Flag") which limited the use of DNSNR in delegation-centric zones.
-This proposal didn't make it either. To summarize:
+
+All these proposals didn't make it, but did provide valuable insights. To summarize:
 
 * The NO record introduced hashing, but this idea lingered in the background for
-    a long time;
+  a long time;
 * The NSEC2 record made it clear that wildcards were not completely understood;
 * The DNSNR record used a new flag field in the RDATA to signal Opt-Out;
 * And the DNSNR record said that when using a hash algorithm, 
-   the owner name *and* the next owner name must be hashed.
+  the owner name and the next owner name must be hashed.
 
 # NSEC3
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
