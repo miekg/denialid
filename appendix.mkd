@@ -44,7 +44,8 @@ Table: Hashed owner names for "example.org" in hash order.
     * Move experimental records in their own section;
     * Added DNAME reference with respect to wildcards;
     * Clarify the difference between the wildcard answers;
-    * A more context about the NO record;
+    * Add more context about the NO record;
     * Elaborate more about the EXIST records and its problems;
     * Added more text about the NSEC3PARAM records;
-    * Apply assorted fixes throughout the document.
+    * Apply assorted fixes throughout the document;
+    * Moved table with hashed owner names to appendix.
