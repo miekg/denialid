@@ -420,7 +420,7 @@ The "1 0 2 DEAD" section of the NSEC3 states:
 
 * Hash Algorithm = 1 (SHA1, this is the default, no other hash algorithms are currently defined for 
     use in NSEC3); 
-* Opt-out = 0 (disabled);
+* Opt-Out = 0 (disabled);
 * Hash Iterations = 2, this yields three iterations, as a zero value is already one iteration; 
 * Salt = "DEAD". 
 
