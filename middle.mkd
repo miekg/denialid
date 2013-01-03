@@ -379,8 +379,6 @@ All these proposals didn't make it, but did provide valuable insights. To summar
   a long time;
 * The NSEC2 record made it clear that wildcards were not completely understood;
 * The DNSNR record used a new flag field in the RDATA to signal Opt-Out;
-* And the DNSNR record said that when using a hash algorithm, 
-  the owner name and the next owner name must be hashed.
 
 # NSEC3
 From the experience gained with NSEC2 and DNSNR, NSEC3 was forged. It incorporates
