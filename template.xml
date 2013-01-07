@@ -7,7 +7,6 @@
 <!-- normative -->
 <!ENTITY RFC1034    PUBLIC '' 'bib/reference.RFC.1034'>
 <!ENTITY RFC2065    PUBLIC '' 'bib/reference.RFC.2065'>
-<!ENTITY RFC2119    PUBLIC '' 'bib/reference.RFC.2119'>
 <!ENTITY RFC2308    PUBLIC '' 'bib/reference.RFC.2308'>
 <!ENTITY RFC4033    PUBLIC '' 'bib/reference.RFC.4033'>
 <!ENTITY RFC4034    PUBLIC '' 'bib/reference.RFC.4034'>
@@ -98,7 +97,6 @@
 <references title="Normative References">
     &RFC1034;
     &RFC2065;
-    &RFC2119;
     &RFC2308;
     &RFC4033;
     &RFC4034;
