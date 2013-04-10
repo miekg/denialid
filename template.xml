@@ -43,19 +43,11 @@
 <title abbrev="Authenticated Denial in DNS">Authenticated Denial of Existence in the DNS</title>
 
         <author initials='R.' surname='Gieben' fullname='R. (Miek) Gieben'>
-            <organization>SIDN Labs</organization>
+            <organization>Google</organization>
             <address>
-                <postal>
-                    <street>Meander 501</street>
-                    <street></street>
-                    <city>Arnhem</city> <region></region>
-                    <code>6825 MD</code>
-                    <country>NL</country>
-                </postal>
-
                 <phone></phone>
-                <email>miek.gieben@sidn.nl</email>
-                <uri>https://sidn.nl/</uri>
+                <email>miek@google.com</email>
+                <uri></uri>
             </address>
         </author>
 
