@@ -68,7 +68,7 @@ in the following zone file:
                         TXT "a record"
     d.example.org.      A 192.0.2.1
                         TXT "d record"
-    Figure: The unsigned "example.org" zone.
+^[fig:the-unsigned::The unsigned "example.org" zone.]
 
 ## NXDOMAIN Responses
 If a resolver asks for the TXT type belonging to `a.example.org` to the
@@ -222,8 +222,7 @@ records, we now have something that can be signed.
                     v .          . |
                     **    (2)     **
       a.example.org ** ---------> ** d.example.org
-      Figure: The NSEC records of "example.org". The arrows represent NSEC records, starting
-      from the apex.
+^[fig:the-nsec-r::The NSEC records of "example.org". The arrows represent NSEC records, starting from the apex.]
 
 This signed zone is loaded into the name server. It looks like this:
 
@@ -245,9 +244,9 @@ This signed zone is loaded into the name server. It looks like this:
                         RRSIG(A) ( ... )
                         RRSIG(TXT) ( ... )
                         RRSIG(NSEC) ( ... )
-    Figure: The signed and sorted "example.org" zone with the added NSEC records (and signatures).
-    For brevity, the class is not shown (defaults to IN), the
-    NS records are left out and the SOA, DNSKEY and RRSIG records are shortened.
+^[fig:the-signed::The signed and sorted "example.org" zone with the added NSEC records (and signatures).
+For brevity, the class is not shown (defaults to IN), the
+NS records are left out and the SOA, DNSKEY and RRSIG records are shortened.]
 
 If a DNSSEC aware resolver asks for `b.example.org`, it gets
 back a `status: NXDOMAIN` packet, which by itself is meaningless (remember
@@ -518,7 +517,8 @@ For completeness, our (unsigned) zone now looks like this:
                         TXT "a record"
     d.example.org.      A 192.0.2.1
                         TXT "d record"
-    Figure: The example.org zone with a wildcard record.
+
+^[fig:the-exampl::The example.org zone with a wildcard record.]
 
 If a resolver asks for `z.example.org TXT`, 
 the name server will respond with an expanded wildcard, instead of an NXDOMAIN:
@@ -540,7 +540,7 @@ sees the answer as-is. How will this answer look with DNSSEC?
     ;; AUTHORITY SECTION:
     d.example.org.      NSEC example.org. A TXT RRSIG NSEC
     d.example.org.      RRSIG(NSEC) ( ... )
-    Figure: A response with an expanded wildcard and with DNSSEC.
+^[fig:a-response::A response with an expanded wildcard and with DNSSEC.]
 
 The RRSIG of the `z.example.org` TXT record indicates there is a wildcard configured. The RDATA of
 the signature lists a label count [](#RFC4034), Section 3.1.3., of two (not visible in the answer above),
@@ -567,7 +567,7 @@ The tweaking simply consists of adjusting the ANSWER section to:
     ;; ANSWER SECTION
     a.example.org.      TXT "wildcard record"
     a.example.org.      RRSIG(TXT) ( ... )
-    Figure: A forged response without the expanded wildcard.
+^[fig:a-forged-r::A forged response without the expanded wildcard.]
 
 Note the subtle difference from [](#fig:a-response) in the owner name. In this response we see a
 `a.example.org TXT` record, for which a record with different RDATA (See [](#fig:the-exampl)) exist in the zone. 
@@ -604,7 +604,7 @@ Lets add some CNAME wildcard records to our zone:
     d.example.org.      A 192.0.2.1
                         TXT "d record"
     w.example.org.      CNAME w.a
-    Figure: A wildcard CNAME chain added to the "example.org" zone.
+^[fig:a-wildcard-::A wildcard CNAME chain added to the "example.org" zone.]
 
 A query for `w.example.org A` will result in the following response:
 
@@ -695,8 +695,7 @@ resulting in the following unsigned zone.
     example.org.        SOA ( ... )
     1.h.example.org.    TXT "1.h record"
     3.3.example.org.    TXT "3.3 record"
-    Figure: The added TXT records in example.org. These records create two empty non-terminals:
-    `h.example.org` and `3.example.org`.
+^[fig:the-added-txt::The added TXT records in example.org. These records create two empty non-terminals: `h.example.org` and `3.example.org`.]
 
 The resolver asks the following: `x.2.example.org TXT`.
 This leads to an NXDOMAIN response from the server, which contains
@@ -735,8 +734,8 @@ the NSEC3 records it got?
                     .  /           . v                .
     1.h.example.org **            **                  -- 
                     ** <--------- ** 3.3.example.org  -- x.2.example.org
-    Figure: x.2.example.org does not exist. The arrows represent the NSEC3 records, the ones
-    numbered (1), (2) and (3) are the NSEC3s returned in our answer.
+
+^[fig:x.2.exampl::x.2.example.org does not exist. The arrows represent the NSEC3 records, the ones numbered (1), (2) and (3) are the NSEC3s returned in our answer.]
 
 The hash of `x.2.example.org` is `ndtu6dste50pr4a1f2qvr1v31g00i2i1`.
 Checking this hash on the first NSEC3 yields that it does not fall
