@@ -49,3 +49,7 @@ Table: Hashed owner names for "example.org" in hash order.
     * Added more text about the NSEC3PARAM records;
     * Apply assorted fixes throughout the document;
     * Moved table with hashed owner names to appendix.
+
+## -03
+
+1. Changed affiliation for R. Gieben
