@@ -17,7 +17,7 @@ Original Name     Hashed Name
 `b`               `iuu8l5lmt76jeltp0bir3tmg4u3uu8e7`
 `x.2`             `ndtu6dste50pr4a1f2qvr1v31g00i2i1`
 
-Table: Hashed owner names for "example.org" in hash order.
+^[tab:hashed-owner::Hashed owner names for "example.org" in hash order.]
 
 # Changelog
 
@@ -49,3 +49,7 @@ Table: Hashed owner names for "example.org" in hash order.
     * Added more text about the NSEC3PARAM records;
     * Apply assorted fixes throughout the document;
     * Moved table with hashed owner names to appendix.
+
+## -03
+
+1. Changed affiliation for R. Gieben
