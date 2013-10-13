@@ -268,7 +268,7 @@ is proven not to exist. We have authenticated denial of existence.
 Note that a man-in-the-middle may still replay this NXDOMAIN response
 when you're querying for, say, `c.example.org`. But it would not do any
 harm since it is provably the proper response to the query. In the future, there
-may be data published for `c.example.org`. Therefore, the RRSIGs RDATA 
+may be data published for `c.example.org`. Therefore, the RRSIG's RDATA 
 include a validity period (not visible in the zone above), so that an attacker
 cannot replay this NXDOMAIN response for `c.example.org` forever.
 
@@ -437,7 +437,7 @@ introduces a flat space of names, as opposed to NSEC.
 
 The domain name used above (`1.h.example.org`) creates an empty non-terminal. 
 Empty non-terminals are domain names that have no RRs associated with them, and exist only
-because they have one or more subdomains that do ([](#RFC5155), Section 1.3). The record:
+because they have one or more sub-domains that do ([](#RFC5155), Section 1.3). The record:
 
         1.h.example.org.    TXT "1.h record"
 
@@ -757,12 +757,12 @@ the closest encloser.
 
 When the resolver has found the closest encloser, the next step is
 to construct the next closer name. This is the closest encloser
-with the last chopped label from query name prepended to it:
+with the last chopped label from query name pre-pended to it:
 "\<last chopped label\>.\<closest encloser\>". The hash of this name should 
 be covered by the interval set in any of the NSEC3 records.
 
 Then the resolver needs to check the presence of a wildcard.
-It creates the wildcard name by prepending the asterisk
+It creates the wildcard name by pre-pending the asterisk
 label to the closest encloser: "*.\<closest encloser\>", and uses the
 hash of that.
 
