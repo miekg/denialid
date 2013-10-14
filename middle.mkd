@@ -708,11 +708,11 @@ with the following NSEC3 records:
      NSEC3 1 0 2 DEAD 1AVVQN74SG75UKFVF25DGCETHGQ638EK SOA RRSIG 
             DNSKEY NSEC3PARAM )
 
-    75b9id679qqov6ldfhd8ocshsssb6jvq.example.org. (
-     NSEC3 1 0 2 DEAD 8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ TXT RRSIG )
-
     1avvqn74sg75ukfvf25dgcethgq638ek.example.org. (
         NSEC3 1 0 2 DEAD 75B9ID679QQOV6LDFHD8OCSHSSSB6JVQ )
+
+    75b9id679qqov6ldfhd8ocshsssb6jvq.example.org. (
+     NSEC3 1 0 2 DEAD 8555T7QEGAU7PJTKSNBCHG4TD2M0JNPJ TXT RRSIG )
 
 If we would follow the NSEC approach, the resolver is only interested in
 one thing.
@@ -728,25 +728,26 @@ the NSEC3 records it got?
                     v .    |     .                    . 
                     **     |      **                  --
       h.example.org ** ----+----> ** 3.example.org    -- 2.example.org
-                    .     /  (3)   . |                .
-                    .    /         . | (2)            . 
+                    .     /  (2)   . |                .
+                    .    /         . | (3)            . 
                     .   / (5)      . |                .
                     .  /           . v                .
     1.h.example.org **            **                  -- 
                     ** <--------- ** 3.3.example.org  -- x.2.example.org
                              (4) 
 
-^[fig:x.2.exampl::x.2.example.org does not exist. The five arrows represent the NSEC3 records, the ones numbered (1), (2) and (3) are the NSEC3s returned in our answer. 2.example.org is covered by (2) and x.2.example.org is covered by (4).]
+^[fig:x.2.exampl::x.2.example.org does not exist. The five arrows represent the NSEC3 records, the ones numbered (1), (2) and (3) are the NSEC3s returned in our answer. 2.example.org is covered by (3) and x.2.example.org is covered by (4).]
 
 The hash of `x.2.example.org` is `ndtu6dste50pr4a1f2qvr1v31g00i2i1`.
 Checking this hash on the first NSEC3 yields that it does not fall
 in between the interval: `15bg9l6359f5ch23e34ddua6n1rihl9h`
 and `1avvqn74sg75ukfvf25dgcethgq638ek`.
 For the second NSEC3 the answer is also negative: the hash sorts outside
-the interval described by `75b9id679qqov6ldfhd8ocshsssb6jvq` and
-`8555t7qegau7pjtksnbchg4td2m0jnpj`.
-And the third NSEC3, with interval `1avvqn74sg75ukfvf25dgcethgq638ek` to
-`75b9id679qqov6ldfhd8ocshsssb6jvq` also isn't of any help.
+the interval described by `1avvqn74sg75ukfvf25dgcethgq638ek` and
+`75b9id679qqov6ldfhd8ocshsssb6jvq`.
+And the third NSEC3, with interval `75b9id679qqov6ldfhd8ocshsssb6jvq` to
+`8555t7qegau7pjtksnbchg4td2m0jnpj` also isn't of any help.
+
 What is a resolver to do? It has been given the maximum amount of NSEC3s and 
 they all seem useless.
 
