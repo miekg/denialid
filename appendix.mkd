@@ -52,4 +52,5 @@ Original Name     Hashed Name
 
 ## -03
 
-1. Changed affiliation for R. Gieben
+1. Changed affiliation for R. Gieben;
+1. Some minor updates.
