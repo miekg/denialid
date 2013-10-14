@@ -200,7 +200,7 @@ a zone.
 
 For this to work, we need our `example.org` zone to be sorted in canonical order
 ([](#RFC4034), Section 6.1), and then create the NSECs.
-We add three NSEC records, one for each name, and each one "covers" a certain
+We add three NSEC records, one for each name, and each one covers a certain
 interval. The last NSEC record points back to the first as required by the RFC, and
 depicted in [](#fig:the-nsec-r).
 
