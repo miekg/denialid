@@ -411,8 +411,9 @@ Note that even though we hashed `example.org`, the
 zone's name is added to make it look like a domain name again. 
 In our zone, the basic format is `Base32(SHA1(FQDN)).example.org`.
 The next hashed owner name `A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84` (line 2) is the hashed version of `d.example.org`,
-represented as Base32.
-Note that `.example.org` is not added to the next hashed owner name, as this
+represented as Base32. Note that `d.example.org` is used are the next owner name, because in the hash ordering, its
+hash comes after the hash of the zone's apex.
+Also note that `.example.org` is not added to the next hashed owner name, as this
 name always falls in the current zone.
 
 The "1 0 2 DEAD" section of the NSEC3 states: 
@@ -435,7 +436,7 @@ used as an owner name.  This is an important observation.
 By hashing the names you lose the depth of a zone - hashing
 introduces a flat space of names, as opposed to NSEC.
 
-The domain name used above (`1.h.example.org`) creates an empty non-terminal. 
+The name used above (`1.h.example.org`) creates an empty non-terminal. 
 Empty non-terminals are domain names that have no RRs associated with them, and exist only
 because they have one or more sub-domains that do ([](#RFC5155), Section 1.3). The record:
 
@@ -564,7 +565,7 @@ The tweaking simply consists of adjusting the ANSWER section to:
 
     ;; status: NOERROR, id: 31827
 
-    ;; ANSWER SECTION
+    ;; ANSWER SECTION:
     a.example.org.      TXT "wildcard record"
     a.example.org.      RRSIG(TXT) ( ... )
 ^[fig:a-forged-r::A forged response without the expanded wildcard.]
