@@ -34,7 +34,7 @@ as these complicate matters, especially combined with CNAME records.
 Note: In this document, domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
-of DNSSEC. NSEC3 opt-out and secure delegations are out of scope for this document.
+of DNSSEC. 
 The following RFCs are not required reading, but they help in
 understanding the problem space.
 
