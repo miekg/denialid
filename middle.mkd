@@ -1,5 +1,5 @@
 # Introduction
-DNSSEC can be somewhat of a complicated matter, and there are certain areas 
+DNSSEC can be somewhat of a complicated matter, and there are certain areas
 of the specification that are more difficult to comprehend than others.
 One such area is "authenticated denial of existence".
 
@@ -8,7 +8,7 @@ that a certain domain name does not exist. It is also used
 to signal that a domain name exists, but does not have the specific
 RR type you were asking for.
 
-The first is referred to as an NXDOMAIN (non-existent domain) 
+The first is referred to as an NXDOMAIN (non-existent domain)
 ([](#RFC2308) Section 2.1)
 and the latter a NODATA ([](#RFC2308) Section 2.2) response.  Both are also
 known as negative responses.
@@ -34,7 +34,7 @@ as these complicate matters, especially combined with CNAME records.
 Note: In this document, domain names in zone file examples will have a trailing dot, in the
 running text they will not.
 This text is written for people who have a fair understanding
-of DNSSEC. 
+of DNSSEC.
 The following RFCs are not required reading, but they help in
 understanding the problem space.
 
@@ -44,7 +44,7 @@ understanding the problem space.
 And these provide some general DNSSEC information.
 
 * RFC 4033, RFC 4034, RFC 4035 [](#RFC4033), [](#RFC4034), [](#RFC4035) - DNSSEC Specification;
-* RFC 4956 [](#RFC4956) - DNS Security (DNSSEC) Opt-In. This RFC has experimental 
+* RFC 4956 [](#RFC4956) - DNS Security (DNSSEC) Opt-In. This RFC has experimental
     status, but is a good read.
 
 These three drafts give some background information on the NSEC3
