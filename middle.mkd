@@ -228,7 +228,8 @@ This signed zone is loaded into the name server. It looks like this:
 
     example.org.        SOA ( ... )
                         DNSKEY ( ... )
-                        NSEC a.example.org. SOA NSEC DNSKEY RRSIG
+                        NSEC a.example.org. NS SOA NSEC DNSKEY RRSIG
+                        RRSIG(NS) ( ... )
                         RRSIG(SOA) ( ... )
                         RRSIG(DNSKEY) ( ... )
                         RRSIG(NSEC) ( ... )
