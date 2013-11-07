@@ -228,20 +228,20 @@ This signed zone is loaded into the name server. It looks like this:
 
     example.org.        SOA ( ... )
                         DNSKEY ( ... )
-                        NSEC a.example.org. NS SOA NSEC DNSKEY RRSIG
+                        NSEC a.example.org. NS SOA RRSIG NSEC DNSKEY
                         RRSIG(NS) ( ... )
                         RRSIG(SOA) ( ... )
-                        RRSIG(DNSKEY) ( ... )
                         RRSIG(NSEC) ( ... )
+                        RRSIG(DNSKEY) ( ... )
     a.example.org.      A 192.0.2.1
                         TXT "a record"
-                        NSEC d.example.org. A TXT NSEC RRSIG
+                        NSEC d.example.org. A TXT RRSIG NSEC
                         RRSIG(A) ( ... )
                         RRSIG(TXT) ( ... )
                         RRSIG(NSEC) ( ... )
     d.example.org.      A 192.0.2.1
                         TXT "d record"
-                        NSEC example.org. A TXT NSEC RRSIG
+                        NSEC example.org. A TXT RRSIG NSEC
                         RRSIG(A) ( ... )
                         RRSIG(TXT) ( ... )
                         RRSIG(NSEC) ( ... )
@@ -256,7 +256,7 @@ To be able to securely detect that `b` does not exist,
 there must also be a signed NSEC record which covers the name space
 where `b` lives. The record:
 
-    a.example.org.      NSEC d.example.org. A TXT NSEC RRSIG
+    a.example.org.      NSEC d.example.org. A TXT RRSIG NSEC
 
 does precisely that: `b`
 should come after `a`, but the next owner name is `d.example.org`, so
@@ -292,7 +292,7 @@ back is:
     ;; AUTHORITY SECTION:
     example.org.        SOA ( ... )
     example.org.        RRSIG(SOA) ( ... )
-    a.example.org.      NSEC d.example.org. A TXT NSEC RRSIG
+    a.example.org.      NSEC d.example.org. A TXT RRSIG NSEC
     a.example.org.      RRSIG(NSEC) ( ... )
 
 The resolver should check the AUTHORITY section and conclude that: 
