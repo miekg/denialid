@@ -404,7 +404,7 @@ Lets look at typical NSEC3 record:
 
     15bg9l6359f5ch23e34ddua6n1rihl9h.example.org. (
        NSEC3 1 0 2 DEAD A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84
-            SOA RRSIG DNSKEY NSEC3PARAM )
+            NS SOA RRSIG DNSKEY NSEC3PARAM )
 
 On the first line we see the hashed owner name: `15bg9l6359f5ch23e34ddua6n1rihl9h.example.org`, this
 is the hashed name of the fully qualified domain name (FQDN) `example.org` encoded as Base32 ([](#RFC4648)).
@@ -514,6 +514,7 @@ add a wildcard record:
 For completeness, our (unsigned) zone now looks like this:
 
     example.org.        SOA ( ... )
+    example.org.        NS  a.example.org.
     *.example.org.      TXT "wildcard record"
     a.example.org.      A 192.0.2.1
                         TXT "a record"
@@ -597,6 +598,7 @@ For every wildcard expansion, we need to prove that the expansion was allowed.
 Lets add some CNAME wildcard records to our zone:
 
     example.org.        SOA ( ... )
+    example.org.        NS  a.example.org.
     *.example.org.      TXT "wildcard record"
     a.example.org.      A 192.0.2.1
                         TXT "a record"
@@ -695,6 +697,7 @@ records added are `1.h.example.org` and `3.3.example.org`. It is signed with NSE
 resulting in the following unsigned zone.
 
     example.org.        SOA ( ... )
+    example.org.        NS  a.example.org.
     1.h.example.org.    TXT "1.h record"
     3.3.example.org.    TXT "3.3 record"
 ^[fig:the-added-txt::The added TXT records in example.org. These records create two empty non-terminals: `h.example.org` and `3.example.org`.]
@@ -707,7 +710,7 @@ Also see [](#fig:x.2.exampl) the numbers in that figure correspond
 with the following NSEC3 records:
 
     15bg9l6359f5ch23e34ddua6n1rihl9h.example.org. (
-     NSEC3 1 0 2 DEAD 1AVVQN74SG75UKFVF25DGCETHGQ638EK SOA RRSIG 
+     NSEC3 1 0 2 DEAD 1AVVQN74SG75UKFVF25DGCETHGQ638EK NS SOA RRSIG 
             DNSKEY NSEC3PARAM )
 
     75b9id679qqov6ldfhd8ocshsssb6jvq.example.org. (
@@ -836,6 +839,7 @@ that the source of synthesis does not exist, while it in fact does.
 Suppose the wildcard record does exist, so our unsigned zone looks like this:
 
     example.org.        SOA ( ... )
+    example.org.        NS  a.example.org.
     *.example.org.      TXT "wildcard record"
     1.h.example.org.    TXT "1.h record"
     3.3.example.org.    TXT "3.3 record"
