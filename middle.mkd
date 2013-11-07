@@ -59,11 +59,11 @@ We start with the basics and take a look at
 NXDOMAIN handling in the DNS. To make it more visible
 we are going to use a small DNS zone, with
 3 names (`example.org`, `a.example.org` and `d.example.org`) and 3 types (SOA,
-A and TXT). For brevity, the class is not shown (defaults to IN), the
-NS records are left out and the SOA record is shortened, resulting
-in the following zone file:
+A and TXT). For brevity, the class is not shown (defaults to IN) and
+the SOA record is shortened, resulting in the following zone file:
 
     example.org.        SOA ( ... )
+    example.org.        NS  a.example.org.
     a.example.org.      A 192.0.2.1
                         TXT "a record"
     d.example.org.      A 192.0.2.1
