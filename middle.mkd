@@ -129,10 +129,8 @@ has to put these pieces of information together and conclude that
 The above has to be translated to the security aware world
 of DNSSEC. But there are a few requirements DNSSEC brings to the table:
 
-1. There is no online signing defined in DNSSEC. Although a
-    name server is free to compute the answer and signature(s)
-    on-the-fly,
-    the protocol is written with a "first sign, then load" 
+1. A name server is free to compute the answer and signature(s)
+    on-the-fly, but the protocol is written with a "first sign, then load" 
     attitude in mind.
     It is rather asymmetrical, but a lot of the design in DNSSEC
     stems from fact that you need to accommodate authenticated
@@ -148,7 +146,7 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
 3. DNS wildcards and CNAME records complicate matters significantly. More
     about this in later sections ([](#wildcards-in-the-dns) and [](#cname-records)).
 
-The first requirement implies that all denial of existence answers need to be 
+The first principle implies that all denial of existence answers need to be 
 pre-computed, but it is impossible to pre-compute (all conceivable) non-existence answers.
 A generic denial record which can be used in all denial of existence proofs is
 not an option: such a record is susceptible to replay attacks. When you are querying
