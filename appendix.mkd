@@ -58,3 +58,4 @@ Original Name     Hashed Name
 ## -04
 
 1. Added NS record in all zone examples.
+1. Some tweaks in the text regarding online signing.
