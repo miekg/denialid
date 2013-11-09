@@ -148,11 +148,14 @@ of DNSSEC. But there are a few requirements DNSSEC brings to the table:
 
 The first principle implies that all denial of existence answers need to be 
 pre-computed, but it is impossible to pre-compute (all conceivable) non-existence answers.
+
 A generic denial record which can be used in all denial of existence proofs is
 not an option: such a record is susceptible to replay attacks. When you are querying
 a name server for a record that actually exists, a man-in-the-middle may
 replay that generic denial record and it would be impossible
-to tell whether the response was genuine or spoofed.
+to tell whether the response was genuine or spoofed. Another way would be to use
+the qname in the answer and sign that; essentially signing an NXDOMAIN response.
+While this approach technically works, is it incompatible with offline signing.
 
 This has been solved by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
