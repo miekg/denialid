@@ -127,7 +127,7 @@ has to put these pieces of information together and conclude that
 
 # Secure Denial of Existence
 The above has to be translated to the security aware world
-of DNSSEC. But there are a few requirements DNSSEC brings to the table:
+of DNSSEC. But there are a few principles DNSSEC brings to the table:
 
 1. A name server is free to compute the answer and signature(s)
     on-the-fly, but the protocol is written with a "first sign, then load" 
