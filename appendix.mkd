@@ -52,4 +52,10 @@ Original Name     Hashed Name
 
 ## -03
 
-1. Changed affiliation for R. Gieben
+1. Changed affiliation for R. Gieben;
+1. Some minor updates.
+
+## -04
+
+1. Added NS record in all zone examples.
+1. Some tweaks in the text regarding online signing.
