@@ -153,11 +153,17 @@ A generic denial record which can be used in all denial of existence proofs is
 not an option: such a record is susceptible to replay attacks. When you are querying
 a name server for a record that actually exists, a man-in-the-middle may
 replay that generic denial record and it would be impossible
-to tell whether the response was genuine or spoofed. Another way would be to use
-the qname in the answer and sign that; essentially signing an NXDOMAIN response.
-While this approach technically works, is it incompatible with offline signing.
+to tell whether the response was genuine or spoofed. To avoid such a record being
+replayed forever we can set a lifetime on it (in similar vein as RRSIG records). This
+introduces two problems: 1) during this lifetime it can *still* be used to deny all
+existing records of the zone; 2) updating the lifetime means regenerating the RRSIG. This
+needs to be done frequently to minimize the replay window. This borders on being incompatible with offline signing.
 
-This has been solved by introducing a record that defines an
+Another way would be to use
+the QNAME in the answer and sign that; essentially signing an NXDOMAIN response.
+While this approach technically works, it is also incompatible with offline signing.
+
+The way this has been solved is by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
 defines the holes (non-existing names) in the zone. This record can 
 be signed beforehand and given to the resolver.
@@ -904,8 +910,8 @@ This document would not be possible without the help of Ed Lewis,
 Roy Arends, Wouter Wijngaards, Olaf Kolkman, Carsten Strotmann,
 Jan-Piet Mens, Peter van Dijk,
 Marco Davids, Esther Makaay, Antoin Verschuren, Lukas Wunner, 
-Joe Abley, Ralf Weber and Geoff Huston.
-Also valuable was the source code of Unbound
+Joe Abley, Ralf Weber, Geoff Huston, Dave Lawrence and Tony Finch.
+Also valuable was the source code of Unbound.
 (`validator/val_nsec3.c`).
 
 Extensive feedback for early versions was received from Karst Koymans.
