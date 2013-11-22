@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='phreebird'>
+<front>
+<title></title>
+
+<author initials='D' surname='Kaminsky' fullname='Dan Kaminsky'>
+    <organization />
+</author>
+
+<date month='January' day='8' year='2011' />
+</front>
+<format type='URL' target='http://dankaminsky.com/phreebird/' />
+</reference>
