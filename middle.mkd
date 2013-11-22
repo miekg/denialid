@@ -158,11 +158,11 @@ genuine or spoofed. In other words, the generic record can be replayed to
 falsely deny *all* possible responses. 
  
 Another way would be to use the QNAME in the answer and sign that; essentially
-signing an NXDOMAIN response. While this approach technically works, it does
-not provide a solution for NODATA responses, and it is also incompatible
-with offline signing. [](#dnssec-online-signing) describes good online
-signing methods, the techniques described here work with records that can be
-created in advance.
+signing an NXDOMAIN response. While this approach could have worked
+technically, it is incompatible with current DNSSEC validators and with
+offline signing techniques. [](#dnssec-online-signing) describes compatible
+online signing techniques in more detail. The remainder of this document
+focuses on methods that create the records in advance.
 
 The way this has been solved is by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
