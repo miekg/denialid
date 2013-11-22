@@ -29,31 +29,74 @@ due to their structure. For these type of zones, NSEC3 might not be useful,
 as it does not help defend against zone walking attacks but does add the
 computational load on authoritative servers and validators.
 
-# DNSSEC On-line Signing
+# DNSSEC Online Signing
 
 An NSEC record lists the next existing name in a zone, and thus makes it
 possible to retrieve all the names from the zone. This can also be done
 with NSEC3, but an adversary will then retrieve all the names in hashed
-format. With DNSSEC on-line signing, zone walking can be prevented by garbling
+format. With DNSSEC online signing, zone walking can be prevented by garbling
 the next owner name.
 
-A drawback of onlin-signing is that the private key must be on-line too, to
+A drawback of online signing is that the private key must be online too, to
 create the corresponding RRSIG records. This makes the keys more vulnerable
 for unwanted exposure.
 
 ## Minimally Covering NSEC Records
 
+To prevent retrieval of the next owner name with NSEC, a different, 
+non-existing (according to the existence rules in []#RFC4592) name may be used.
+However, not just any name can be used because a validator may make assumptions
+on the size of the span between the NSEC owner name and next owner name.
+The span must be large enough to cover the QNAME, but not too large that
+it covers existing names. 
+
 [](#RFC4470) introduces minimally covering NSEC records. These records
 use a next owner name that is lexically closer to the NSEC owner name than
-the actual next owner name.
+the actual next owner name, ensuring that no existing names are covered. 
+The next owner name can be derived from the QNAME with the use of epsilon 
+functions.
 
-To do, in more detail.
+For example, to deny the existence of `b.example.org` in the zone from
+[](#nsec), the following NSEC record could have been generated:
+
+    a.example.org.      NSEC c.example.org. RRSIG NSEC
+
+This record also proofs that `b.example.org` also does not exist, but an
+adversary cannot use the next owner name in a zone walking attack. Note the
+type bitmap only has the RRSIG and NSEC set, because RFC4470 states:
+
+> The generated NSEC record's type bitmap MUST have the RRSIG and NSEC
+> bits set and SHOULD NOT have any other bits set. 
+
+In this case however, `a.example.org` exists with other RRtypes and we could
+have also set the A and TXT types in the bitmap.
+
+Because DNS ordering is very strict, the span can be shortened to a minimum.
+In order to do so, the last character in the leftmost label of the NSEC owner
+name needs to be decremented and the label must be filled with octets of value
+255 until the label length reaches the maximum of 63 octets. The next owner
+name is the QNAME with a leading label with a single null octet added. This
+gives the following minimally covering record for `b.example.org`:
+
+    a\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255.example.org.      NSEC \000.b.example.org. RRSIG NSEC
 
 ## NSEC3 White Lies
 
-Kaminsky uses a similar technique for NSEC3, dubbed "White Lies".
+The same principle of minimally covering spans can be applied to NSEC3 records.
+This mechanism has been dubbed as NSEC3 White Lies. Here, the NSEC3 owner name
+is simply the hash of the QNAME minus one and the next owner name is the hash
+of the QNAME plus one.
 
-To do, in more detail.
+The following NSEC3 white lie denies `b.example.org` (recall this hashes to
+`iuu8l5lmt76jeltp0bir3tmg4u3uu8e7`) in the zone from
+[](#nsec):
+
+    iuu8l5lmt76jeltp0bir3tmg4u3uu8e6.example.org (
+       NSEC3 1 0 2 DEAD IUU815LMT76JELTP0BIR3TMG4U3UU8E8 )
+
+The type bitmap is empty in this case. If SHA1(`b.example.org`)-1 is a
+collision with an existing name, the bitmap could have been filled with the
+RRtypes of the RRsets at that name.
 
 # Changelog
 
