@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='Unbound' target='http://unbound.net' >
+
+<front>
+<title abbrev='Unbound Resolver'>Unbound: a validating, recursive, and caching DNS resolver</title>
+<author>
+<organization>NLnet Labs</organization>
+<address>
+<email>unbound-users@nlnetlabs.nl</email></address></author>
+<date year='2006'/>
+</front>
+<format type='subversion' target='http://unbound.nlnletlabs.nl/svn/' />
+</reference>

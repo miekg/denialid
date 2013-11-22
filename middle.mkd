@@ -912,6 +912,6 @@ Jan-Piet Mens, Peter van Dijk,
 Marco Davids, Esther Makaay, Antoin Verschuren, Lukas Wunner, 
 Joe Abley, Ralf Weber, Geoff Huston, Dave Lawrence and Tony Finch.
 Also valuable was the source code of Unbound.
-(`validator/val_nsec3.c`).
+(`validator/val_nsec3.c`) [](#Unbound).
 
 Extensive feedback for early versions was received from Karst Koymans.
