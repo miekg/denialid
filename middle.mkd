@@ -161,8 +161,7 @@ Another way would be to use the QNAME in the answer and sign that; essentially
 signing an NXDOMAIN response. While this approach could have worked
 technically, it is incompatible with
 off-line signing techniques. [](#dnssec-on-line-signing) describes compatible
-on-line signing techniques in more detail. The remainder of this document
-focuses on methods that create the records in advance.
+on-line signing techniques in more detail.
 
 The way this has been solved is by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
