@@ -160,7 +160,7 @@ falsely deny *all* possible responses.
 Another way would be to use the QNAME in the answer and sign that; essentially
 signing an NXDOMAIN response. While this approach technically works, it does
 not provide a solution for NODATA responses, and it is also incompatible
-with offline signing. [](#dnssec-on-line-signing) describes good on-line
+with offline signing. [](#dnssec-online-signing) describes good online
 signing methods, the techniques described here work with records that can be
 created in advance.
 
@@ -335,7 +335,7 @@ These two issues eventually lead to NSEC3 which:
 
 Note that [](#RFC4470) also prevents zone walking by introducing minimally
 covering NSEC records. This technique is described
-in [](#dnssec-on-line-signing);
+in [](#dnssec-online-signing);
  
 Before we delve into NSEC3, let us first take a look at its predecessors: NO,
 NSEC2, and DNSNR.
