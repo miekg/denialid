@@ -29,15 +29,15 @@ due to their structure. For these type of zones, NSEC3 might not be useful,
 as it does not help defend against zone walking attacks but does add the
 computational load on authoritative servers and validators.
 
-# DNSSEC Online Signing
+# DNSSEC On-line Signing
 
 An NSEC record lists the next existing name in a zone, and thus makes it
 possible to retrieve all the names from the zone. This can also be done
 with NSEC3, but an adversary will then retrieve all the names in hashed
-format. With DNSSEC online signing, zone walking can be prevented by garbling
+format. With DNSSEC on-line signing, zone walking can be prevented by garbling
 the next owner name.
 
-A drawback of online signing is that the private key must be online too, to
+A drawback of on-line signing is that the private key must be on-line too, to
 create the corresponding RRSIG records. This makes the keys more vulnerable
 for unwanted exposure.
 
@@ -141,8 +141,8 @@ RRtypes of the RRsets at that name.
 ## -04
 
 1. Added NS record in all zone examples;
-1. Some tweaks in the text regarding online signing;
+1. Some tweaks in the text regarding on-line signing;
 1. Add more text on a non-working "generic non-existence records".
-1. Add appendix on online signing;
+1. Add appendix on on-line signing;
 1. Add appendix on usefulness of NSEC3.
 
