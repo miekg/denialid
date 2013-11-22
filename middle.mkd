@@ -150,18 +150,19 @@ The first principle implies that all denial of existence answers need to be
 pre-computed, but it is impossible to pre-compute (all conceivable) non-existence answers.
 
 A generic denial record which can be used in all denial of existence proofs is
-not an option: such a record is susceptible to replay attacks. When you are querying
-a name server for a record that actually exists, a man-in-the-middle may
-replay that generic denial record and it would be impossible
-to tell whether the response was genuine or spoofed. To avoid such a record being
-replayed forever we can set a lifetime on it (in similar vein as RRSIG records). This
-introduces two problems: 1) during this lifetime it can *still* be used to deny all
-existing records of the zone; 2) updating the lifetime means regenerating the RRSIG. This
-needs to be done frequently to minimize the replay window. This borders on being incompatible with offline signing.
-
-Another way would be to use
-the QNAME in the answer and sign that; essentially signing an NXDOMAIN response.
-While this approach technically works, it is also incompatible with offline signing.
+not an option: such a record is susceptible to replay attacks. When you are
+querying a name server for any record that actually exists, a
+man-in-the-middle could replay that generic denial record that is not limited
+in its scope and it would be impossible to tell whether the response was
+genuine or spoofed. In other words, the generic record can be replayed to 
+falsely deny *all* possible responses. 
+ 
+Another way would be to use the QNAME in the answer and sign that; essentially
+signing an NXDOMAIN response. While this approach technically works, it does
+not provide a solution for NODATA responses, and it is also incompatible
+with offline signing. [](#dnssec-on-line-signing) describes good on-line
+signing methods, the techniques described here work with records that can be
+created in advance.
 
 The way this has been solved is by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
