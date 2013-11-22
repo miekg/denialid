@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<reference anchor='RFC4470'>
+
+<front>
+<title>Minimally Covering NSEC Records and DNSSEC On-line Signing</title>
+<author initials='S.' surname='Weiler' fullname='S. Weiler'>
+<organization /></author>
+<author initials='J.' surname='Ihren' fullname='J. Ihren'>
+<organization /></author>
+<date year='2006' month='April' />
+<abstract>
+<t>This document describes how to construct DNSSEC NSEC resource records that cover a smaller range of names than called for by RFC 4034.  By generating and signing these records on demand, authoritative name servers can effectively stop the disclosure of zone contents otherwise made possible by walking the chain of NSEC records in a signed zone. [STANDARDS-TRACK]</t></abstract></front>
+
+<seriesInfo name='RFC' value='4470' />
+<format type='TXT' octets='17471' target='http://www.rfc-editor.org/rfc/rfc4470.txt' />
+</reference>
