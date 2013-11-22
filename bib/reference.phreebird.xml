@@ -2,7 +2,7 @@
 
 <reference anchor='phreebird'>
 <front>
-<title></title>
+<title abbrev="Phreebird">Phreebird: a DNSSEC proxy</title>
 
 <author initials='D' surname='Kaminsky' fullname='Dan Kaminsky'>
     <organization />
