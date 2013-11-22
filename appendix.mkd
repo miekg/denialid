@@ -44,17 +44,17 @@ for unwanted exposure.
 ## Minimally Covering NSEC Records
 
 To prevent retrieval of the next owner name with NSEC, a different, 
-non-existing (according to the existence rules in []#RFC4592) name may be used.
-However, not just any name can be used because a validator may make assumptions
-on the size of the span between the NSEC owner name and next owner name.
-The span must be large enough to cover the QNAME, but not too large that
-it covers existing names. 
+non-existing (according to the existence rules in []#RFC4592, Section 2.2)
+name may be used. However, not just any name can be used because a validator
+may make assumptions on the size of the span between the NSEC owner name and
+next owner name. The span must be large enough to cover the QNAME, but not too
+large that it covers existing names. 
 
 [](#RFC4470) introduces minimally covering NSEC records. These records
 use a next owner name that is lexically closer to the NSEC owner name than
 the actual next owner name, ensuring that no existing names are covered. 
-The next owner name can be derived from the QNAME with the use of epsilon 
-functions.
+The next owner name can be derived from the QNAME with the use of so-called
+epsilon functions [](#RFC4470).
 
 For example, to deny the existence of `b.example.org` in the zone from
 [](#nsec), the following NSEC record could have been generated:
