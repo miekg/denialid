@@ -78,7 +78,11 @@ name needs to be decremented and the label must be filled with octets of value
 name is the QNAME with a leading label with a single null octet added. This
 gives the following minimally covering record for `b.example.org`:
 
-    a\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255.example.org.      NSEC \000.b.example.org. RRSIG NSEC
+    a\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255
+     \255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255
+     \255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255
+     \255\255\255\255\255\255\255\255\255\255\255.example.org. (
+       NSEC \000.b.example.org. RRSIG NSEC )
 
 ## NSEC3 White Lies
 
