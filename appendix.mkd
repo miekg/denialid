@@ -52,16 +52,16 @@ For example, to deny the existence of `b.example.org` in the zone from
 
     a.example.org.      NSEC c.example.org. RRSIG NSEC
 
-This record also proofs that `b.example.org` also does not exist, but an
+This record also proves that `b.example.org` also does not exist, but an
 adversary cannot use the next owner name in a zone walking attack. Note the
-type bitmap only has the RRSIG and NSEC set, because RFC4470 states:
+type bitmap only has the RRSIG and NSEC set, because [](#RFC4470) states:
 
 > The generated NSEC record's type bitmap MUST have the RRSIG and NSEC
 > bits set and SHOULD NOT have any other bits set.
 
 This is because the NSEC records may appear at names that did not exist
 before the zone was signed. In this case however, `a.example.org` exists
-with other RRtypes and we could have also set the A and TXT types in the
+with other RR types and we could have also set the A and TXT types in the
 bitmap.
 
 Because DNS ordering is very strict, the span can be shortened to a minimum.
