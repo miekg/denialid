@@ -99,3 +99,6 @@ To do, in more detail.
 1. Added NS record in all zone examples;
 1. Some tweaks in the text regarding online signing;
 1. Add more text on a non-working "generic non-existence records".
+1. Add appendix on online signing;
+1. Add appendix on usefulness of NSEC3.
+
