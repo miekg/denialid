@@ -20,15 +20,6 @@ Original Name     Hashed Name
 
 ^[tab:hashed-owner::Hashed owner names for "example.org" in hash order.]
 
-# Usefullness of NSEC3
-
-One of the objectives of NSEC3 is to mitigate against zone walking. Therefor,
-NSEC3 might not be that useful in small, trivial zones or highly structured
-zones like ip6.arpa and in-addr.arpa. These can be walked even with NSEC3
-due to their structure. For these type of zones, NSEC3 might not be useful, 
-as it does not help defend against zone walking attacks but does add the
-computational load on authoritative servers and validators.
-
 # DNSSEC On-line Signing
 
 An NSEC record lists the next existing name in a zone, and thus makes it
