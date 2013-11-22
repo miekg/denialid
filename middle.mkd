@@ -469,7 +469,7 @@ Note that NSEC3 might not always be useful. For example, highly structures
 zones, like the reverse zones ip6.arpa and in-addr.arpa, can be walked even
 with NSEC3 due to their structure. Also the names in small, trivial zones
 can be easily guessed. In these cases, it does not help to defend against zone
-walking attacks but does add the computational load on authoritative servers
+walking, but does add the computational load on authoritative servers
 and validators.
 
 ## Opt-Out
