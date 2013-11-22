@@ -26,6 +26,7 @@
 <!ENTITY draftnsec2v2  PUBLIC '' 'bib/reference.I-D.laurie-dnsext-nsec2v2.xml'>
 <!ENTITY draftexist    PUBLIC '' 'bib/reference.I-D.ietf-dnsext-not-exsiting-rr.xml'>
 <!ENTITY RFC5155Errata PUBLIC '' 'bib/reference.RFC.5155.errata.xml'>
+<!ENTITY phreebird     PUBLIC '' 'bib/reference.phreebird.xml'>
 ]>
 
 <rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-04">
@@ -110,6 +111,7 @@
     &draftnsec2v2;
     &draftexist;
     &RFC5155Errata;
+    &phreebird;
 </references>
 &appendix;
 </back>
