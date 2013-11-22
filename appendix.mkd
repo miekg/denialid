@@ -34,7 +34,7 @@ for unwanted exposure.
 
 ## Minimally Covering NSEC Records
 
-To prevent retrieval of the next owner name with NSEC, a different, 
+To prevent retrieval of the next owner name with NSEC, a different,
 non-existing (according to the existence rules in []#RFC4592, Section 2.2)
 name may be used. However, not just any name can be used because a validator
 may make assumptions on the size of the span between the NSEC owner name and
