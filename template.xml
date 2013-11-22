@@ -20,12 +20,14 @@
 <!ENTITY RFC2535    PUBLIC '' 'bib/reference.RFC.2535'>
 <!ENTITY RFC3655    PUBLIC '' 'bib/reference.RFC.3655'>
 <!ENTITY RFC3755    PUBLIC '' 'bib/reference.RFC.3755'>
+<!ENTITY RFC4470    PUBLIC '' 'bib/reference.RFC.4470'>
 <!ENTITY RFC4956    PUBLIC '' 'bib/reference.RFC.4956'>
 <!ENTITY draftdnsnr    PUBLIC '' 'bib/reference.I-D.arends-dnsnr.xml'>
 <!ENTITY draftnsec2v2  PUBLIC '' 'bib/reference.I-D.laurie-dnsext-nsec2v2.xml'>
 <!ENTITY draftexist    PUBLIC '' 'bib/reference.I-D.ietf-dnsext-not-exsiting-rr.xml'>
 <!ENTITY RFC5155Errata PUBLIC '' 'bib/reference.RFC.5155.errata.xml'>
 <!ENTITY unbound    PUBLIC '' 'bib/reference.unbound.xml'>
+<!ENTITY phreebird     PUBLIC '' 'bib/reference.phreebird.xml'>
 ]>
 
 <rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-04">
@@ -104,12 +106,14 @@
     &RFC2535;
     &RFC3655;
     &RFC3755;
+    &RFC4470;
     &RFC4956;
     &draftdnsnr;
     &draftnsec2v2;
     &draftexist;
     &RFC5155Errata;
     &unbound;
+    &phreebird;
 </references>
 &appendix;
 </back>

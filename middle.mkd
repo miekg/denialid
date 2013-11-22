@@ -150,18 +150,19 @@ The first principle implies that all denial of existence answers need to be
 pre-computed, but it is impossible to pre-compute (all conceivable) non-existence answers.
 
 A generic denial record which can be used in all denial of existence proofs is
-not an option: such a record is susceptible to replay attacks. When you are querying
-a name server for a record that actually exists, a man-in-the-middle may
-replay that generic denial record and it would be impossible
-to tell whether the response was genuine or spoofed. To avoid such a record being
-replayed forever we can set a lifetime on it (in similar vein as RRSIG records). This
-introduces two problems: 1) during this lifetime it can *still* be used to deny all
-existing records of the zone; 2) updating the lifetime means regenerating the RRSIG. This
-needs to be done frequently to minimize the replay window. This borders on being incompatible with offline signing.
-
-Another way would be to use
-the QNAME in the answer and sign that; essentially signing an NXDOMAIN response.
-While this approach technically works, it is also incompatible with offline signing.
+not an option: such a record is susceptible to replay attacks. When you are
+querying a name server for any record that actually exists, a
+man-in-the-middle could replay that generic denial record that is not limited
+in its scope and it would be impossible to tell whether the response was
+genuine or spoofed. In other words, the generic record can be replayed to 
+falsely deny *all* possible responses. 
+ 
+Another way would be to use the QNAME in the answer and sign that; essentially
+signing an NXDOMAIN response. While this approach could have worked
+technically, it is incompatible with current DNSSEC validators and with
+off-line signing techniques. [](#dnssec-on-line-signing) describes compatible
+on-line signing techniques in more detail. The remainder of this document
+focuses on methods that create the records in advance.
 
 The way this has been solved is by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
@@ -169,12 +170,12 @@ defines the holes (non-existing names) in the zone. This record can
 be signed beforehand and given to the resolver.
 
 > Given all these troubles, why didn't the designers of
-> DNSSEC go for the (easy) route and allowed for online signing? Well,
-> at that time (pre 2000), online signing was not feasible with the then
+> DNSSEC go for the (easy) route and allowed for on-line signing? Well,
+> at that time (pre 2000), on-line signing was not feasible with the then
 > current hardware. Keep in mind that the larger servers get
 > between 2000 and 6000 queries per second (qps), with peaks up to 20,000 qps
 > or more.  Scaling signature generation to these kind of levels is
-> always a challenge. Another issue was (and is) key management, for online
+> always a challenge. Another issue was (and is) key management, for on-line
 > signing to work you need access to the private key(s). This is considered a
 > security risk. 
 
@@ -327,13 +328,17 @@ who are deploying DNSSEC, face up front costs. This could hinder DNSSEC adoption
 
 These two issues eventually lead to NSEC3 which:
 
-* Adds a way to garble the next owner name, thus thwarting zone-walking;
+* Adds a way to garble the owner names, thus thwarting zone-walking;
 * Makes it possible to skip names for the next owner name. This feature
   is called Opt-Out (See [](#opt-out)). It means not all names in your zone get an NSEC3 plus
   ditto signature, making it possible to "grow into" your DNSSEC deployment.
 
-But before we delve into NSEC3, let us first take a look at its predecessors: NO, NSEC2
-and, DNSNR.
+Note that [](#RFC4470) also prevents zone walking by introducing minimally
+covering NSEC records. This technique is described
+in [](#dnssec-on-line-signing);
+ 
+Before we delve into NSEC3, let us first take a look at its predecessors: NO,
+NSEC2, and DNSNR.
 
 # Experimental and Deprecated Mechanisms: NO, NSEC2 and DNSNR
 Long before NSEC was defined, the NO record was introduced. 
@@ -459,6 +464,13 @@ creates two names:
 An empty non-terminal will get an NSEC3 record, but not an NSEC record.
 In [](#the-closest-encloser-nsec3-record) is shown how the resolver uses
 these NSEC3 records to validate the denial of existence proofs.
+
+Note that NSEC3 might not always be useful. For example, highly structures 
+zones, like the reverse zones ip6.arpa and in-addr.arpa, can be walked even
+with NSEC3 due to their structure. Also the names in small, trivial zones
+can be easily guessed. In these cases, it does not help to defend against zone
+walking attacks but does add the computational load on authoritative servers
+and validators.
 
 ## Opt-Out
 Hashing mitigates the zone walking issue of NSEC. The other issue, the high
@@ -689,6 +701,9 @@ These two records already deny the existence of the requested name, so we do not
 need an NSEC3 record that covers the actual queried name: By denying the existence
 of the next closer name, you also deny the existence of the queried name.
 
+Note that with NSEC, the existance of all empty non-terminals between the two
+names are denied, hence implicitly contains the closest encloser.
+
 For a given query name, there is one (and only one) place where wildcard expansion is possible.
 This is the `source of synthesis`, and is defined 
 ([](#RFC4592), Section 2.1.1 and Section 3.3.1) as:
@@ -910,7 +925,8 @@ This document would not be possible without the help of Ed Lewis,
 Roy Arends, Wouter Wijngaards, Olaf Kolkman, Carsten Strotmann,
 Jan-Piet Mens, Peter van Dijk,
 Marco Davids, Esther Makaay, Antoin Verschuren, Lukas Wunner, 
-Joe Abley, Ralf Weber, Geoff Huston, Dave Lawrence and Tony Finch.
+Joe Abley, Ralf Weber, Geoff Huston, Dave Lawrence, Tony Finch and Mark
+Andrews.
 Also valuable was the source code of Unbound.
 (`validator/val_nsec3.c`) [](#Unbound).
 
