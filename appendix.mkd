@@ -88,15 +88,15 @@ The following NSEC3 white lie denies `b.example.org` (recall this hashes to
 `iuu8l5lmt76jeltp0bir3tmg4u3uu8e7`) in the zone from
 [](#nsec):
 
-    iuu8l5lmt76jeltp0bir3tmg4u3uu8e6.example.org (
+    iuu8l5lmt76jeltp0bir3tmg4u3uu8e6.example.org. (
        NSEC3 1 0 2 DEAD IUU815LMT76JELTP0BIR3TMG4U3UU8E8 )
 
 The type bitmap is empty in this case. If SHA1(`b.example.org`)-1 is a
 collision with an existing name, the bitmap should have been filled with the
-RR types of the RRsets at that name. This record actually denies the existence
+RR types that exist at that name. This record actually denies the existence
 of the next closer of the closest encloser of `b.example.org` (which is 
 conveniently `b.example.org`). Of course the NSEC3 records to match the 
-closest encloser and to cover the source of synthesis are also still required.
+closest encloser and to cover the source of synthesis are still required.
 These can be generated too:
 
     # Matching `example.org`: `15bg9l6359f5ch23e34ddua6n1rihl9h`
