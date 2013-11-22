@@ -68,8 +68,10 @@ type bitmap only has the RRSIG and NSEC set, because RFC4470 states:
 > The generated NSEC record's type bitmap MUST have the RRSIG and NSEC
 > bits set and SHOULD NOT have any other bits set. 
 
-In this case however, `a.example.org` exists with other RRtypes and we could
-have also set the A and TXT types in the bitmap.
+This is because the NSEC records may appear at names that did not exist
+before the zone was signed. In this case however, `a.example.org` exists
+with other RRtypes and we could have also set the A and TXT types in the
+bitmap.
 
 Because DNS ordering is very strict, the span can be shortened to a minimum.
 In order to do so, the last character in the leftmost label of the NSEC owner
