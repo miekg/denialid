@@ -92,7 +92,7 @@ The following NSEC3 white lie denies `b.example.org` (recall this hashes to
        NSEC3 1 0 2 DEAD IUU815LMT76JELTP0BIR3TMG4U3UU8E8 )
 
 The type bitmap is empty in this case. If SHA1(`b.example.org`)-1 is a
-collision with an existing name, the bitmap could have been filled with the
+collision with an existing name, the bitmap should have been filled with the
 RR types of the RRsets at that name. This record actually denies the existence
 of the next closer of the closest encloser of `b.example.org` (which is 
 conveniently `b.example.org`). Of course the NSEC3 records to match the 
