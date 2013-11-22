@@ -333,8 +333,12 @@ These two issues eventually lead to NSEC3 which:
   is called Opt-Out (See [](#opt-out)). It means not all names in your zone get an NSEC3 plus
   ditto signature, making it possible to "grow into" your DNSSEC deployment.
 
-But before we delve into NSEC3, let us first take a look at its predecessors: NO, NSEC2
-and, DNSNR.
+Note that [](#RFC4470) also prevents zone walking by introducing minimally
+covering NSEC records. This technique is described
+in [](#dnssec-on-line-signing);
+ 
+Before we delve into NSEC3, let us first take a look at its predecessors: NO,
+NSEC2, and DNSNR.
 
 # Experimental and Deprecated Mechanisms: NO, NSEC2 and DNSNR
 Long before NSEC was defined, the NO record was introduced. 
