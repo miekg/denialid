@@ -1,4 +1,5 @@
 # List of Hashed Owner Names
+
 The following owner names are used in this document. The
 origin for these names is `example.org`.
 
@@ -18,6 +19,32 @@ Original Name     Hashed Name
 `x.2`             `ndtu6dste50pr4a1f2qvr1v31g00i2i1`
 
 ^[tab:hashed-owner::Hashed owner names for "example.org" in hash order.]
+
+# DNSSEC On-line Signing
+
+An NSEC record lists the next existing name in a zone, and thus makes it
+possible to retrieve all the names from the zone. This can also be done
+with NSEC3, but an adversary will then retrieve all the names in hashed
+format. With DNSSEC on-line signing, zone walking can be prevented by garbling
+the next owner name.
+
+A drawback of onlin-signing is that the private key must be on-line too, to
+create the corresponding RRSIG records. This makes the keys more vulnerable
+for unwanted exposure.
+
+## Minimally Covering NSEC Records
+
+[](#RFC4470) introduces minimally covering NSEC records. These records
+use a next owner name that is lexically closer to the NSEC owner name than
+the actual next owner name.
+
+To do, in more detail.
+
+## NSEC3 White Lies
+
+Kaminsky uses a similar technique for NSEC3, dubbed "White Lies".
+
+To do, in more detail.
 
 # Changelog
 
