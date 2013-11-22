@@ -80,8 +80,8 @@ gives the following minimally covering record for `b.example.org`:
 ## NSEC3 White Lies
 
 The same principle of minimally covering spans can be applied to NSEC3 records.
-This mechanism has been dubbed as NSEC3 White Lies when it was implemented in
-[](#phreebird). Here, the NSEC3 owner name is simply the hash of the QNAME
+This mechanism has been dubbed "NSEC3 White Lies" when it was implemented in
+Phreebird [](#phreebird). Here, the NSEC3 owner name is the hash of the QNAME
 minus one and the next owner name is the hash of the QNAME plus one.
 
 The following NSEC3 white lie denies `b.example.org` (recall this hashes to
@@ -93,7 +93,7 @@ The following NSEC3 white lie denies `b.example.org` (recall this hashes to
 
 The type bitmap is empty in this case. If SHA1(`b.example.org`)-1 is a
 collision with an existing name, the bitmap could have been filled with the
-RRtypes of the RRsets at that name. This record actually denies the existence
+RR types of the RRsets at that name. This record actually denies the existence
 of the next closer of the closest encloser of `b.example.org` (which is 
 conveniently `b.example.org`). Of course the NSEC3 records to match the 
 closest encloser and to cover the source of synthesis are also still required.
