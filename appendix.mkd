@@ -20,6 +20,18 @@ Original Name     Hashed Name
 
 ^[tab:hashed-owner::Hashed owner names for "example.org" in hash order.]
 
+# Usefullness of NSEC3
+
+You may want to have some discussion about the pointlessness of
+NSEC3 in highly structured zones like ip6.arpa and in-addr.arpa.
+These can be walked even with NSEC3 due to their structure.
+
+There is a bias that NSEC3 is better than NSEC.  They are just
+different.  NSEC3 is actually worse for the typical trivial zone
+as it doesn't help with zone walking as you can guess the names and
+adds pointless computational load on both authoritative servers and
+validators.
+
 # DNSSEC On-line Signing
 
 An NSEC record lists the next existing name in a zone, and thus makes it
