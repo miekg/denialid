@@ -918,7 +918,8 @@ This document would not be possible without the help of Ed Lewis,
 Roy Arends, Wouter Wijngaards, Olaf Kolkman, Carsten Strotmann,
 Jan-Piet Mens, Peter van Dijk,
 Marco Davids, Esther Makaay, Antoin Verschuren, Lukas Wunner, 
-Joe Abley, Ralf Weber, Geoff Huston, Dave Lawrence and Tony Finch.
+Joe Abley, Ralf Weber, Geoff Huston, Dave Lawrence, Tony Finch and Mark
+Andrews.
 Also valuable was the source code of Unbound.
 (`validator/val_nsec3.c`).
 
