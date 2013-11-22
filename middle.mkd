@@ -328,7 +328,7 @@ who are deploying DNSSEC, face up front costs. This could hinder DNSSEC adoption
 
 These two issues eventually lead to NSEC3 which:
 
-* Adds a way to garble the next owner name, thus thwarting zone-walking;
+* Adds a way to garble the owner names, thus thwarting zone-walking;
 * Makes it possible to skip names for the next owner name. This feature
   is called Opt-Out (See [](#opt-out)). It means not all names in your zone get an NSEC3 plus
   ditto signature, making it possible to "grow into" your DNSSEC deployment.
