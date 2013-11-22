@@ -701,7 +701,7 @@ These two records already deny the existence of the requested name, so we do not
 need an NSEC3 record that covers the actual queried name: By denying the existence
 of the next closer name, you also deny the existence of the queried name.
 
-Note that with NSEC, the existance of all empty non-terminals between the two
+Note that with NSEC, the existence of all empty non-terminals between the two
 names are denied, hence implicitly contains the closest encloser.
 
 For a given query name, there is one (and only one) place where wildcard expansion is possible.
