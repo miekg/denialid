@@ -6,9 +6,8 @@ with NSEC3, but an adversary will then retrieve all the names in hashed
 format. With DNSSEC on-line signing, zone walking can be prevented by faking
 the next owner name.
 
-A drawback of on-line signing is that the private key must be on-line too, to
-create the corresponding RRSIG records. This makes the keys more vulnerable
-for unwanted exposure.
+A drawback of on-line signing is that the private key must be on-line too to
+create the corresponding RRSIG records. 
 
 ## Minimally Covering NSEC Records
 
