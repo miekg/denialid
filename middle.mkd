@@ -152,7 +152,7 @@ pre-computed, but it is impossible to pre-compute (all conceivable) non-existenc
 A generic denial record which can be used in all denial of existence proofs is
 not an option: such a record is susceptible to replay attacks. When you are
 querying a name server for any record that actually exists, a
-man-in-the-middle could replay that generic denial record that is not limited
+man-in-the-middle could replay that generic denial record that is unlimited
 in its scope and it would be impossible to tell whether the response was
 genuine or spoofed. In other words, the generic record can be replayed to 
 falsely deny *all* possible responses. 
@@ -749,18 +749,18 @@ the NSEC3 records it got?
                         example.org
                            ** 
                        +-- ** . . . . . . . . . . .
-                  (1) /  . ^ .                    .
+                  (1) /  . ^ .                     .
                      /  .  |   .                    .
                     |  .   |    .                    .
                     v .    |     .                    . 
-                    **     |      **                  --
-      h.example.org ** ----+----> ** 3.example.org    -- 2.example.org
+                    **     |      **                  ++
+      h.example.org ** ----+----> ** 3.example.org    ++ 2.example.org
                     .     /  (2)   . |                .
                     .    /         . | (3)            . 
                     .   / (5)      . |                .
                     .  /           . v                .
-    1.h.example.org **            **                  -- 
-                    ** <--------- ** 3.3.example.org  -- x.2.example.org
+    1.h.example.org **            **                  ++ 
+                    ** <--------- ** 3.3.example.org  ++ x.2.example.org
                              (4) 
 
 ^[fig:x.2.exampl::x.2.example.org does not exist. The five arrows represent the NSEC3 records, the ones numbered (1), (2) and (3) are the NSEC3s returned in our answer. 2.example.org is covered by (3) and x.2.example.org is covered by (4).]
