@@ -1,25 +1,3 @@
-# List of Hashed Owner Names
-
-The following owner names are used in this document. The
-origin for these names is `example.org`.
-
-Original Name     Hashed Name
--------------     -----------
-`a`               `04sknapca5al7qos3km2l9tl3p5okq4c`
-`1.h`             `117gercprcjgg8j04ev1ndrk8d1jt14k`
-`@`               `15bg9l6359f5ch23e34ddua6n1rihl9h`
-`h`               `1avvqn74sg75ukfvf25dgcethgq638ek`
-`*`               `22670trplhsr72pqqmedltg1kdqeolb7`
-`3`               `75b9id679qqov6ldfhd8ocshsssb6jvq`
-`2`               `7t70drg4ekc28v93q7gnbleopa7vlp6q`
-`3.3`             `8555t7qegau7pjtksnbchg4td2m0jnpj`
-`d`               `a6edkb6v8vl5ol8jnqqlt74qmj7heb84`
-`*.2`             `fbq73bfkjlrkdoqs27k5qf81aqqd7hho`
-`b`               `iuu8l5lmt76jeltp0bir3tmg4u3uu8e7`
-`x.2`             `ndtu6dste50pr4a1f2qvr1v31g00i2i1`
-
-^[tab:hashed-owner::Hashed owner names for "example.org" in hash order.]
-
 # DNSSEC On-line Signing
 
 An NSEC record lists the next existing name in a zone, and thus makes it
@@ -107,6 +85,28 @@ These can be generated too:
     # Covering `*.example.org`: `22670trplhsr72pqqmedltg1kdqeolb7`
     22670trplhsr72pqqmedltg1kdqeolb6.example.org.(
        NSEC3 1 0 2 DEAD 22670TRPLHSR72PQQMEDLTG1KDQEOLB8 )
+
+# List of Hashed Owner Names
+
+The following owner names are used in this document. The
+origin for these names is `example.org`.
+
+Original Name     Hashed Name
+-------------     -----------
+`a`               `04sknapca5al7qos3km2l9tl3p5okq4c`
+`1.h`             `117gercprcjgg8j04ev1ndrk8d1jt14k`
+`@`               `15bg9l6359f5ch23e34ddua6n1rihl9h`
+`h`               `1avvqn74sg75ukfvf25dgcethgq638ek`
+`*`               `22670trplhsr72pqqmedltg1kdqeolb7`
+`3`               `75b9id679qqov6ldfhd8ocshsssb6jvq`
+`2`               `7t70drg4ekc28v93q7gnbleopa7vlp6q`
+`3.3`             `8555t7qegau7pjtksnbchg4td2m0jnpj`
+`d`               `a6edkb6v8vl5ol8jnqqlt74qmj7heb84`
+`*.2`             `fbq73bfkjlrkdoqs27k5qf81aqqd7hho`
+`b`               `iuu8l5lmt76jeltp0bir3tmg4u3uu8e7`
+`x.2`             `ndtu6dste50pr4a1f2qvr1v31g00i2i1`
+
+^[tab:hashed-owner::Hashed owner names for "example.org" in hash order.]
 
 # Changelog
 
