@@ -3,7 +3,7 @@
 An NSEC record lists the next existing name in a zone, and thus makes it
 possible to retrieve all the names from the zone. This can also be done
 with NSEC3, but an adversary will then retrieve all the names in hashed
-format. With DNSSEC on-line signing, zone walking can be prevented by garbling
+format. With DNSSEC on-line signing, zone walking can be prevented by faking
 the next owner name.
 
 A drawback of on-line signing is that the private key must be on-line too, to
