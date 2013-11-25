@@ -75,7 +75,7 @@ These can be generated too:
 
     # Matching `example.org`: `15bg9l6359f5ch23e34ddua6n1rihl9h`
     15bg9l6359f5ch23e34ddua6n1rihl9h.example.org. (
-       NSEC3 1 0 2 DEAD 1AVVQN74SG75UKFVF25DGCETHGQ638EK NS SOA RRSIG
+       NSEC3 1 0 2 DEAD 15BG9L6359F5CH23E34DDUA6N1RIHL9I NS SOA RRSIG
             DNSKEY NSEC3PARAM )
 
     # Covering `*.example.org`: `22670trplhsr72pqqmedltg1kdqeolb7`
