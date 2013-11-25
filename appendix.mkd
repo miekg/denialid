@@ -146,4 +146,8 @@ Original Name     Hashed Name
 1. Some tweaks in the text regarding on-line signing;
 1. Add more text on a non-working "generic non-existence records".
 1. Add appendix on on-line signing;
-1. Add appendix on usefulness of NSEC3.
+1. Add text on usefulness of NSEC3.
+
+## -05
+
+1. Fix NSEC3 RR in Appendix A.2.
