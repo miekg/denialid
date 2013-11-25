@@ -30,7 +30,7 @@
 <!ENTITY phreebird     PUBLIC '' 'bib/reference.phreebird.xml'>
 ]>
 
-<rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-04">
+<rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-05">
 <?rfc toc="yes"?>         <!-- generate a table of contents -->
 <?rfc tocompact="no"?>
 <?rfc tocdepth="6"?>
@@ -72,7 +72,7 @@
             </address>
         </author>
 
-        <date day="22" month='November' year='2013' />
+        <date day="25" month='November' year='2013' />
 
         <area>Internet</area>
         <keyword>DNSSEC</keyword>
