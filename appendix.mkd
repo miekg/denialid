@@ -1,5 +1,7 @@
 # DNSSEC On-line Signing
 
+## Minimally Covering NSEC Records
+
 An NSEC record lists the next existing name in a zone, and thus makes it
 possible to retrieve all the names from the zone. This can also be done
 with NSEC3, but an adversary will then retrieve all the names in hashed

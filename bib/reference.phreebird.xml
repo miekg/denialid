@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<reference anchor='phreebird'>
+<reference anchor='phreebird' target="http://dankaminsky.com/phreebird/">
 <front>
 <title abbrev="Phreebird">Phreebird: a DNSSEC proxy</title>
 
@@ -8,7 +8,7 @@
     <organization />
 </author>
 
-<date month='January' day='8' year='2011' />
+<date month='January' year='2011' />
 </front>
 <format type='URL' target='http://dankaminsky.com/phreebird/' />
 </reference>
