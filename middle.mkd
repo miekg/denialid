@@ -175,8 +175,9 @@ be signed beforehand and given to the resolver.
 > between 2000 and 6000 queries per second (qps), with peaks up to 20,000 qps
 > or more.  Scaling signature generation to these kind of levels is
 > always a challenge. Another issue was (and is) key management, for on-line
-> signing to work you need access to the private key(s). This is considered a
-> security risk. Hence, the protocol required not to rely on on-line signing.
+> signing to work each authoritative name server needs access to the private
+> key(s). This is considered a security risk. Hence, the protocol required
+> not to rely on on-line signing.
 
 The road to the current solution (NSEC/NSEC3) was long. It
 started with the NXT (next) record. The NO (not existing) record was introduced,
