@@ -510,7 +510,8 @@ zone's specific NSEC3 parameters (hash iterations and salt).
 One way to learn them is to scan the zone during loading for NSEC3 records and glean
 the NSEC3 parameters from them.  However, it would need to make sure that there
 is at least one complete set of NSEC3 records for the zone using the same
-parameters. Therefore, it would need to inspect all NSEC3 records.
+parameters (because the zone may be in a transition to a new, yet incomplete, set of NSEC3 records.
+Therefore, it would need to inspect all NSEC3 records.
 
 A more graceful solution was designed. 
 The solution was to create a new record, NSEC3PARAM, which must be placed at
