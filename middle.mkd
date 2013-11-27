@@ -157,16 +157,16 @@ in its scope and it would be impossible to tell whether the response was
 genuine or spoofed. In other words, the generic record can be replayed to 
 falsely deny *all* possible responses. 
  
-Another way would be to use the QNAME in the answer and sign that; essentially
+We could also use the QNAME in the answer and sign that; essentially
 signing an NXDOMAIN response. While this approach could have worked
-technically, it is incompatible with
-off-line signing techniques. [](#dnssec-on-line-signing) describes compatible
-on-line signing techniques in more detail.
+technically, it is incompatible with off-line signing. 
 
 The way this has been solved is by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
 defines the holes (non-existing names) in the zone. This record can 
 be signed beforehand and given to the resolver.
+[](#on-line-signing-minimally-covering-nsec-records) and [](#on-line-signing-nsec3-white-lies)
+describe an on-line signing technique that is compatible with this scheme.
 
 > Given all these troubles, why didn't the designers of
 > DNSSEC go for the (easy) route and allowed for on-line signing? Well,
@@ -335,7 +335,7 @@ These two issues eventually lead to NSEC3 which:
 
 Note that [](#RFC4470) also prevents zone walking by introducing minimally
 covering NSEC records. This technique is described
-in [](#dnssec-on-line-signing);
+in [](#on-line-signing-minimally-covering-nsec-records) and [](#on-line-signing-nsec3-white-lies).
  
 Before we delve into NSEC3, let us first take a look at its predecessors: NO,
 NSEC2, and DNSNR.
@@ -755,11 +755,11 @@ the NSEC3 records it got?
                      /  .  |   .                    .
                     |  .   |    .                    .
                     v .    |     .                    . 
-                    **     |      **                  ++
+                    **     | (2)  **                  ++
       h.example.org ** ----+----> ** 3.example.org    ++ 2.example.org
-                    .     /  (2)   . |                .
-                    .    /         . | (3)            . 
-                    .   / (5)      . |                .
+                    .     /        . |                .
+                    .    / (5)     . | (3)            . 
+                    .   /          . |                .
                     .  /           . v                .
     1.h.example.org **            **                  ++ 
                     ** <--------- ** 3.3.example.org  ++ x.2.example.org

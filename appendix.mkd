@@ -1,11 +1,9 @@
-# DNSSEC On-line Signing
-
-## Minimally Covering NSEC Records
+# On-line Signing: Minimally Covering NSEC Records
 
 An NSEC record lists the next existing name in a zone, and thus makes it
-possible to retrieve all the names from the zone. This can also be done
-with NSEC3, but an adversary will then retrieve all the names in hashed
-format. With DNSSEC on-line signing, zone walking can be prevented by faking
+trivial to retrieve all the names from the zone. This can also be done
+with NSEC3, but an adversary will then retrieve all the hashed names.
+With DNSSEC on-line signing, zone walking can be prevented by faking
 the next owner name.
 
 To prevent retrieval of the next owner name with NSEC, a different,
@@ -52,7 +50,7 @@ gives the following minimally covering record for `b.example.org`:
      \255\255\255\255\255\255\255\255\255\255\255.example.org. (
        NSEC \000.b.example.org. RRSIG NSEC )
 
-## NSEC3 White Lies
+# On-line Signing: NSEC3 White Lies
 
 The same principle of minimally covering spans can be applied to NSEC3 records.
 This mechanism has been dubbed "NSEC3 White Lies" when it was implemented in
@@ -70,7 +68,7 @@ collision with an existing name, the bitmap should have been filled with the
 RR types that exist at that name. This record actually denies the existence
 of the next closer of the closest encloser of `b.example.org` (which is
 conveniently `b.example.org`). Of course the NSEC3 records to match the
-closest encloser and to cover the source of synthesis are still required.
+closest encloser and the one to deny the wildcard are still required.
 These can be generated too:
 
     # Matching `example.org`: `15bg9l6359f5ch23e34ddua6n1rihl9h`
