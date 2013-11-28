@@ -166,7 +166,7 @@ interval between two existing names. Or to put it another way: it
 defines the holes (non-existing names) in the zone. This record can 
 be signed beforehand and given to the resolver.
 [](#on-line-signing-minimally-covering-nsec-records) and [](#on-line-signing-nsec3-white-lies)
-describe an on-line signing technique that is compatible with this scheme.
+describe on-line signing techniques that is compatible with this scheme.
 
 > Given all these troubles, why didn't the designers of
 > DNSSEC go for the (easy) route and allowed for on-line signing? Well,
@@ -328,14 +328,15 @@ who are deploying DNSSEC, face up front costs. This could hinder DNSSEC adoption
 
 These two issues eventually lead to NSEC3 which:
 
-* Adds a way to garble the owner names, thus thwarting zone-walking;
+* Adds a way to garble the owner names, thus thwarting zone walking;
 * Makes it possible to skip names for the next owner name. This feature
   is called Opt-Out (See [](#opt-out)). It means not all names in your zone get an NSEC3 plus
   ditto signature, making it possible to "grow into" your DNSSEC deployment.
 
-Note that [](#RFC4470) also prevents zone walking by introducing minimally
+Note that there are other ways to mitigate against zone walking.
+RFC 4470 [(#RFC4470) prevents zone walking by introducing minimally
 covering NSEC records. This technique is described
-in [](#on-line-signing-minimally-covering-nsec-records) and [](#on-line-signing-nsec3-white-lies).
+in [](#on-line-signing-minimally-covering-nsec-records).
  
 Before we delve into NSEC3, let us first take a look at its predecessors: NO,
 NSEC2, and DNSNR.
