@@ -130,23 +130,23 @@ The above has to be translated to the security aware world
 of DNSSEC. But there are a few principles DNSSEC brings to the table:
 
 1. A name server is free to compute the answer and signature(s)
-    on-the-fly, but the protocol is written with a "first sign, then load" 
+    on-the-fly, but the protocol is written with a "first sign, then load"
     attitude in mind.
     It is rather asymmetrical, but a lot of the design in DNSSEC
     stems from fact that you need to accommodate authenticated
     denial of existence. If the DNS did not have NXDOMAIN, DNSSEC would be a
     lot simpler, but a lot less useful!
 
-2. The DNS packet header is not signed. 
-    This means that a `status: NXDOMAIN` 
+2. The DNS packet header is not signed.
+    This means that a `status: NXDOMAIN`
     can not be trusted. In fact the entire header may be forged, including
-    the AD bit (AD stands for Authentic Data, see RFC 3655 [](#RFC3655)), 
+    the AD bit (AD stands for Authentic Data, see RFC 3655 [](#RFC3655)),
     which may give some food for thought;
 
 3. DNS wildcards and CNAME records complicate matters significantly. More
     about this in later sections ([](#wildcards-in-the-dns) and [](#cname-records)).
 
-The first principle implies that all denial of existence answers need to be 
+The first principle implies that all denial of existence answers need to be
 pre-computed, but it is impossible to pre-compute (all conceivable) non-existence answers.
 
 A generic denial record which can be used in all denial of existence proofs is
@@ -154,16 +154,16 @@ not an option: such a record is susceptible to replay attacks. When you are
 querying a name server for any record that actually exists, a
 man-in-the-middle could replay that generic denial record that is unlimited
 in its scope and it would be impossible to tell whether the response was
-genuine or spoofed. In other words, the generic record can be replayed to 
-falsely deny *all* possible responses. 
- 
+genuine or spoofed. In other words, the generic record can be replayed to
+falsely deny *all* possible responses.
+
 We could also use the QNAME in the answer and sign that; essentially
 signing an NXDOMAIN response. While this approach could have worked
-technically, it is incompatible with off-line signing. 
+technically, it is incompatible with off-line signing.
 
 The way this has been solved is by introducing a record that defines an
 interval between two existing names. Or to put it another way: it
-defines the holes (non-existing names) in the zone. This record can 
+defines the holes (non-existing names) in the zone. This record can
 be signed beforehand and given to the resolver.
 [](#on-line-signing-minimally-covering-nsec-records) and [](#on-line-signing-nsec3-white-lies)
 describe on-line signing techniques that are compatible with this scheme.
@@ -186,7 +186,7 @@ NSEC (next secure) record. From there it went through NSEC2/DNSNR to finally rea
 NSEC3 (next secure, version 3) in RFC 5155.
 
 ## NXT
-The first attempt to specify authenticated denial of existence was NXT 
+The first attempt to specify authenticated denial of existence was NXT
 (RFC 2535 [](#RFC2535)).  Section 5.1 of that RFC introduces the record:
 
 > "The NXT resource record is used to securely indicate that RRs with an
@@ -198,7 +198,7 @@ is superseded by NSEC. In the next section we explain how NSEC (and thus NXT) wo
 
 ## NSEC
 In RFC 3755 [](#RFC3755) all the DNSSEC types were given new names, SIG was renamed RRSIG,
-KEY became DNSKEY and NXT was renamed to NSEC and a minor 
+KEY became DNSKEY and NXT was renamed to NSEC and a minor
 issue was fixed in the process, namely the type bitmap was redefined to allow more
 than 127 types to be listed ([](#RFC2535), Section 5.2).
 
@@ -278,18 +278,18 @@ is proven not to exist. We have authenticated denial of existence.
 Note that a man-in-the-middle may still replay this NXDOMAIN response
 when you're querying for, say, `c.example.org`. But it would not do any
 harm since it is provably the proper response to the query. In the future, there
-may be data published for `c.example.org`. Therefore, the RRSIG's RDATA 
+may be data published for `c.example.org`. Therefore, the RRSIG's RDATA
 include a validity period (not visible in the zone above), so that an attacker
 cannot replay this NXDOMAIN response for `c.example.org` forever.
 
 ## NODATA Responses
-NSEC records are also used in NODATA responses. In that case we need to look more closely 
+NSEC records are also used in NODATA responses. In that case we need to look more closely
 at the type bitmap. The
 type bitmap in an NSEC record tells which types are defined for
 a name. If we look at the NSEC record of `a.example.org`, we
 see the following types in the bitmap: A, TXT, NSEC and RRSIG. So
 for the name `a` this indicates we must have an A, TXT, NSEC and RRSIG record in the
-zone. 
+zone.
 
 With the type bitmap of the NSEC record, a resolver can establish
 that a name is there, but the type is not. For example, if a resolver
@@ -304,7 +304,7 @@ back is:
     a.example.org.      NSEC d.example.org. A TXT RRSIG NSEC
     a.example.org.      RRSIG(NSEC) ( ... )
 
-The resolver should check the AUTHORITY section and conclude that: 
+The resolver should check the AUTHORITY section and conclude that:
 
 II.  `a.example.org` exists (because of the NSEC with that owner name) and;
 II.  the type (AAAA) does not as it is not listed in the type bitmap.
@@ -337,23 +337,23 @@ Note that there are other ways to mitigate against zone walking.
 RFC 4470 [(#RFC4470) prevents zone walking by introducing minimally
 covering NSEC records. This technique is described
 in [](#on-line-signing-minimally-covering-nsec-records).
- 
+
 Before we delve into NSEC3, let us first take a look at its predecessors: NO,
 NSEC2, and DNSNR.
 
 # Experimental and Deprecated Mechanisms: NO, NSEC2 and DNSNR
-Long before NSEC was defined, the NO record was introduced. 
+Long before NSEC was defined, the NO record was introduced.
 It was the first record to use the idea of hashed owner names, to fix the issue of zone walking
 that was present with the NXT record.
 It also fixed the type bitmap issue of the NXT record, but not in a space efficient way.
 At that time (around 2000) zone walking was not considered important enough
 to warrant the new record. People were also worried that DNSSEC deployment would be hindered by
 developing an alternate means of denial of existence. Thus the effort was shelved and
-NXT remained. 
+NXT remained.
 
 When the new DNSSEC specification [](#RFC4034) was written,
 people were still not convinced that zone walking was a problem that
-should be solved. So NSEC saw the light and inherited the two issues from NXT. 
+should be solved. So NSEC saw the light and inherited the two issues from NXT.
 
 Several years after, NSEC2 was introduced as a way to solve the two issues
 of NSEC. The NSEC2 draft contains the following paragraph:
@@ -374,14 +374,14 @@ presence of a domain name. From the draft:
 >  the closest encloser, this SHOULD be used instead of an EXIST record."
 
 The introduction of this record led to questions on what
-wildcards actually mean (especially in the context of DNSSEC). It is 
-probably not a coincidence that 
+wildcards actually mean (especially in the context of DNSSEC). It is
+probably not a coincidence that
 "The Role of Wildcards in the Domain Name System" ([](#RFC4592)) was standardized
 before NSEC3 was.
 
 NSEC2 solved the zone walking issue by hashing (with SHA1 and a salt) the
 "next owner name" in the record, thereby making it useless for zone walking.
-But it did not have Opt-Out. 
+But it did not have Opt-Out.
 
 The DNSNR record was another attempt that used hashed names to
 foil zone walking and it also introduced the concept of opting out (called
@@ -401,7 +401,7 @@ have with NSEC, but it introduces some additional complexity.
 
 NSEC3 did not supersede NSEC, they are both defined for
 DNSSEC. So DNSSEC is blessed with two different means to perform authenticated
-denial of existence: NSEC and NSEC3. 
+denial of existence: NSEC and NSEC3.
 In NSEC3 every name is hashed, including the owner name.
 This means
 that NSEC3 chain is sorted in hash order, instead of canonical order.
@@ -422,8 +422,8 @@ Lets look at typical NSEC3 record:
 
 On the first line we see the hashed owner name: `15bg9l6359f5ch23e34ddua6n1rihl9h.example.org`, this
 is the hashed name of the fully qualified domain name (FQDN) `example.org` encoded as Base32 ([](#RFC4648)).
-Note that even though we hashed `example.org`, the 
-zone's name is added to make it look like a domain name again. 
+Note that even though we hashed `example.org`, the
+zone's name is added to make it look like a domain name again.
 In our zone, the basic format is `Base32(SHA1(FQDN)).example.org`.
 The next hashed owner name `A6EDKB6V8VL5OL8JNQQLT74QMJ7HEB84` (line 2) is the hashed version of `d.example.org`,
 represented as Base32. Note that `d.example.org` is used are the next owner name, because in the hash ordering, its
@@ -431,13 +431,12 @@ hash comes after the hash of the zone's apex.
 Also note that `.example.org` is not added to the next hashed owner name, as this
 name always falls in the current zone.
 
-The "1 0 2 DEAD" section of the NSEC3 states: 
+The "1 0 2 DEAD" section of the NSEC3 states:
 
-* Hash Algorithm = 1 (SHA1, this is the default, no other hash algorithms are currently defined for 
-    use in NSEC3); 
+* Hash Algorithm = 1 (SHA1, this is the default, no other hash algorithms are currently defined for use in NSEC3);
 * Opt-Out = 0 (disabled);
-* Hash Iterations = 2, this yields three iterations, as a zero value is already one iteration; 
-* Salt = "DEAD". 
+* Hash Iterations = 2, this yields three iterations, as a zero value is already one iteration;
+* Salt = "DEAD".
 
 At the end we see the type bitmap, which is identical to NSEC's bitmap, that
 lists the types present at the original owner name. Note that the type NSEC3
@@ -447,11 +446,11 @@ for the hashed name.
 
 Names like `1.h.example.org` hash to one label in NSEC3,
 `1.h.example.org` becomes: `117gercprcjgg8j04ev1ndrk8d1jt14k.example.org` when
-used as an owner name.  This is an important observation. 
+used as an owner name.  This is an important observation.
 By hashing the names you lose the depth of a zone - hashing
 introduces a flat space of names, as opposed to NSEC.
 
-The name used above (`1.h.example.org`) creates an empty non-terminal. 
+The name used above (`1.h.example.org`) creates an empty non-terminal.
 Empty non-terminals are domain names that have no RRs associated with them, and exist only
 because they have one or more sub-domains that do ([](#RFC5155), Section 1.3). The record:
 
@@ -466,7 +465,7 @@ An empty non-terminal will get an NSEC3 record, but not an NSEC record.
 In [](#the-closest-encloser-nsec3-record) is shown how the resolver uses
 these NSEC3 records to validate the denial of existence proofs.
 
-Note that NSEC3 might not always be useful. For example, highly structures 
+Note that NSEC3 might not always be useful. For example, highly structures
 zones, like the reverse zones ip6.arpa and in-addr.arpa, can be walked even
 with NSEC3 due to their structure. Also the names in small, trivial zones
 can be easily guessed. In these cases, it does not help to defend against zone
@@ -477,17 +476,17 @@ and validators.
 Hashing mitigates the zone walking issue of NSEC. The other issue, the high
 costs of securing a delegation to an insecure zone, is tackled with Opt-Out.
 When using Opt-Out, names that are an insecure delegation (and empty non-terminals
-that are only derived from insecure delegations) don't require an NSEC3 record. 
+that are only derived from insecure delegations) don't require an NSEC3 record.
 For each insecure delegation, the zone size can be decreased (compared with a fully
 signed zone without using Opt-Out) with at least two records: one NSEC3
 record and one corresponding RRSIG record. If the insecure delegation would
-introduce empty non-terminals, even more records can be omitted from the zone. 
+introduce empty non-terminals, even more records can be omitted from the zone.
 
 Opt-Out NSEC3 records are not able to prove or deny the existence of the insecure
 delegations. In other words, those delegation do not benefit from the cryptographic
-security that DNSSEC provides. 
+security that DNSSEC provides.
 
-A recently discovered corner case ([](#RFC5155-errata3441)) shows that not only those delegations 
+A recently discovered corner case ([](#RFC5155-errata3441)) shows that not only those delegations
 remain insecure, also the empty non-terminal space that is derived from those delegations
 are insecure. Because the names in this empty non-terminal space do exist according
 to the definition in [](#RFC4592), the server should respond to queries for these names
@@ -513,7 +512,7 @@ the NSEC3 parameters from them.  However, it would need to make sure that there
 is at least one complete set of NSEC3 records for the zone using the same
 parameters. Therefore, it would need to inspect all NSEC3 records.
 
-A more graceful solution was designed. 
+A more graceful solution was designed.
 The solution was to create a new record, NSEC3PARAM, which must be placed at
 the apex of the zone.  Its role is to provide a fixed place
 where an authoritative name server can directly see the NSEC3 parameters used, and
@@ -544,7 +543,7 @@ For completeness, our (unsigned) zone now looks like this:
 
 ^[fig:the-exampl::The example.org zone with a wildcard record.]
 
-If a resolver asks for `z.example.org TXT`, 
+If a resolver asks for `z.example.org TXT`,
 the name server will respond with an expanded wildcard, instead of an NXDOMAIN:
 
     ;; status: NOERROR, id: 13658
@@ -568,12 +567,12 @@ sees the answer as-is. How will this answer look with DNSSEC?
 
 The RRSIG of the `z.example.org` TXT record indicates there is a wildcard configured. The RDATA of
 the signature lists a label count [](#RFC4034), Section 3.1.3., of two (not visible in the answer above),
-but the owner name of the signature has three labels. 
+but the owner name of the signature has three labels.
 This mismatch indicates there is a wildcard `*.example.org` configured.
 
 > An astute reader may notice that it appears as if a `z.example.org` RRSIG(TXT) is created
 > out of thin air. This is not the case. The signature for `z.example.org` does not exist.
-> The signature you are seeing is the one for `*.example.org` which does exist, only 
+> The signature you are seeing is the one for `*.example.org` which does exist, only
 > the owner name is switched to `z.example.org`. So even
 > with wildcards, no signatures have to be created on the fly.
 
@@ -594,9 +593,9 @@ The tweaking simply consists of adjusting the ANSWER section to:
 ^[fig:a-forged-r::A forged response without the expanded wildcard.]
 
 Note the subtle difference from [](#fig:a-response) in the owner name. In this response we see a
-`a.example.org TXT` record, for which a record with different RDATA (See [](#fig:the-exampl)) exist in the zone. 
+`a.example.org TXT` record, for which a record with different RDATA (See [](#fig:the-exampl)) exist in the zone.
 
-Which would be a perfectly valid answer if we would not require the 
+Which would be a perfectly valid answer if we would not require the
 inclusion of an NSEC or NSEC3 record in the wildcard answer response. The resolver
 believes that `a.example.org TXT` is a wildcard record, and the real record
 is obscured. This is bad and defeats all the security DNSSEC
@@ -604,7 +603,7 @@ can deliver. Because of this, the NSEC or NSEC3 must be present.
 
 Another way of putting this is that DNSSEC is there to ensure
 the name server has followed the steps as outlined in [](#RFC1034), Section 4.3.2
-for looking up names in the zone. 
+for looking up names in the zone.
 It explicitly lists wildcard look up as one of these steps (3c), so with DNSSEC this must be
 communicated to the resolver: hence the NSEC(3) record.
 
@@ -666,7 +665,7 @@ and one NSEC3 record that deny wildcard synthesis. What do we miss?
 
 The short answer is that, due to the hashing in NSEC3 you loose the depth of
 your zone: Everything is hashed into a flat plane. To make up for this loss of
-information you need an extra record. 
+information you need an extra record.
 
 To understand NSEC3, we will need two definitions:
 
@@ -682,15 +681,15 @@ Closest encloser:
 Next closer name:
 
 :   Introduced in the NSEC3 RFC, this is the closest encloser with one more label added to the left.
-    So if `example.org` is the closest encloser for the query name `x.2.example.org`, `2.example.org` is 
+    So if `example.org` is the closest encloser for the query name `x.2.example.org`, `2.example.org` is
     the `next closer name`.
 
 An NSEC3 `closest encloser proof` consists of:
 
 1. An NSEC3 record that **matches** the `closest encloser`. This means the
    unhashed owner name of the record is the closest encloser. This bit of
-   information tells a resolver: "The name you are asking for does 
-   not exist, the closest I have is this". 
+   information tells a resolver: "The name you are asking for does
+   not exist, the closest I have is this".
 
 2. An NSEC3 record that **covers** the `next closer name`. This means it
    defines an interval in which the `next closer name` falls. This
@@ -706,7 +705,7 @@ Note that with NSEC, the existence of all empty non-terminals between the two
 names are denied, hence implicitly contains the closest encloser.
 
 For a given query name, there is one (and only one) place where wildcard expansion is possible.
-This is the `source of synthesis`, and is defined 
+This is the `source of synthesis`, and is defined
 ([](#RFC4592), Section 2.1.1 and Section 3.3.1) as:
 
     <asterisk label>.<closest encloser>
@@ -734,7 +733,7 @@ Also see [](#fig:x.2.exampl) the numbers in that figure correspond
 with the following NSEC3 records:
 
     15bg9l6359f5ch23e34ddua6n1rihl9h.example.org. (
-     NSEC3 1 0 2 DEAD 1AVVQN74SG75UKFVF25DGCETHGQ638EK NS SOA RRSIG 
+     NSEC3 1 0 2 DEAD 1AVVQN74SG75UKFVF25DGCETHGQ638EK NS SOA RRSIG
             DNSKEY NSEC3PARAM )
 
     1avvqn74sg75ukfvf25dgcethgq638ek.example.org. (
@@ -745,25 +744,25 @@ with the following NSEC3 records:
 
 If we would follow the NSEC approach, the resolver is only interested in
 one thing.
-Does the hash of `x.2.example.org` fall in any of the intervals of 
+Does the hash of `x.2.example.org` fall in any of the intervals of
 the NSEC3 records it got?
 
                         example.org
-                           ** 
+                           **
                        +-- ** . . . . . . . . . . .
                   (1) /  . ^ .                     .
                      /  .  |   .                    .
                     |  .   |    .                    .
-                    v .    |     .                    . 
+                    v .    |     .                    .
                     **     | (2)  **                  ++
       h.example.org ** ----+----> ** 3.example.org    ++ 2.example.org
                     .     /        . |                .
-                    .    / (5)     . | (3)            . 
+                    .    / (5)     . | (3)            .
                     .   /          . |                .
                     .  /           . v                .
-    1.h.example.org **            **                  ++ 
+    1.h.example.org **            **                  ++
                     ** <--------- ** 3.3.example.org  ++ x.2.example.org
-                             (4) 
+                             (4)
 
 ^[fig:x.2.exampl::x.2.example.org does not exist. The five arrows represent the NSEC3 records, the ones numbered (1), (2) and (3) are the NSEC3s returned in our answer. 2.example.org is covered by (3) and x.2.example.org is covered by (4).]
 
@@ -777,7 +776,7 @@ the interval described by `1avvqn74sg75ukfvf25dgcethgq638ek` and
 And the third NSEC3, with interval `75b9id679qqov6ldfhd8ocshsssb6jvq` to
 `8555t7qegau7pjtksnbchg4td2m0jnpj` also isn't of any help.
 
-What is a resolver to do? It has been given the maximum amount of NSEC3s and 
+What is a resolver to do? It has been given the maximum amount of NSEC3s and
 they all seem useless.
 
 So this is where the closest encloser proof comes into play. And for the proof
@@ -790,7 +789,7 @@ the closest encloser.
 When the resolver has found the closest encloser, the next step is
 to construct the next closer name. This is the closest encloser
 with the last chopped label from query name pre-pended to it:
-"\<last chopped label\>.\<closest encloser\>". The hash of this name should 
+"\<last chopped label\>.\<closest encloser\>". The hash of this name should
 be covered by the interval set in any of the NSEC3 records.
 
 Then the resolver needs to check the presence of a wildcard.
@@ -804,15 +803,15 @@ hashing each instance (with the same number of iterations and hash
 as the zone it is querying) and comparing that to the answers
 given. So it has the following hashes to work with:
 
-`x.2.example.org`: 
+`x.2.example.org`:
 
 :   `ndtu6dste50pr4a1f2qvr1v31g00i2i1`, last chopped label: "\<empty\>";
 
-`2.example.org`: 
+`2.example.org`:
 
 :   `7t70drg4ekc28v93q7gnbleopa7vlp6q`, last chopped label: "x";
 
-`example.org`: 
+`example.org`:
 
 :   `15bg9l6359f5ch23e34ddua6n1rihl9h`, last chopped label: "2";
 
@@ -887,8 +886,8 @@ covers the query name `x.2.example.org` (`ndtu6dste50pr4a1f2qvr1v31g00i2i1`).
 
 Now an attacker adds this NSEC3 record to the AUTHORITY section of the reply
 to deny both `x.2.example.org` and any wildcard expansion. The net result is
-that the resolver determines that `x.2.example.org` does not exist, while in fact it 
-should have been synthesized via wildcard expansion. 
+that the resolver determines that `x.2.example.org` does not exist, while in fact it
+should have been synthesized via wildcard expansion.
 With the NSEC3 matching the closest encloser `example.org`, the resolver
 can be sure that the wildcard expansion should occur at `*.example.org` and nowhere else.
 
@@ -916,7 +915,7 @@ the query resolution.
 
 This document aims to fill this "documentation gap" and provide would-be
 implementors and other interested parties with enough background knowledge to
-better understand authenticated denial of existence. 
+better understand authenticated denial of existence.
 
 # IANA Considerations
 This document has no actions for IANA.
@@ -925,7 +924,7 @@ This document has no actions for IANA.
 This document would not be possible without the help of Ed Lewis,
 Roy Arends, Wouter Wijngaards, Olaf Kolkman, Carsten Strotmann,
 Jan-Piet Mens, Peter van Dijk,
-Marco Davids, Esther Makaay, Antoin Verschuren, Lukas Wunner, 
+Marco Davids, Esther Makaay, Antoin Verschuren, Lukas Wunner,
 Joe Abley, Ralf Weber, Geoff Huston, Dave Lawrence, Tony Finch and Mark
 Andrews.
 Also valuable was the source code of Unbound.
