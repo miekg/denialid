@@ -149,3 +149,7 @@ Original Name     Hashed Name
 ## -05
 
 1. Minor fixes and adjustments.
+
+## -06
+
+1. Removed a paragraph that wasn't clear. No other changes.

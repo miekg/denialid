@@ -30,7 +30,7 @@
 <!ENTITY phreebird     PUBLIC '' 'bib/reference.phreebird.xml'>
 ]>
 
-<rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-05">
+<rfc ipr="trust200902" submissionType="independent" category="info" docName="draft-gieben-auth-denial-of-existence-dns-06">
 <?rfc toc="yes"?>         <!-- generate a table of contents -->
 <?rfc tocompact="no"?>
 <?rfc tocdepth="6"?>
